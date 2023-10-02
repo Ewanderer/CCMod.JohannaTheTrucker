@@ -15,6 +15,7 @@ namespace JohannaTheTrucker
        public static ExternalSprite? JohannaPotrait { get; private set; }
        public static ExternalSprite? JohannaMini { get; private set; }
        public static ExternalSprite? HookIcon { get; private set; }
+       public static ExternalSprite? JohannaCardFrame { get; private set; }
        public static ExternalSprite? ClusterMissleIcon { get; private set; }
        public static ExternalDeck? JohannaDeck { get; private set; }
         public static ExternalCard? ReelInCard { get; private set; }
@@ -57,16 +58,24 @@ namespace JohannaTheTrucker
                 ClusterMissleIcon = new ExternalSprite("JohannaTheTrucker.ClusterMissleIcon", new FileInfo(path));
                 artRegistry.RegisterArt(ClusterMissleIcon);
             }
+
+            // deck sprite
+
+            {
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("JoCardFrame.png"));
+                JohannaCardFrame = new ExternalSprite("JohannaTheTrucker.JohannaDeckFrame", new FileInfo(path));
+                artRegistry.RegisterArt(JohannaCardFrame);
+            }
         }
 
         public void LoadManifest(IDeckRegistry registry)
         {
             ExternalSprite cardArtDefault = ExternalSprite.GetRaw((int)Spr.cards_colorless);
-            ExternalSprite borderSprite = ExternalSprite.GetRaw((int)Spr.cardShared_border_jupiter);
+            ExternalSprite borderSprite = JohannaCardFrame ?? throw new Exception();
             JohannaDeck = new ExternalDeck(
                 "JohannaTheTrucker.JohannaDeck",
                 System.Drawing.Color.FromArgb(65, 144, 195),
-                System.Drawing.Color.FromArgb(195, 41, 108),
+                System.Drawing.Color.White,
                 cardArtDefault, 
                 borderSprite, 
                 null);

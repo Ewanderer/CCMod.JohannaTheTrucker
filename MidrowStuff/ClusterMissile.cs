@@ -15,7 +15,6 @@ namespace JohannaTheTrucker.MidrowStuff
             return new List<CardAction>() { 
             new AAttack(){ 
             damage=GetDamage(),
-            fr,
             targetPlayer=this.targetPlayer,
  
             }
@@ -35,9 +34,7 @@ namespace JohannaTheTrucker.MidrowStuff
              return stackSize;
         }
 
-        public override Spr? GetIcon() => (Spr)(Manifest.HookIcon?.Id ?? throw new Exception("missing hook icon"));
-
-        
+        public override Spr? GetIcon() => (Spr)(Manifest.HookIcon?.Id ?? throw new Exception("missing hook icon"));        
 
         public virtual void GrowCluster(ClusterMissile otherCluster) {
 //check if upgrade to HE missile is necessary.
