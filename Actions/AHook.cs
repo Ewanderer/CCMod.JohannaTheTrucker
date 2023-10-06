@@ -27,7 +27,7 @@ namespace JohannaTheTrucker.Actions
 
             var hook_start = (hookToRight) ? missile_bays.Last() : missile_bays.First();
 
-            var pos_x = ship.GetX(s) + ship.parts.IndexOf(hook_start);
+            var pos_x = ship.x + ship.parts.IndexOf(hook_start);
 
             //look through midrow to find target pos
             var target_pos = c.stuff.Keys.OrderBy(e => e).Where(e => (hookToRight) ? e > pos_x : e < pos_x).Take(1);
