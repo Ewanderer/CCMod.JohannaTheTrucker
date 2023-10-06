@@ -74,7 +74,7 @@ namespace JohannaTheTrucker.Actions
                 var dir_key = hookToRight;
                 list.AddRange(move.GetTooltips(s));
             }
-            return base.GetTooltips(s);
+            return list;
         }
 
     }
