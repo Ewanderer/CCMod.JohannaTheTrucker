@@ -10,9 +10,11 @@
   <ItemGroup>
     <Reference Include="CobaltCore">
       <HintPath>References\CobaltCore.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="CobaltCoreModding.Definitions">
       <HintPath>References\CobaltCoreModding.Definitions.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
 
