@@ -33,6 +33,12 @@
     <None Update="Sprites\HookIcon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Sprites\HookLeftIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sprites\HookRightIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Sprites\JoCardFrame.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

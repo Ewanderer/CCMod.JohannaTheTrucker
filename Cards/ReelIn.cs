@@ -12,12 +12,18 @@ namespace JohannaTheTrucker.Cards
 
         public override List<CardAction> GetActions(State s, Combat c)
         {
-           var list=new List<CardAction>();
+            var list = new List<CardAction>();
 
-            list.Add(new AHook()
+
+            var hook_action = new AHook()
             {
                 hookToRight = flipped
-            });
+            };
+
+            hook_action.disabled = hook_action.CalculateMove(s, c) == null;
+
+            list.Add(hook_action);
+
 
             list.Add(new ADroneMove()
             {
@@ -30,13 +36,13 @@ namespace JohannaTheTrucker.Cards
 
         public override CardData GetData(State state)
         {
-           return new CardData()
+            return new CardData()
             {
                 cost = 1,
                 flippable = true,
             };
         }
 
-        public override string Name() => "Reel In"; 
+        public override string Name() => "Reel In";
     }
 }

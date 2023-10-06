@@ -14,8 +14,7 @@ namespace JohannaTheTrucker.Actions
         public bool fromPlayer = true;
         public bool hookToRight;
 
-
-        private AMove? CalculateMove(State? s, Combat? c)
+        public AMove? CalculateMove(State? s, Combat? c)
         {
             if (s == null || c == null)
                 return null;
@@ -45,7 +44,6 @@ namespace JohannaTheTrucker.Actions
                 targetPlayer = fromPlayer,
                 whoDidThis = this.whoDidThis
             };
-
             return move_action;
         }
 
@@ -53,7 +51,9 @@ namespace JohannaTheTrucker.Actions
         {
             var move = CalculateMove(s, c);
             if (move == null)
+            {              
                 return;
+            }
             c.QueueImmediate(move);
         }
 
@@ -61,14 +61,20 @@ namespace JohannaTheTrucker.Actions
         {
             if (Manifest.HookIcon?.Id == null)
                 return null;
-            return new Icon((Spr)Manifest.HookIcon.Id, 0, Colors.textMain, hookToRight);
+            if(s.route is not Combat)
+                return new Icon((Spr)(Manifest.HookIcon?.Id??throw new Exception("missing hook icon")), 0, Colors.textMain);
+            if(hookToRight)
+                return new Icon((Spr)(Manifest.HookRightIcon?.Id ?? throw new Exception("missing hook right icon")), 0, Colors.textMain);
+            else
+                return new Icon((Spr)(Manifest.HookLeftIcon?.Id ?? throw new Exception("missing hook left icon")), 0, Colors.textMain);
         }
 
         public override List<Tooltip> GetTooltips(State s)
         {
             var list = new List<Tooltip>();
             AMove? move;
-            list.Add(new TTGlossary("JohannaTheTruckerAHook"));
+            var glossary = new TTGlossary(Manifest.AHook_Glossary?.Head ?? throw new Exception("Missing AHook Glossary"));
+            list.Add(glossary);
             if (s.route is Combat c && (move = CalculateMove(s, c)) != null)
             {
                 var dir_key = hookToRight;
