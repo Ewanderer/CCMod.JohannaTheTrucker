@@ -10,8 +10,6 @@ namespace JohannaTheTrucker.Cards
     public class ReelIn : Card
     {
 
-        bool flipped = false;
-
         public override List<CardAction> GetActions(State s, Combat c)
         {
            var list=new List<CardAction>();
@@ -23,10 +21,12 @@ namespace JohannaTheTrucker.Cards
 
             list.Add(new ADroneMove()
             {
-                dir = flipped ? 1 : -1,            
+                dir = -1
             });
             return list;
         }
+
+
 
         public override CardData GetData(State state)
         {
@@ -38,10 +38,5 @@ namespace JohannaTheTrucker.Cards
         }
 
         public override string Name() => "Reel In"; 
-
-        public override void OnFlip(G g)
-        {
-            flipped = !flipped;
-        }
     }
 }
