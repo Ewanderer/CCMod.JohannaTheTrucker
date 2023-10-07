@@ -42,9 +42,11 @@ namespace JohannaTheTrucker.MidrowStuff
             bool highligthed = ShouldDrawHilight(g);
             Texture2D? outlined = null;
             var spr = GetIcon();
+            if (spr == null)
+                return;
             if (highligthed)
             {
-                outlined = SpriteLoader.GetOutlined(spr);
+                outlined = SpriteLoader.GetOutlined(spr.Value);
             }
 
             var flip = targetPlayer;
@@ -54,8 +56,8 @@ namespace JohannaTheTrucker.MidrowStuff
             {
 
                 //calc position.
-                var x = v.x + pattern[i];
-                var y = v.y + pattern[i];
+                var x = v.x + pattern[i].x;
+                var y = v.y + pattern[i].y;
                 if (highligthed)
                 {
                     x -= 2;
