@@ -49,15 +49,16 @@ namespace JohannaTheTrucker.MidrowStuff
                 outlined = SpriteLoader.GetOutlined(spr.Value);
             }
 
-            var flip = targetPlayer;
+            var flip = !targetPlayer;
             //draw swarm
             var pattern = GetPattern(stackSize);
+            var offset = this.GetOffset(g);
             for (int i = 0; i < Math.Min(stackSize, 5); i++)
             {
 
                 //calc position.
-                var x = v.x + pattern[i].x;
-                var y = v.y + pattern[i].y;
+                var x = v.x + pattern[i].x + offset.x-4;
+                var y = v.y + pattern[i].y + offset.y;
                 if (highligthed)
                 {
                     x -= 2;
@@ -82,46 +83,38 @@ namespace JohannaTheTrucker.MidrowStuff
             var pattern = new Vec[length];
 
             for (int i = 0; i < length; i++)
-                pattern[i] = new Vec();
+                pattern[i] = new Vec(8, 16);
             switch (length)
             {
                 case 2:
-                    pattern[0] = new Vec(-8, -8);
-                    pattern[1] = new Vec(8, 8);
+                    pattern[0] += new Vec(0, -8);
+                    pattern[1] += new Vec(0, 8);
                     break;
                 case 3:
-                    pattern[0] = new Vec(-12, -3);
-                    pattern[1] = new Vec(-8, -8);
-                    pattern[2] = new Vec(4, 7);
+                    pattern[0] += new Vec(-4, 8);
+                    pattern[1] += new Vec(4, 8);
+                    pattern[2] += new Vec(0, -8);
                     break;
                 case 4:
-                    pattern = new Vec[]
-            {
-                new Vec(-4,-11),
-                new Vec(4,-5),
-                new Vec(-4,0),
-                new Vec(4,4)
-            };
+                    pattern[0] += new Vec(-4, 8);
+                    pattern[1] += new Vec(4, 8);
+                    pattern[2] += new Vec(-4, -8);
+                    pattern[3] += new Vec(4, -8);
                     break;
 
                 case 5:
-                    pattern = new Vec[]
-            {
-                new Vec(-4,-11),
-                new Vec(4,-5),
-                new Vec(-4,0),
-                new Vec(4,4),
-                new Vec(-3,11)
-            };
+                    pattern[0] += new Vec(-4, 12);
+                    pattern[1] += new Vec(4, 12);
+                    pattern[2] += new Vec(-4, -12);
+                    pattern[3] += new Vec(4, -12);
+                    pattern[4] += new Vec(0, 0);
                     break;
             }
-
-
             return pattern;
         }
 
 
-        public override Spr? GetIcon() => (Spr)(Manifest.HookIcon?.Id ?? throw new Exception("missing hook icon"));
+        public override Spr? GetIcon() => (Spr)(Manifest.ClusterMissleIcon?.Id ?? throw new Exception("missing hook icon"));
 
         public virtual void GrowCluster(ClusterMissile otherCluster)
         {
