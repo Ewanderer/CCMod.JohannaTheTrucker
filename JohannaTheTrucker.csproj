@@ -16,6 +16,10 @@
       <HintPath>References\CobaltCoreModding.Definitions.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="FNA">
+      <HintPath>References\FNA.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>
