@@ -23,6 +23,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Sprites\CCJohanna.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
