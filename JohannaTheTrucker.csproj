@@ -16,14 +16,14 @@
       <HintPath>References\CobaltCoreModding.Definitions.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="FNA">
-      <HintPath>References\FNA.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Sprites\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303" />
   </ItemGroup>
 
   <ItemGroup>
