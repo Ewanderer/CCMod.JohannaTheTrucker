@@ -14,8 +14,8 @@ namespace JohannaTheTrucker.Actions
     public class ASpawnCluster : ASpawn
     {
 
-        public  ClusterMissile? cluster_internal;
-        
+        public ClusterMissile? cluster_internal;
+
         public ClusterMissile cluster
         {
             get => cluster_internal ?? throw new Exception("cluster missile must be assigned!");
@@ -170,13 +170,13 @@ namespace JohannaTheTrucker.Actions
 
         public override Icon? GetIcon(State s)
         {
-            if (Manifest.ClusterMissleIcon?.Id == null)
+            if (Manifest.ClusterMissleToken?.Id == null)
                 return null;
             bool flipY = this.cluster?.targetPlayer ?? false;
             if (this.fromPlayer && s.ship.Get(Status.backwardsMissiles) > 0)
                 flipY = !flipY;
-          return new Icon((Spr)Manifest.ClusterMissleIcon.Id, cluster?.GetActualClusterSize() ?? 0, Colors.textMain, flipY);
-     
+            return new Icon(cluster?.GetActionIcon() ?? (Spr)Manifest.ClusterMissleToken.Id, cluster?.GetActualClusterSize() ?? 0, Colors.textMain, flipY);
+
         }
 
     }

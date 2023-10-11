@@ -15,18 +15,63 @@ namespace JohannaTheTrucker.Cards
         public override List<CardAction> GetActions(State s, Combat c)
         {
             var result = new List<CardAction>();
-
-            var cluster_missile = new MidrowStuff.ClusterMissile()
             {
-                stackSize = 3
-            };
+                var cluster_missile = new MidrowStuff.ClusterMissile()
+                {
+                    stackSize = 3
+                };
 
-            var spawn_cluster = new ASpawnCluster()
+                var spawn_cluster = new ASpawnCluster()
+                {
+                    cluster = cluster_missile
+                };
+
+                result.Add(spawn_cluster);
+            }
             {
-                cluster = cluster_missile
-            };
+                var cluster_missile = new MidrowStuff.ClusterMissile()
+                {
+                    stackSize = 3,
+                    stackType = MidrowStuff.ClusterMissile.MissileType.heavy
+                };
 
-            result.Add(spawn_cluster);
+                var spawn_cluster = new ASpawnCluster()
+                {
+                    cluster = cluster_missile
+                };
+
+                result.Add(spawn_cluster);
+            }
+
+            {
+                var cluster_missile = new MidrowStuff.ClusterMissile()
+                {
+                    stackSize = 3,
+                    stackType = MidrowStuff.ClusterMissile.MissileType.seeker
+                };
+
+                var spawn_cluster = new ASpawnCluster()
+                {
+                    cluster = cluster_missile
+                };
+
+                result.Add(spawn_cluster);
+            }
+
+            {
+                var cluster_missile = new MidrowStuff.ClusterMissile()
+                {
+                    stackSize = 1,
+                    bubbleShield = true
+                };
+
+                var spawn_cluster = new ASpawnCluster()
+                {
+                    cluster = cluster_missile,
+                };
+
+                result.Add(spawn_cluster);
+            }
 
             return result;
 

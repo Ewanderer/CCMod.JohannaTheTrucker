@@ -18,7 +18,16 @@ namespace JohannaTheTrucker
         public static ExternalSprite? HookLeftIcon { get; private set; }
         public static ExternalSprite? HookRightIcon { get; private set; }
         public static ExternalSprite? JohannaCardFrame { get; private set; }
+        public static ExternalSprite? ClusterMissleToken { get; private set; }
+        public static ExternalSprite? HEClusterMissleToken { get; private set; }
+        public static ExternalSprite? SeekerClusterMissleToken { get; private set; }
+        public static ExternalSprite? HESeekerClusterMissleToken { get; private set; }
+
+
         public static ExternalSprite? ClusterMissleIcon { get; private set; }
+        public static ExternalSprite? HEClusterMissleIcon { get; private set; }
+        public static ExternalSprite? SeekerClusterMissleIcon { get; private set; }
+
         public static ExternalDeck? JohannaDeck { get; private set; }
         public static ExternalCard? ReelInCard { get; private set; }
         public static ExternalCard? ClusterRocketCard { get; private set; }
@@ -71,8 +80,44 @@ namespace JohannaTheTrucker
 
             {
                 var path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("ClusterMissile.png"));
+                ClusterMissleToken = new ExternalSprite("JohannaTheTrucker.ClusterMissleToken", new FileInfo(path));
+                artRegistry.RegisterArt(ClusterMissleToken);
+            }
+
+            {
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("ClusterMissile_HE.png"));
+                HEClusterMissleToken = new ExternalSprite("JohannaTheTrucker.HEClusterMissleToken", new FileInfo(path));
+                artRegistry.RegisterArt(HEClusterMissleToken);
+            }
+
+            {
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("ClusterMissile_Seeker.png"));
+                SeekerClusterMissleToken = new ExternalSprite("JohannaTheTrucker.SeekerClusterMissleToken", new FileInfo(path));
+                artRegistry.RegisterArt(SeekerClusterMissleToken);
+            }
+
+            {
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("ClusterMissile_HE_seeker.png"));
+                HESeekerClusterMissleToken = new ExternalSprite("JohannaTheTrucker.HESeekerClusterMissleToken", new FileInfo(path));
+                artRegistry.RegisterArt(HESeekerClusterMissleToken);
+            }
+
+            {
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites/action_icons", Path.GetFileName("cm.png"));
                 ClusterMissleIcon = new ExternalSprite("JohannaTheTrucker.ClusterMissleIcon", new FileInfo(path));
                 artRegistry.RegisterArt(ClusterMissleIcon);
+            }
+
+            {
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites/action_icons", Path.GetFileName("scm.png"));
+                SeekerClusterMissleIcon = new ExternalSprite("JohannaTheTrucker.SeekerClusterMissleIcon", new FileInfo(path));
+                artRegistry.RegisterArt(SeekerClusterMissleIcon);
+            }
+
+            {
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites/action_icons", Path.GetFileName("hcm.png"));
+                HEClusterMissleIcon = new ExternalSprite("JohannaTheTrucker.HEClusterMissleIcon", new FileInfo(path));
+                artRegistry.RegisterArt(HEClusterMissleIcon);
             }
 
             // deck sprite
