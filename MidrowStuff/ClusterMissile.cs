@@ -1,6 +1,8 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using JohannaTheTrucker.Actions;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +18,7 @@ namespace JohannaTheTrucker.MidrowStuff
         /// </summary>
         private static double[] sin_cache = Range(0, resolution).Select(x => Math.Sin(((double)x / (double)resolution) / Math.PI * 20)).ToArray();
 
-        private int time_step_counter = 0;
+        private int time_step_counter = -1;
 
         public int stackSize;
 
@@ -28,6 +30,15 @@ namespace JohannaTheTrucker.MidrowStuff
             heavy_seeker = 3
         }
 
+        public int RawDamage()
+        {
+
+            if (stackType == MissileType.heavy || stackType == MissileType.heavy_seeker)
+                return 2;
+            return 1;
+
+        }
+
         public MissileType stackType = MissileType.normal;
 
         private double speed = 3;
@@ -35,11 +46,9 @@ namespace JohannaTheTrucker.MidrowStuff
         public override List<CardAction>? GetActions(State s, Combat c)
         {
             return new List<CardAction>() {
-            new AAttack(){
-            damage=GetDamage(),
-            targetPlayer=this.targetPlayer,
-
-            }
+                new AClusterAttack(){
+                world_pos_x=this.x,
+                }
             };
         }
 
@@ -70,19 +79,23 @@ namespace JohannaTheTrucker.MidrowStuff
             return new List<CardAction>();
         }
 
-        public virtual int GetActualClusterSize()
-        {
-            return stackSize;
-        }
-
-
 
         public override void Render(G g, Vec v)
         {
-            var step_size = (int)Math.Round(Math.Clamp(g.dt / speed * 2 * (double)resolution, 1.0, (double)resolution / 4));
 
-            time_step_counter = (time_step_counter + step_size) % (2 * resolution);
 
+            if (time_step_counter != -1)
+            {
+                var step_size = (int)Math.Round(Math.Clamp(g.dt / speed * 2 * (double)resolution, 1.0, (double)resolution / 4));
+                time_step_counter = (time_step_counter + step_size) % (2 * resolution);
+
+            }
+            else
+            {
+                //first setup to sync.
+                var init_val = (int)Math.Round((g.time / speed) % (2.0 * (double)resolution));
+                time_step_counter = init_val;
+            }
             bool highligthed = ShouldDrawHilight(g);
             Texture2D? outlined = null;
             var spr = GetIcon();
@@ -96,9 +109,9 @@ namespace JohannaTheTrucker.MidrowStuff
             //rotation raycastr
             //  var target_v = targetPlayer ? new Vec(0, -1) : new Vec(0, 1);
             //  var angle = Math.Atan2(target_v.y - 1, target_v.x);
-            var size = GetActualClusterSize();
-            var offset_per_missile = (int)Math.Round(Math.Clamp(((double)resolution * 2) / size, 1, resolution * 2));
-            for (int i = 0; i < size; i++)
+
+            var offset_per_missile = (int)Math.Round(Math.Clamp(((double)resolution * 2) / stackSize, 1, resolution * 2));
+            for (int i = 0; i < stackSize; i++)
             {
                 var delta = (time_step_counter + offset_per_missile * i) % (resolution * 2);
                 var offset = OffestFromStep(delta);
@@ -151,10 +164,40 @@ namespace JohannaTheTrucker.MidrowStuff
             }
         }
 
+        /// <summary>
+        /// Opposing clusters should annihilate each other
+        ///  If bubbled, the new instance will be destroyed on launch(normal behavior), pop the existing bubble(also normal behavior) and and cluster charges and properties from the destroyed instance isn't added or merged at all
+        /// </summary>
+        /// <param name="otherCluster"></param>
+        private void ResolveOpposingClusterCollision(ClusterMissile otherCluster)
+        {
+#warning unfinished but due to lack of enemy with cluster attacks not of too great concern.
+            //trigger artifacts
+            if (bubbleShield == otherCluster.bubbleShield)
+            {
+                //destroy this instance
+            }
+            else if (bubbleShield && !bubbleShield)
+            {
+                //pop bubble
+                bubbleShield = false;
+            }
+            else { 
+                //triger destroyed drone artifact
+
+                //replace target, ammout and type.
+            }
+        }
+
         public virtual void GrowCluster(ClusterMissile otherCluster)
         {
+            if (otherCluster.targetPlayer != targetPlayer)
+            {
+                ResolveOpposingClusterCollision(otherCluster);
+                return;
+            }
             //check if upgrade to HE missile is necessary.
-            stackSize += otherCluster.GetActualClusterSize();
+            stackSize += otherCluster.stackSize;
             //check if there is an possible upgrade
             if (otherCluster.stackType != MissileType.normal && stackType != otherCluster.stackType)
             {

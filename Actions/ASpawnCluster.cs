@@ -175,7 +175,7 @@ namespace JohannaTheTrucker.Actions
             bool flipY = this.cluster?.targetPlayer ?? false;
             if (this.fromPlayer && s.ship.Get(Status.backwardsMissiles) > 0)
                 flipY = !flipY;
-            return new Icon(cluster?.GetActionIcon() ?? (Spr)Manifest.ClusterMissleToken.Id, cluster?.GetActualClusterSize() ?? 0, Colors.textMain, flipY);
+            return new Icon(cluster?.GetActionIcon() ?? (Spr)Manifest.ClusterMissleToken.Id, cluster?.stackSize ?? 0, Colors.textMain, flipY);
 
         }
 
