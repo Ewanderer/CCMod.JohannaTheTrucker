@@ -91,42 +91,6 @@ namespace JohannaTheTrucker.Actions
                     OnHit(g, s, c);
                 done = true;
             }
-
-            /*
-            if (c.EitherShipIsDead(s))
-                timer = -1;
-            if (missile == null)
-            {
-                //try to recover
-                if (!c.stuff.TryGetValue(world_pos_x, out var stuff) || stuff is not ClusterMissile msl)
-                {
-                    timer = -1;
-                    return;
-                }
-                missile = msl;
-            }
-            //check if fx is done
-            if (missile_fx?.IsDone ?? true)
-            {
-                if (!done && this.timer == 1)
-                {
-
-                    //apply damage and stuff, if the missile will hit.
-                    if (will_hit)
-                        OnHit(g, s, c);
-                    done = true;
-                    timer = 0.35;
-                }
-                //mark action done
-
-                if (done)
-                    this.timer -= g.dt;
-            }
-            else
-            {
-                //keep action alive.
-                this.timer = 1;
-            }*/
         }
 
         public bool done = false;
