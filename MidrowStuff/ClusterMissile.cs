@@ -44,7 +44,7 @@ namespace JohannaTheTrucker.MidrowStuff
         private double speed = 3;
 
         public override List<CardAction>? GetActions(State s, Combat c)
-        {
+        {     
             return new List<CardAction>() {
                 new AClusterAttack(){
                 world_pos_x=this.x,
@@ -172,6 +172,7 @@ namespace JohannaTheTrucker.MidrowStuff
         private void ResolveOpposingClusterCollision(ClusterMissile otherCluster)
         {
 #warning unfinished but due to lack of enemy with cluster attacks not of too great concern.
+          
             //trigger artifacts
             if (bubbleShield == otherCluster.bubbleShield)
             {

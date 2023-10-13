@@ -20,7 +20,6 @@ namespace JohannaTheTrucker.Actions
         public bool will_hit = false;
         private int target_pos;
 
-
         public override void Begin(G g, State s, Combat c)
         {
             if (!c.stuff.TryGetValue(world_pos_x, out var stuff) || stuff is not ClusterMissile msl)
@@ -58,7 +57,7 @@ namespace JohannaTheTrucker.Actions
             missile_fx = new FlightFX();
             missile_fx.miss = !will_hit;
 
-            missile_fx.texture = SpriteLoader.Get(missile.GetIcon()??Spr.icons_recycle);
+            missile_fx.texture = SpriteLoader.Get(missile.GetIcon() ?? Spr.icons_recycle);
 
             missile_fx.start_x = world_pos_x;
 
@@ -68,8 +67,8 @@ namespace JohannaTheTrucker.Actions
 
             missile_fx.target_y = missile.targetPlayer ? FlightFX.YRow.player : FlightFX.YRow.enemy;
             //slgithy longer flight time for miss to not have rockets zoom.
-            missile_fx.target_flight_time = will_hit ? 1.2 : 1.6;
-
+            missile_fx.target_flight_time = will_hit ? 0.4 : 0.6;
+            this.timer = missile_fx.target_flight_time + 0.2;
             //add to fx of combat.
             c.fx.Add(missile_fx);
 
@@ -79,21 +78,33 @@ namespace JohannaTheTrucker.Actions
             {
                 c.stuff.Remove(world_pos_x);
             }
-            this.timer = 1;
+
         }
 
 
         public override void Update(G g, State s, Combat c)
         {
+            timer -= g.dt;
+            if (timer < 0.2 && !done)
+            {
+                if (will_hit)
+                    OnHit(g, s, c);
+                done = true;
+            }
+
+            /*
             if (c.EitherShipIsDead(s))
                 timer = -1;
             if (missile == null)
             {
-                return;
+                //try to recover
+                if (!c.stuff.TryGetValue(world_pos_x, out var stuff) || stuff is not ClusterMissile msl)
+                {
+                    timer = -1;
+                    return;
+                }
+                missile = msl;
             }
-
-
-
             //check if fx is done
             if (missile_fx?.IsDone ?? true)
             {
@@ -104,15 +115,18 @@ namespace JohannaTheTrucker.Actions
                     if (will_hit)
                         OnHit(g, s, c);
                     done = true;
+                    timer = 0.35;
                 }
                 //mark action done
-                this.timer = -1;
+
+                if (done)
+                    this.timer -= g.dt;
             }
             else
             {
                 //keep action alive.
                 this.timer = 1;
-            }
+            }*/
         }
 
         public bool done = false;
@@ -126,7 +140,14 @@ namespace JohannaTheTrucker.Actions
         private void OnHit(G g, State s, Combat c)
         {
             if (missile == null)
-                return;
+            {
+                if (!c.stuff.TryGetValue(world_pos_x, out var stuff) || stuff is not ClusterMissile msl)
+                {
+                    return;
+                }
+                missile = msl;
+            }
+
             int incomingDamage = missile.RawDamage();
             foreach (Artifact enumerateAllArtifact in s.EnumerateAllArtifacts())
                 incomingDamage += enumerateAllArtifact.ModifyBaseMissileDamage(s, s.route as Combat, this.missile.targetPlayer);
