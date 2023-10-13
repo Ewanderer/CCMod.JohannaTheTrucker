@@ -33,7 +33,7 @@ namespace JohannaTheTrucker
         public static ExternalCard? LeapFrogCard { get; private set; }
         public static ExternalCard? SmallManeuverCard { get; private set; }
         public static ExternalCard? DoubleHookCard { get; private set; }
-
+        public static ExternalCard? VarietyPackCard { get; private set; }
         public static ExternalCard? SpaceFoldingCard { get; private set; }
         public static ExternalSprite? SeekerClusterMissleIcon { get; private set; }
         public static ExternalSprite? SeekerClusterMissleToken { get; private set; }
@@ -198,6 +198,10 @@ namespace JohannaTheTrucker
             SpaceFoldingCard = new ExternalCard("JohannaTheTrucker.Cards.SpaceFolding", typeof(SpaceFolding), card_art, JohannaDeck);
             registry.RegisterCard(SpaceFoldingCard);
             SpaceFoldingCard.AddLocalisation("Space Folding", "Flip midrow using your missile bay as pivot.", "Flip midrow using your missile bay as pivot. Gain 2 midshift.", "Bubble and Flip midrow using your missile bay as pivot.");
+
+            VarietyPackCard = new ExternalCard("JohannaTheTrucker.Cards.VarietyPack", typeof(VarietyPack), card_art, JohannaDeck);
+            registry.RegisterCard(VarietyPackCard);
+            VarietyPackCard.AddLocalisation("Variety Pack");
         }
 
         void ICharacterManifest.LoadManifest(ICharacterRegistry registry)
