@@ -46,13 +46,13 @@ namespace JohannaTheTrucker.Cards
             switch (upgrade)
             {
                 case Upgrade.None:
-                    desc = Loc.GetLocString("card." + typeof(SpaceFolding).Name + ".desc");
+                    desc = Loc.GetLocString(Manifest.SpaceFoldingCard?.DescLocKey??throw new Exception("Missing card"));
                     break;
                 case Upgrade.A:
-                    desc = Loc.GetLocString("card." + typeof(SpaceFolding).Name + ".descA");
+                    desc = Loc.GetLocString(Manifest.SpaceFoldingCard?.DescALocKey ?? throw new Exception("Missing card"));
                     break;
                 case Upgrade.B:
-                    desc = Loc.GetLocString("card." + typeof(SpaceFolding).Name + ".descB");
+                    desc = Loc.GetLocString(Manifest.SpaceFoldingCard?.DescBLocKey ?? throw new Exception("Missing card"));
                     break;
             }
             return new CardData()
