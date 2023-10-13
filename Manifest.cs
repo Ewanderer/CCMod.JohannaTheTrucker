@@ -28,6 +28,7 @@ namespace JohannaTheTrucker
         public static ExternalCard? SaturationFireCard { get; private set; }
         public static ExternalCard? LargePayloadCard { get; private set; }
         public static ExternalCard? HEClusterCard { get; private set; }
+        public static ExternalCard? SeekingClusterCard { get; private set; }
         public static ExternalSprite? SeekerClusterMissleIcon { get; private set; }
         public static ExternalSprite? SeekerClusterMissleToken { get; private set; }
         IEnumerable<string> ISpriteManifest.Dependencies => new string[0];
@@ -169,6 +170,10 @@ namespace JohannaTheTrucker
             HEClusterCard = new ExternalCard("JohannaTheTrucker.Cards.HECluster", typeof(HECluster), card_art, JohannaDeck);
             registry.RegisterCard(HEClusterCard);
             HEClusterCard.AddLocalisation("HE-Cluster");
+
+            SeekingClusterCard = new ExternalCard("JohannaTheTrucker.Cards.SeekingCluster", typeof(SeekingCluster), card_art, JohannaDeck);
+            registry.RegisterCard(SeekingClusterCard);
+            SeekingClusterCard.AddLocalisation("Seeking Cluster");
         }
 
         void ICharacterManifest.LoadManifest(ICharacterRegistry registry)
