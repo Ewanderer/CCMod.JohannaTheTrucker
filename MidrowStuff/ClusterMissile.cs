@@ -1,26 +1,22 @@
 ﻿using JohannaTheTrucker.Actions;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.Metrics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static System.Linq.Enumerable;
 
 namespace JohannaTheTrucker.MidrowStuff
 {
     public class ClusterMissile : StuffBase
     {
+        public int stackSize;
+        public MissileType stackType = MissileType.normal;
         private const int resolution = 1000;
+
         /// <summary>
         /// Cache sine values
         /// </summary>
         private static double[] sin_cache = Range(0, resolution).Select(x => Math.Sin(((double)x / (double)resolution) / Math.PI * 20)).ToArray();
 
+        private double speed = 3;
         private int time_step_counter = -1;
-
-        public int stackSize;
 
         public enum MissileType
         {
@@ -30,21 +26,26 @@ namespace JohannaTheTrucker.MidrowStuff
             heavy_seeker = 3
         }
 
-        public int RawDamage()
+        public Spr? GetActionIcon()
         {
+            switch (stackType)
+            {
+                case MissileType.normal:
+                    return (Spr)(Manifest.ClusterMissleIcon?.Id ?? throw new Exception("missing missile icon"));
 
-            if (stackType == MissileType.heavy || stackType == MissileType.heavy_seeker)
-                return 2;
-            return 1;
+                case MissileType.heavy:
+                    return (Spr)(Manifest.HEClusterMissleIcon?.Id ?? throw new Exception("missing missile icon"));
 
+                case MissileType.seeker:
+                    return (Spr)(Manifest.SeekerClusterMissleIcon?.Id ?? throw new Exception("missing missile icon"));
+
+                default:
+                    return null;
+            }
         }
 
-        public MissileType stackType = MissileType.normal;
-
-        private double speed = 3;
-
         public override List<CardAction>? GetActions(State s, Combat c)
-        {     
+        {
             return new List<CardAction>() {
                 new AClusterAttack(){
                 world_pos_x=this.x,
@@ -52,43 +53,68 @@ namespace JohannaTheTrucker.MidrowStuff
             };
         }
 
-        private Vec OffestFromStep(int i)
-        {
-            double y;
-            double x;
-            if (i < resolution)
-            {
-                x = (double)i / (double)resolution;
-            }
-            else
-            {
-                i -= resolution;
-                x = 1 - (double)i / (double)resolution;
-            }
-            y = sin_cache[i];
-            return new Vec(x, y);
-        }
-
-        private int GetDamage()
-        {
-            return 1;
-        }
-
         public override List<CardAction>? GetActionsOnDestroyed(State s, Combat c, bool wasPlayer, int worldX)
         {
             return new List<CardAction>();
         }
 
+        public override Spr? GetIcon()
+        {
+            switch (stackType)
+            {
+                case MissileType.normal:
+                    return (Spr)(Manifest.ClusterMissleToken?.Id ?? throw new Exception("missing missile icon"));
+
+                case MissileType.heavy:
+                    return (Spr)(Manifest.HEClusterMissleToken?.Id ?? throw new Exception("missing missile icon"));
+
+                case MissileType.seeker:
+                    return (Spr)(Manifest.SeekerClusterMissleToken?.Id ?? throw new Exception("missing missile icon"));
+
+                case MissileType.heavy_seeker:
+                    return (Spr)(Manifest.HESeekerClusterMissleToken?.Id ?? throw new Exception("missing missile icon"));
+
+                default:
+                    return null;
+            }
+        }
+
+        public virtual void GrowCluster(ClusterMissile otherCluster)
+        {
+            if (otherCluster.targetPlayer != targetPlayer)
+            {
+                ResolveOpposingClusterCollision(otherCluster);
+                return;
+            }
+            //check if upgrade to HE missile is necessary.
+            stackSize += otherCluster.stackSize;
+            //check if there is an possible upgrade
+            if (otherCluster.stackType != MissileType.normal && stackType != otherCluster.stackType)
+            {
+                //check if the upgrade is just to the other type
+                if (stackType == MissileType.normal)
+                    stackType = otherCluster.stackType;
+                //of if it becomes the ultimate version.
+                else stackType = MissileType.heavy_seeker;
+            }
+
+            if (otherCluster.bubbleShield)
+                bubbleShield = true;
+        }
+
+        public int RawDamage()
+        {
+            if (stackType == MissileType.heavy || stackType == MissileType.heavy_seeker)
+                return 2;
+            return 1;
+        }
 
         public override void Render(G g, Vec v)
         {
-
-
             if (time_step_counter != -1)
             {
                 var step_size = (int)Math.Round(Math.Clamp(g.dt / speed * 2 * (double)resolution, 1.0, (double)resolution / 4));
                 time_step_counter = (time_step_counter + step_size) % (2 * resolution);
-
             }
             else
             {
@@ -128,40 +154,29 @@ namespace JohannaTheTrucker.MidrowStuff
                 {
                     Draw.Sprite(spr, v.x + draw_x, v.y + draw_y, flip, !flip, 0, null, null, null, null, null, null, null, null);
                 }
-
             }
         }
 
-        public override Spr? GetIcon()
+        private int GetDamage()
         {
-            switch (stackType)
-            {
-                case MissileType.normal:
-                    return (Spr)(Manifest.ClusterMissleToken?.Id ?? throw new Exception("missing missile icon"));
-                case MissileType.heavy:
-                    return (Spr)(Manifest.HEClusterMissleToken?.Id ?? throw new Exception("missing missile icon"));
-                case MissileType.seeker:
-                    return (Spr)(Manifest.SeekerClusterMissleToken?.Id ?? throw new Exception("missing missile icon"));
-                case MissileType.heavy_seeker:
-                    return (Spr)(Manifest.HESeekerClusterMissleToken?.Id ?? throw new Exception("missing missile icon"));
-                default:
-                    return null;
-            }
+            return 1;
         }
 
-        public Spr? GetActionIcon()
+        private Vec OffestFromStep(int i)
         {
-            switch (stackType)
+            double y;
+            double x;
+            if (i < resolution)
             {
-                case MissileType.normal:
-                    return (Spr)(Manifest.ClusterMissleIcon?.Id ?? throw new Exception("missing missile icon"));
-                case MissileType.heavy:
-                    return (Spr)(Manifest.HEClusterMissleIcon?.Id ?? throw new Exception("missing missile icon"));
-                case MissileType.seeker:
-                    return (Spr)(Manifest.SeekerClusterMissleIcon?.Id ?? throw new Exception("missing missile icon"));
-                default:
-                    return null;
+                x = (double)i / (double)resolution;
             }
+            else
+            {
+                i -= resolution;
+                x = 1 - (double)i / (double)resolution;
+            }
+            y = sin_cache[i];
+            return new Vec(x, y);
         }
 
         /// <summary>
@@ -169,48 +184,28 @@ namespace JohannaTheTrucker.MidrowStuff
         ///  If bubbled, the new instance will be destroyed on launch(normal behavior), pop the existing bubble(also normal behavior) and and cluster charges and properties from the destroyed instance isn't added or merged at all
         /// </summary>
         /// <param name="otherCluster"></param>
-        private void ResolveOpposingClusterCollision(ClusterMissile otherCluster)
+        private void ResolveOpposingClusterCollision(ClusterMissile otherCluster, Combat c)
         {
 #warning unfinished but due to lack of enemy with cluster attacks not of too great concern.
-          
+
             //trigger artifacts
             if (bubbleShield == otherCluster.bubbleShield)
             {
                 //destroy this instance
+                c.stuff.Remove(this.x);
+
             }
             else if (bubbleShield && !bubbleShield)
             {
                 //pop bubble
                 bubbleShield = false;
             }
-            else { 
+            else
+            {
                 //triger destroyed drone artifact
 
                 //replace target, ammout and type.
             }
-        }
-
-        public virtual void GrowCluster(ClusterMissile otherCluster)
-        {
-            if (otherCluster.targetPlayer != targetPlayer)
-            {
-                ResolveOpposingClusterCollision(otherCluster);
-                return;
-            }
-            //check if upgrade to HE missile is necessary.
-            stackSize += otherCluster.stackSize;
-            //check if there is an possible upgrade
-            if (otherCluster.stackType != MissileType.normal && stackType != otherCluster.stackType)
-            {
-                //check if the upgrade is just to the other type
-                if (stackType == MissileType.normal)
-                    stackType = otherCluster.stackType;
-                //of if it becomes the ultimate version.
-                else stackType = MissileType.heavy_seeker;
-            }
-
-            if (otherCluster.bubbleShield)
-                bubbleShield = true;
         }
     }
 }

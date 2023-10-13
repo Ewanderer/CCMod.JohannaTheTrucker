@@ -1,23 +1,16 @@
-﻿using JohannaTheTrucker.Cards;
-using JohannaTheTrucker.MidrowStuff;
+﻿using JohannaTheTrucker.MidrowStuff;
 using JohannaTheTrucker.SpecialEffects;
-using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JohannaTheTrucker.Actions
 {
     public class AClusterAttack : CardAction
     {
-
+        public bool done = false;
+        public bool will_hit = false;
         public int world_pos_x;
 
-        private FlightFX? missile_fx;
         private ClusterMissile? missile;
-        public bool will_hit = false;
+        private FlightFX? missile_fx;
         private int target_pos;
 
         public override void Begin(G g, State s, Combat c)
@@ -78,9 +71,7 @@ namespace JohannaTheTrucker.Actions
             {
                 c.stuff.Remove(world_pos_x);
             }
-
         }
-
 
         public override void Update(G g, State s, Combat c)
         {
@@ -92,8 +83,6 @@ namespace JohannaTheTrucker.Actions
                 done = true;
             }
         }
-
-        public bool done = false;
 
         /// <summary>
         /// Mostly copied code from missile hit.
@@ -115,7 +104,6 @@ namespace JohannaTheTrucker.Actions
             int incomingDamage = missile.RawDamage();
             foreach (Artifact enumerateAllArtifact in s.EnumerateAllArtifacts())
                 incomingDamage += enumerateAllArtifact.ModifyBaseMissileDamage(s, s.route as Combat, this.missile.targetPlayer);
-
 
             if (incomingDamage < 0)
                 incomingDamage = 0;

@@ -1,9 +1,4 @@
 ﻿using FMOD;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using JohannaTheTrucker.MidrowStuff;
 
 namespace JohannaTheTrucker.Actions
@@ -13,7 +8,6 @@ namespace JohannaTheTrucker.Actions
     /// </summary>
     public class ASpawnCluster : ASpawn
     {
-
         public ClusterMissile? cluster_internal;
 
         public ClusterMissile cluster
@@ -25,7 +19,6 @@ namespace JohannaTheTrucker.Actions
                 thing = value;
             }
         }
-
 
         public override void Begin(G g, State s, Combat c)
         {
@@ -45,7 +38,6 @@ namespace JohannaTheTrucker.Actions
             }
             else
             {
-
                 this.cluster.fromPlayer = this.fromPlayer;
                 if (this.fromPlayer)
                 {
@@ -55,7 +47,6 @@ namespace JohannaTheTrucker.Actions
                 StuffBase actual_launch = cluster;
                 foreach (Artifact enumerateAllArtifact in s.EnumerateAllArtifacts())
                     actual_launch = enumerateAllArtifact.ReplaceSpawnedThing(s, c, actual_launch, this.fromPlayer);
-
 
                 int worldX1 = this.GetWorldX(s, c);
                 int worldX2 = worldX1;
@@ -98,6 +89,15 @@ namespace JohannaTheTrucker.Actions
             }
         }
 
+        public override Icon? GetIcon(State s)
+        {
+            if (Manifest.ClusterMissleToken?.Id == null)
+                return null;
+            bool flipY = this.cluster?.targetPlayer ?? false;
+            if (this.fromPlayer && s.ship.Get(Status.backwardsMissiles) > 0)
+                flipY = !flipY;
+            return new Icon(cluster?.GetActionIcon() ?? (Spr)Manifest.ClusterMissleToken.Id, cluster?.stackSize ?? 0, Colors.textMain, flipY);
+        }
 
         private void HandleClusterGrowth(ClusterMissile otherCluster, State s, Combat c, ClusterMissile launched_cluster, int worldX3)
         {
@@ -166,18 +166,5 @@ namespace JohannaTheTrucker.Actions
             return tooltips;
         }
         */
-
-
-        public override Icon? GetIcon(State s)
-        {
-            if (Manifest.ClusterMissleToken?.Id == null)
-                return null;
-            bool flipY = this.cluster?.targetPlayer ?? false;
-            if (this.fromPlayer && s.ship.Get(Status.backwardsMissiles) > 0)
-                flipY = !flipY;
-            return new Icon(cluster?.GetActionIcon() ?? (Spr)Manifest.ClusterMissleToken.Id, cluster?.stackSize ?? 0, Colors.textMain, flipY);
-
-        }
-
     }
 }

@@ -1,42 +1,36 @@
-﻿using CobaltCoreModding.Definitions.ModManifests;
-using CobaltCoreModding.Definitions.ExternalItems;
+﻿using CobaltCoreModding.Definitions.ExternalItems;
 using CobaltCoreModding.Definitions.ModContactPoints;
-using System.Reflection;
+using CobaltCoreModding.Definitions.ModManifests;
 using JohannaTheTrucker.Cards;
 
 namespace JohannaTheTrucker
 {
     public class Manifest : ISpriteManifest, IDeckManifest, IGlossaryManifest, ICardManifest, ICharacterManifest, IAnimationManifest
     {
-        IEnumerable<string> ISpriteManifest.Dependencies => new string[0];
-
-        public string Name { get; init; } = "Arin.JohannaTheTrucker";
-
-        public static ExternalSprite? JohannaPotrait { get; private set; }
-        public static ExternalSprite? JohannaMini { get; private set; }
+        public static ExternalGlossary? AHook_Glossary { get; private set; }
+        public static ExternalSprite? ClusterMissleIcon { get; private set; }
+        public static ExternalSprite? ClusterMissleToken { get; private set; }
+        public static ExternalCard? ClusterRocketCard { get; private set; }
+        public static ExternalSprite? HEClusterMissleIcon { get; private set; }
+        public static ExternalSprite? HEClusterMissleToken { get; private set; }
+        public static ExternalSprite? HESeekerClusterMissleToken { get; private set; }
         public static ExternalSprite? HookIcon { get; private set; }
         public static ExternalSprite? HookLeftIcon { get; private set; }
         public static ExternalSprite? HookRightIcon { get; private set; }
         public static ExternalSprite? JohannaCardFrame { get; private set; }
-        public static ExternalSprite? ClusterMissleToken { get; private set; }
-        public static ExternalSprite? HEClusterMissleToken { get; private set; }
-        public static ExternalSprite? SeekerClusterMissleToken { get; private set; }
-        public static ExternalSprite? HESeekerClusterMissleToken { get; private set; }
-
-
-        public static ExternalSprite? ClusterMissleIcon { get; private set; }
-        public static ExternalSprite? HEClusterMissleIcon { get; private set; }
-        public static ExternalSprite? SeekerClusterMissleIcon { get; private set; }
-
-        public static ExternalDeck? JohannaDeck { get; private set; }
-        public static ExternalCard? ReelInCard { get; private set; }
-        public static ExternalCard? ClusterRocketCard { get; private set; }
         public static ExternalCharacter? JohannaCharacter { get; private set; }
+        public static ExternalDeck? JohannaDeck { get; private set; }
         public static ExternalAnimation? JohannaDefaultAnimation { get; private set; }
+        public static ExternalSprite? JohannaMini { get; private set; }
         public static ExternalAnimation? JohannaMiniAnimation { get; private set; }
-        public DirectoryInfo? ModRootFolder { get; set; }
+        public static ExternalSprite? JohannaPotrait { get; private set; }
+        public static ExternalCard? ReelInCard { get; private set; }
+        public static ExternalSprite? SeekerClusterMissleIcon { get; private set; }
+        public static ExternalSprite? SeekerClusterMissleToken { get; private set; }
+        IEnumerable<string> ISpriteManifest.Dependencies => new string[0];
 
-        public static ExternalGlossary? AHook_Glossary { get; private set; }
+        public DirectoryInfo? ModRootFolder { get; set; }
+        public string Name { get; init; } = "Arin.JohannaTheTrucker";
 
         void ISpriteManifest.LoadManifest(IArtRegistry artRegistry)
         {
@@ -161,7 +155,6 @@ namespace JohannaTheTrucker
             ClusterRocketCard = new ExternalCard("JohannaTheTrucker.Cards.ClusterRocket", typeof(ClusterRocket), card_art, JohannaDeck);
             registry.RegisterCard(ClusterRocketCard);
             ClusterRocketCard.AddLocalisation("Cluster Rocket");
-
         }
 
         void ICharacterManifest.LoadManifest(ICharacterRegistry registry)

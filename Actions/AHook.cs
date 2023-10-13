@@ -1,18 +1,19 @@
-﻿using CobaltCoreModding.Definitions.ExternalItems;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace JohannaTheTrucker.Actions
+﻿namespace JohannaTheTrucker.Actions
 {
     internal class AHook : CardAction
     {
-
         public bool fromPlayer = true;
         public bool hookToRight;
+
+        public override void Begin(G g, State s, Combat c)
+        {
+            var move = CalculateMove(s, c);
+            if (move == null)
+            {
+                return;
+            }
+            c.QueueImmediate(move);
+        }
 
         public AMove? CalculateMove(State? s, Combat? c)
         {
@@ -47,23 +48,13 @@ namespace JohannaTheTrucker.Actions
             return move_action;
         }
 
-        public override void Begin(G g, State s, Combat c)
-        {
-            var move = CalculateMove(s, c);
-            if (move == null)
-            {              
-                return;
-            }
-            c.QueueImmediate(move);
-        }
-
         public override Icon? GetIcon(State s)
         {
             if (Manifest.HookIcon?.Id == null)
                 return null;
-            if(s.route is not Combat)
-                return new Icon((Spr)(Manifest.HookIcon?.Id??throw new Exception("missing hook icon")), 0, Colors.textMain);
-            if(hookToRight)
+            if (s.route is not Combat)
+                return new Icon((Spr)(Manifest.HookIcon?.Id ?? throw new Exception("missing hook icon")), 0, Colors.textMain);
+            if (hookToRight)
                 return new Icon((Spr)(Manifest.HookRightIcon?.Id ?? throw new Exception("missing hook right icon")), 0, Colors.textMain);
             else
                 return new Icon((Spr)(Manifest.HookLeftIcon?.Id ?? throw new Exception("missing hook left icon")), 0, Colors.textMain);
@@ -82,6 +73,5 @@ namespace JohannaTheTrucker.Actions
             }
             return list;
         }
-
     }
 }

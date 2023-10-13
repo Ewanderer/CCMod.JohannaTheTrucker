@@ -1,17 +1,10 @@
 ﻿using JohannaTheTrucker.Actions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JohannaTheTrucker.Cards
 {
     [CardMeta(rarity = Rarity.common)]
     public class ClusterRocket : Card
     {
-
-
         public override List<CardAction> GetActions(State s, Combat c)
         {
             var result = new List<CardAction>();
@@ -74,10 +67,7 @@ namespace JohannaTheTrucker.Cards
             }
 
             return result;
-
         }
-
-        public override string Name() => "Cluster Rocket";
 
         public override CardData GetData(State state)
         {
@@ -87,6 +77,6 @@ namespace JohannaTheTrucker.Cards
             };
         }
 
-
+        public override string Name() => "Cluster Rocket";
     }
 }
