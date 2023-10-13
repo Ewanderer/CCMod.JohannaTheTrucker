@@ -1,5 +1,6 @@
 ﻿using FMOD;
 using JohannaTheTrucker.MidrowStuff;
+using JohannaTheTrucker.SpecialEffects;
 
 namespace JohannaTheTrucker.Actions
 {
@@ -65,13 +66,37 @@ namespace JohannaTheTrucker.Actions
 
                 if (c.stuff.TryGetValue(worldX3, out StuffBase? stuffBase))
                 {
+                   
                     //Check if we are still laucning a cluster missile and if our target is a cluster missile
                     if (actual_launch is ClusterMissile launched_cluster && stuffBase is ClusterMissile otherCluster)
                     {
+                        c.fx.Add(new FlightFX()
+                        {
+                            start_x = worldX2,
+                            start_y = launched_cluster.fromPlayer ? FlightFX.YRow.player : FlightFX.YRow.enemy,
+                            target_x = worldX3,
+                            target_y = FlightFX.YRow.midrow,
+                            target_flight_time = 0.35,
+                            miss = false,
+                            texture = SpriteLoader.Get(launched_cluster.GetIcon() ?? Spr.icons_recycle)
+                        });
                         HandleClusterGrowth(otherCluster, s, c, launched_cluster, worldX3);
                     }
                     else
                     {
+                        if (actual_launch is ClusterMissile launched_cluster2) {
+                            c.fx.Add(new FlightFX()
+                            {
+                                start_x = worldX2,
+                                start_y = launched_cluster2.fromPlayer ? FlightFX.YRow.player : FlightFX.YRow.enemy,
+                                target_x = worldX3,
+                                target_y = FlightFX.YRow.midrow,
+                                target_flight_time = 0.35,
+                                miss = false,
+                                texture = SpriteLoader.Get(launched_cluster2.GetIcon() ?? Spr.icons_recycle)
+                            });
+                        }
+
                         //if not we use the boring old code here.
                         HandleNormalCollision(stuffBase, s, c, actual_launch, worldX3);
                     }
@@ -103,7 +128,7 @@ namespace JohannaTheTrucker.Actions
         {
             //make feedback
             Audio.Play(new GUID?(FSPRO.Event.Drones_MissileLaunch));
-
+        
             //grow other cluster
             otherCluster.GrowCluster(launched_cluster, c, s);
         }

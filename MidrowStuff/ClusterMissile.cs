@@ -112,6 +112,8 @@ namespace JohannaTheTrucker.MidrowStuff
 
         public override void Render(G g, Vec v)
         {
+            if (age < 0.2)
+                return;
             if (time_step_counter != -1)
             {
                 var step_size = (int)Math.Round(Math.Clamp(g.dt / speed * 2 * (double)resolution, 1.0, (double)resolution / 4));
