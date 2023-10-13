@@ -27,7 +27,8 @@ namespace JohannaTheTrucker.Cards
                 new AStatus()
                 {
                     status = Status.evade,
-                    statusAmount = 1
+                    statusAmount = 1,
+                    targetPlayer=true
                 }
             };
         }
