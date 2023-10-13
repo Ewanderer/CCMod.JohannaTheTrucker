@@ -2,70 +2,60 @@
 
 namespace JohannaTheTrucker.Cards
 {
-    [CardMeta(rarity = Rarity.common)]
+    [CardMeta(rarity = Rarity.common, upgradesTo = new Upgrade[] { Upgrade.A, Upgrade.B })]
     public class ClusterRocket : Card
     {
         public override List<CardAction> GetActions(State s, Combat c)
         {
             var result = new List<CardAction>();
+            switch (upgrade)
             {
-                var cluster_missile = new MidrowStuff.ClusterMissile()
-                {
-                    stackSize = 3
-                };
+                case Upgrade.None:
+                    {
+                        var cluster_missile = new MidrowStuff.ClusterMissile()
+                        {
+                            stackSize = 3
+                        };
 
-                var spawn_cluster = new ASpawnCluster()
-                {
-                    cluster = cluster_missile
-                };
+                        var spawn_cluster = new ASpawnCluster()
+                        {
+                            cluster = cluster_missile
+                        };
 
-                result.Add(spawn_cluster);
+                        result.Add(spawn_cluster);
+                    }
+                    break;
+                case Upgrade.A:
+                    {
+                        var cluster_missile = new MidrowStuff.ClusterMissile()
+                        {
+                            stackSize = 5
+                        };
+
+                        var spawn_cluster = new ASpawnCluster()
+                        {
+                            cluster = cluster_missile
+                        };
+
+                        result.Add(spawn_cluster);
+                    }
+                    break;
+                case Upgrade.B:
+                    {
+                        var cluster_missile = new MidrowStuff.ClusterMissile()
+                        {
+                            stackSize = 2
+                        };
+
+                        var spawn_cluster = new ASpawnCluster()
+                        {
+                            cluster = cluster_missile
+                        };
+
+                        result.Add(spawn_cluster);
+                    }
+                    break;
             }
-            {
-                var cluster_missile = new MidrowStuff.ClusterMissile()
-                {
-                    stackSize = 3,
-                    stackType = MidrowStuff.ClusterMissile.MissileType.heavy
-                };
-
-                var spawn_cluster = new ASpawnCluster()
-                {
-                    cluster = cluster_missile
-                };
-
-                result.Add(spawn_cluster);
-            }
-
-            {
-                var cluster_missile = new MidrowStuff.ClusterMissile()
-                {
-                    stackSize = 3,
-                    stackType = MidrowStuff.ClusterMissile.MissileType.seeker
-                };
-
-                var spawn_cluster = new ASpawnCluster()
-                {
-                    cluster = cluster_missile
-                };
-
-                result.Add(spawn_cluster);
-            }
-
-            {
-                var cluster_missile = new MidrowStuff.ClusterMissile()
-                {
-                    stackSize = 1,
-                    bubbleShield = true
-                };
-
-                var spawn_cluster = new ASpawnCluster()
-                {
-                    cluster = cluster_missile,
-                };
-
-                result.Add(spawn_cluster);
-            }
-
             return result;
         }
 
@@ -73,7 +63,7 @@ namespace JohannaTheTrucker.Cards
         {
             return new CardData
             {
-                cost = 1,
+                cost = upgrade == Upgrade.B ? 0 : 1,
             };
         }
 
