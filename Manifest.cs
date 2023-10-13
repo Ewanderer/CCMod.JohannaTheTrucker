@@ -36,6 +36,7 @@ namespace JohannaTheTrucker
         public static ExternalCard? VarietyPackCard { get; private set; }
         public static ExternalCard? SpaceFoldingCard { get; private set; }
         public static ExternalCard? EnemyShiftCard { get; private set; }
+        public static ExternalCard? ReplicatorCard { get; private set; }
         public static ExternalSprite? SeekerClusterMissleIcon { get; private set; }
         public static ExternalSprite? SeekerClusterMissleToken { get; private set; }
         IEnumerable<string> ISpriteManifest.Dependencies => new string[0];
@@ -207,6 +208,10 @@ namespace JohannaTheTrucker
             EnemyShiftCard = new ExternalCard("JohannaTheTrucker.Cards.EnemyShift", typeof(EnemyShift), card_art, JohannaDeck);
             registry.RegisterCard(EnemyShiftCard);
             EnemyShiftCard.AddLocalisation("Enemy Shift");
+
+            ReplicatorCard = new ExternalCard("JohannaTheTrucker.Cards.Replicator", typeof(Replicator), card_art, JohannaDeck);
+            registry.RegisterCard(ReplicatorCard);
+            ReplicatorCard.AddLocalisation("Replicator");
         }
 
         void ICharacterManifest.LoadManifest(ICharacterRegistry registry)
