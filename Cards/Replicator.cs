@@ -46,13 +46,14 @@ namespace JohannaTheTrucker.Cards
                 {
                     var cluster_missile = new MidrowStuff.ClusterMissile()
                     {
-                        stackSize = 1
+                        stackSize = 1,
                     };
 
                     var spawn_cluster = new ASpawnCluster()
                     {
                         cluster = cluster_missile,
-                        disabled = !can_play
+                        disabled = !can_play,
+                        offset = 1
                     };
 
                     result.Add(spawn_cluster);
