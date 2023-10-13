@@ -64,7 +64,7 @@ namespace JohannaTheTrucker.Actions
             this.timer = missile_fx.target_flight_time + 0.2;
             //add to fx of combat.
             c.fx.Add(missile_fx);
-
+            Audio.Play(FSPRO.Event.Drones_MissileIncoming);
             //reduce cluster size
             missile.stackSize--;
             if (missile.stackSize == 0)
@@ -79,7 +79,13 @@ namespace JohannaTheTrucker.Actions
             if (timer < 0.2 && !done)
             {
                 if (will_hit)
+                {
+                   
                     OnHit(g, s, c);
+                }
+                else {
+                    Audio.Play(FSPRO.Event.Drones_MissileMiss);
+                }
                 done = true;
             }
         }

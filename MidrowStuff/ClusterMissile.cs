@@ -79,11 +79,12 @@ namespace JohannaTheTrucker.MidrowStuff
             }
         }
 
-        public virtual void GrowCluster(ClusterMissile otherCluster)
+        public virtual void GrowCluster(ClusterMissile otherCluster, Combat c, State s)
         {
             if (otherCluster.targetPlayer != targetPlayer)
             {
-                ResolveOpposingClusterCollision(otherCluster);
+                ResolveOpposingClusterCollision(otherCluster, c,s);
+               
                 return;
             }
             //check if upgrade to HE missile is necessary.
@@ -184,27 +185,51 @@ namespace JohannaTheTrucker.MidrowStuff
         ///  If bubbled, the new instance will be destroyed on launch(normal behavior), pop the existing bubble(also normal behavior) and and cluster charges and properties from the destroyed instance isn't added or merged at all
         /// </summary>
         /// <param name="otherCluster"></param>
-        private void ResolveOpposingClusterCollision(ClusterMissile otherCluster, Combat c)
+        private void ResolveOpposingClusterCollision(ClusterMissile otherCluster, Combat c, State s)
         {
-#warning unfinished but due to lack of enemy with cluster attacks not of too great concern.
 
             //trigger artifacts
             if (bubbleShield == otherCluster.bubbleShield)
             {
+                c.fx.Add(new DroneExplosion()
+                {
+                    pos = FxPositions.Drone(this.x)
+                });          
+
                 //destroy this instance
                 c.stuff.Remove(this.x);
+                if (otherCluster.fromPlayer)
+                    foreach (Artifact enumerateAllArtifact in s.EnumerateAllArtifacts())
+                        enumerateAllArtifact.OnPlayerDestroyDrone(s, c);
+                Audio.Play(FSPRO.Event.Hits_DroneCollision);
 
             }
             else if (bubbleShield && !bubbleShield)
             {
                 //pop bubble
                 bubbleShield = false;
+                c.fx.Add(new ShieldPop()
+                {
+                    pos = FxPositions.Drone(this.x)
+                });
             }
             else
             {
                 //triger destroyed drone artifact
 
+                c.fx.Add(new DroneExplosion()
+                {
+                    pos = FxPositions.Drone(this.x)
+                });
+
                 //replace target, ammout and type.
+                this.targetPlayer = otherCluster.targetPlayer;
+                this.stackType = otherCluster.stackType;
+                this.stackSize = otherCluster.stackSize;
+                if (otherCluster.fromPlayer)
+                    foreach (Artifact enumerateAllArtifact in s.EnumerateAllArtifacts())
+                        enumerateAllArtifact.OnPlayerDestroyDrone(s, c);
+                Audio.Play(FSPRO.Event.Hits_DroneCollision);
             }
         }
     }

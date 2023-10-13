@@ -103,9 +103,9 @@ namespace JohannaTheTrucker.Actions
         {
             //make feedback
             Audio.Play(new GUID?(FSPRO.Event.Drones_MissileLaunch));
-#warning to-do: FX for a launch graphic
+
             //grow other cluster
-            otherCluster.GrowCluster(launched_cluster);
+            otherCluster.GrowCluster(launched_cluster, c, s);
         }
 
         private void HandleNormalCollision(StuffBase stuffBase, State s, Combat c, StuffBase actual_launch, int worldX3)
