@@ -8,6 +8,7 @@ namespace JohannaTheTrucker
     public class Manifest : ISpriteManifest, IDeckManifest, IGlossaryManifest, ICardManifest, ICharacterManifest, IAnimationManifest
     {
         public static ExternalGlossary? AHook_Glossary { get; private set; }
+        public static ExternalGlossary? AFlipMidrow_Glossary { get; private set; }
         public static ExternalSprite? ClusterMissleIcon { get; private set; }
         public static ExternalSprite? ClusterMissleToken { get; private set; }
         public static ExternalCard? ClusterRocketCard { get; private set; }
@@ -32,6 +33,8 @@ namespace JohannaTheTrucker
         public static ExternalCard? LeapFrogCard { get; private set; }
         public static ExternalCard? SmallManeuverCard { get; private set; }
         public static ExternalCard? DoubleHookCard { get; private set; }
+
+        public static ExternalCard? SpaceFoldingCard { get; private set; }
         public static ExternalSprite? SeekerClusterMissleIcon { get; private set; }
         public static ExternalSprite? SeekerClusterMissleToken { get; private set; }
         IEnumerable<string> ISpriteManifest.Dependencies => new string[0];
@@ -149,6 +152,8 @@ namespace JohannaTheTrucker
             AHook_Glossary = new ExternalGlossary("JohannaTheTrucker.Glossary.AHookDesc", "JohannaTheTruckerAHook", false, ExternalGlossary.GlossayType.action, HookIcon ?? throw new Exception("Miossing Hook Icon"));
             AHook_Glossary.AddLocalisation("en", "Hookshot", "Align ship's missile bay with the closest midrow object", null);
             registry.RegisterGlossary(AHook_Glossary);
+
+            
         }
 
         void ICardManifest.LoadManifest(ICardRegistry registry)
@@ -189,6 +194,10 @@ namespace JohannaTheTrucker
             DoubleHookCard = new ExternalCard("JohannaTheTrucker.Cards.DoubleHook", typeof(DoubleHook), card_art, JohannaDeck);
             registry.RegisterCard(DoubleHookCard);
             DoubleHookCard.AddLocalisation("Double Hook");
+
+            SpaceFoldingCard = new ExternalCard("JohannaTheTrucker.Cards.SpaceFolding", typeof(SpaceFolding), card_art, JohannaDeck);
+            registry.RegisterCard(SpaceFoldingCard);
+            SpaceFoldingCard.AddLocalisation("Space Folding", "Flip midrow using your missile bay as pivot.", "Flip midrow using your missile bay as pivot. Gain 2 midshift.", "Bubble and Flip midrow using your missile bay as pivot.");
         }
 
         void ICharacterManifest.LoadManifest(ICharacterRegistry registry)
