@@ -31,6 +31,7 @@ namespace JohannaTheTrucker
         public static ExternalCard? SeekingClusterCard { get; private set; }
         public static ExternalCard? LeapFrogCard { get; private set; }
         public static ExternalCard? SmallManeuverCard { get; private set; }
+        public static ExternalCard? DoubleHookCard { get; private set; }
         public static ExternalSprite? SeekerClusterMissleIcon { get; private set; }
         public static ExternalSprite? SeekerClusterMissleToken { get; private set; }
         IEnumerable<string> ISpriteManifest.Dependencies => new string[0];
@@ -184,6 +185,10 @@ namespace JohannaTheTrucker
             SmallManeuverCard = new ExternalCard("JohannaTheTrucker.Cards.SmallManeuver", typeof(SmallManeuver), card_art, JohannaDeck);
             registry.RegisterCard(SmallManeuverCard);
             SmallManeuverCard.AddLocalisation("Small Maneuver");
+
+            DoubleHookCard = new ExternalCard("JohannaTheTrucker.Cards.DoubleHook", typeof(DoubleHook), card_art, JohannaDeck);
+            registry.RegisterCard(DoubleHookCard);
+            DoubleHookCard.AddLocalisation("Double Hook");
         }
 
         void ICharacterManifest.LoadManifest(ICharacterRegistry registry)
