@@ -23,12 +23,13 @@ namespace JohannaTheTrucker.Cards
                     });
                     result.Add(new AHook()
                     {
-                        hookToRight = flipped
+                        hookToRight = flipped,
                     });
                     result.Add(new AMove()
                     {
                         dir = -1,
-                        fromEvade = false
+                        fromEvade = false,
+                        targetPlayer=true,
                     });
                     break;
                 case Upgrade.A:
