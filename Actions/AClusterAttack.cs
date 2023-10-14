@@ -47,6 +47,13 @@ namespace JohannaTheTrucker.Actions
             }
             //create fx
 
+            if (!will_hit && Manifest.SmartExplosiveStatus?.Id != null)
+            {
+                var source = missile.fromPlayer ? s.ship : c.otherShip;
+                if (source.Get((Status)Manifest.SmartExplosiveStatus.Id) > 0)
+                    return;
+            }
+
             missile_fx = new FlightFX();
             missile_fx.miss = !will_hit;
 
@@ -80,10 +87,11 @@ namespace JohannaTheTrucker.Actions
             {
                 if (will_hit)
                 {
-                   
+
                     OnHit(g, s, c);
                 }
-                else {
+                else
+                {
                     Audio.Play(FSPRO.Event.Drones_MissileMiss);
                 }
                 done = true;
