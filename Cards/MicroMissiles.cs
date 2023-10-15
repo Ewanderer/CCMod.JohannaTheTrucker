@@ -32,7 +32,8 @@ namespace JohannaTheTrucker.Cards
             return new CardData
             {
                 cost = 0,
-                temporary = true
+                temporary = true,
+                exhaust=true,
             };
         }
 
