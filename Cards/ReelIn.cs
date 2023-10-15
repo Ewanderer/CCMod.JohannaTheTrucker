@@ -8,9 +8,6 @@ namespace JohannaTheTrucker.Cards
         public override List<CardAction> GetActions(State s, Combat c)
         {
             var list = new List<CardAction>();
-
-
-
             var hook_action = new AHook()
             {
                 hookToRight = flipped

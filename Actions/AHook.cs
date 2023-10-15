@@ -21,8 +21,8 @@
                 return null;
             //determine from where to hook
             Ship ship = this.fromPlayer ? s.ship : c.otherShip;
-            var missile_bays = ship.parts.FindAll(e => e.type == PType.missiles && e.active);
-            if (missile_bays.Count == 0)
+            var missile_bays = ship.parts.Where(e => e.type == PType.missiles && e.active);
+            if (missile_bays.Count() == 0)
                 return null;
 
             var hook_start = (hookToRight) ? missile_bays.Last() : missile_bays.First();
@@ -30,7 +30,13 @@
             var pos_x = ship.x + ship.parts.IndexOf(hook_start);
 
             //look through midrow to find target pos
-            var target_pos = c.stuff.Keys.OrderBy(e => e).Where(e => (hookToRight) ? e > pos_x : e < pos_x).Take(1);
+            // var target_pos = c.stuff.Keys.OrderBy(e => e).Where(e => (hookToRight) ? e > pos_x : e < pos_x).Take(1);
+            var target_pos = c.stuff.Keys.OrderBy(e => e).Where(e => (hookToRight) ? e > pos_x : e < pos_x);
+            if (hookToRight)
+                target_pos = target_pos.Take(1);
+            else
+                target_pos = target_pos.Reverse().Take(1);
+
             //check if we found a target.
             if (!target_pos.Any())
                 return null;
