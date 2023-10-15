@@ -33,9 +33,9 @@ namespace JohannaTheTrucker.Cards
                         stackSize = upgrade == Upgrade.A ? 1 : 2
                     };
 
-                    var spawn_cluster = new ASpawnCluster()
+                    var spawn_cluster = new ASpawn()
                     {
-                        cluster = cluster_missile,
+                        thing = cluster_missile,
                         disabled = !can_play
                     };
 
@@ -49,9 +49,9 @@ namespace JohannaTheTrucker.Cards
                         stackSize = 1,
                     };
 
-                    var spawn_cluster = new ASpawnCluster()
+                    var spawn_cluster = new ASpawn()
                     {
-                        cluster = cluster_missile,
+                        thing = cluster_missile,
                         disabled = !can_play,
                         offset = 1
                     };
@@ -68,9 +68,9 @@ namespace JohannaTheTrucker.Cards
                         stackSize = 99
                     };
 
-                    var spawn_cluster = new ASpawnCluster()
+                    var spawn_cluster = new ASpawn()
                     {
-                        cluster = cluster_missile,
+                        thing = cluster_missile,
                     };
 
                     result.Add(spawn_cluster);

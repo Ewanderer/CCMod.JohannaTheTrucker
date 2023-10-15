@@ -51,7 +51,7 @@ namespace JohannaTheTrucker
         IEnumerable<string> ISpriteManifest.Dependencies => new string[0];
 
         public DirectoryInfo? ModRootFolder { get; set; }
-        public string Name { get; init; } = "Arin.JohannaTheTrucker";
+        public string Name { get; init; } = "Actionmartini.JohannaTheTrucker";
 
         void ISpriteManifest.LoadManifest(IArtRegistry artRegistry)
         {
