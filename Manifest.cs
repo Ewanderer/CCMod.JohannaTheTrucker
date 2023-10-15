@@ -47,6 +47,7 @@ namespace JohannaTheTrucker
         public static ExternalCard? RocketSiloCard { get; private set; }
         public static ExternalCard? MultiplicityCard { get; private set; }
         public static ExternalCard? MassUpgradeCard { get; private set; }
+        public static ExternalCard? ReboundCard { get; private set; }
         public static ExternalCard? SmartExplosivesCard { get; private set; }
         public static ExternalSprite? SeekerClusterMissleIcon { get; private set; }
         public static ExternalSprite? SeekerClusterMissleToken { get; private set; }
@@ -282,6 +283,10 @@ namespace JohannaTheTrucker
             MassUpgradeCard = new ExternalCard("JohannaTheTrucker.Cards.MassUpgrade", typeof(MassUpgrade), card_art, JohannaDeck);
             registry.RegisterCard(MassUpgradeCard);
             MassUpgradeCard.AddLocalisation("Mass Upgrade");
+
+            ReboundCard = new ExternalCard("JohannaTheTrucker.Cards.Rebound", typeof(Rebound), card_art, JohannaDeck);
+            registry.RegisterCard(ReboundCard);
+            ReboundCard.AddLocalisation("Rebound");
         }
 
         void ICharacterManifest.LoadManifest(ICharacterRegistry registry)
