@@ -25,9 +25,9 @@ namespace JohannaTheTrucker.Cards
                             stackSize = 2
                         };
 
-                        var spawn_cluster = new ASpawnCluster()
+                        var spawn_cluster = new ASpawn()
                         {
-                            cluster = cluster_missile,
+                            thing = cluster_missile,
                             offset=-1
                         };
 
@@ -40,9 +40,9 @@ namespace JohannaTheTrucker.Cards
                             stackSize = 2
                         };
 
-                        var spawn_cluster = new ASpawnCluster()
+                        var spawn_cluster = new ASpawn()
                         {
-                            cluster = cluster_missile,
+                            thing = cluster_missile,
                             offset = 1
                         };
 
@@ -57,9 +57,9 @@ namespace JohannaTheTrucker.Cards
                             stackSize = 4
                         };
 
-                        var spawn_cluster = new ASpawnCluster()
+                        var spawn_cluster = new ASpawn()
                         {
-                            cluster = cluster_missile,
+                            thing = cluster_missile,
                             offset = -1
                         };
 
@@ -72,9 +72,9 @@ namespace JohannaTheTrucker.Cards
                             stackSize = 4
                         };
 
-                        var spawn_cluster = new ASpawnCluster()
+                        var spawn_cluster = new ASpawn()
                         {
-                            cluster = cluster_missile,
+                            thing = cluster_missile,
                             offset = 1
                         };
 
@@ -88,9 +88,9 @@ namespace JohannaTheTrucker.Cards
                             stackSize = 2
                         };
 
-                        var spawn_cluster = new ASpawnCluster()
+                        var spawn_cluster = new ASpawn()
                         {
-                            cluster = cluster_missile,
+                            thing = cluster_missile,
                             offset = -1
                         };
 
@@ -103,9 +103,9 @@ namespace JohannaTheTrucker.Cards
                             stackSize = 2
                         };
 
-                        var spawn_cluster = new ASpawnCluster()
+                        var spawn_cluster = new ASpawn()
                         {
-                            cluster = cluster_missile,
+                            thing = cluster_missile,
                             offset = 0
                         };
 
@@ -118,9 +118,9 @@ namespace JohannaTheTrucker.Cards
                             stackSize = 2
                         };
 
-                        var spawn_cluster = new ASpawnCluster()
+                        var spawn_cluster = new ASpawn()
                         {
-                            cluster = cluster_missile,
+                            thing = cluster_missile,
                             offset = 1
                         };
 

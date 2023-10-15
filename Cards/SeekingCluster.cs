@@ -29,9 +29,9 @@ namespace JohannaTheTrucker.Cards
                             stackType = MidrowStuff.ClusterMissile.MissileType.seeker
                         };
 
-                        var spawn_cluster = new ASpawnCluster()
+                        var spawn_cluster = new ASpawn()
                         {
-                            cluster = cluster_missile
+                            thing = cluster_missile
                         };
 
                         result.Add(spawn_cluster);
@@ -51,9 +51,9 @@ namespace JohannaTheTrucker.Cards
                             stackType = MidrowStuff.ClusterMissile.MissileType.seeker
                         };
 
-                        var spawn_cluster = new ASpawnCluster()
+                        var spawn_cluster = new ASpawn()
                         {
-                            cluster = cluster_missile
+                            thing = cluster_missile
                         };
 
                         result.Add(spawn_cluster);
@@ -67,9 +67,9 @@ namespace JohannaTheTrucker.Cards
                             stackType = MidrowStuff.ClusterMissile.MissileType.seeker
                         };
 
-                        var spawn_cluster = new ASpawnCluster()
+                        var spawn_cluster = new ASpawn()
                         {
-                            cluster = cluster_missile,
+                            thing = cluster_missile,
                             offset = -2
                         };
 
@@ -83,9 +83,9 @@ namespace JohannaTheTrucker.Cards
                             stackType = MidrowStuff.ClusterMissile.MissileType.seeker
                         };
 
-                        var spawn_cluster = new ASpawnCluster()
+                        var spawn_cluster = new ASpawn()
                         {
-                            cluster = cluster_missile
+                            thing = cluster_missile
                         };
 
                         result.Add(spawn_cluster);

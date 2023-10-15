@@ -18,9 +18,9 @@ namespace JohannaTheTrucker.Cards
                 stackSize = 2
             };
 
-            var spawn_cluster = new ASpawnCluster()
+            var spawn_cluster = new ASpawn()
             {
-                cluster = cluster_missile
+                thing = cluster_missile
             };
 
             result.Add(spawn_cluster);
