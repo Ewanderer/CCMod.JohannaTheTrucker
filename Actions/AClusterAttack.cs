@@ -13,52 +13,6 @@ namespace JohannaTheTrucker.Actions
         private FlightFX? missile_fx;
         private int target_pos;
 
-        private int GetSeekerImpact(State s, Combat c)
-        {
-            if (missile == null)
-                return -1;
-            int worldX = world_pos_x;
-
-
-            Ship ship = this.missile.targetPlayer ? s.ship : c.otherShip;
-            int num1 = 99;
-            int num2 = 0;
-            for (int index = 0; index < ship.parts.Count; ++index)
-            {
-                if (ship.parts[index].type != PType.empty)
-                {
-                    num2 = index;
-                    if (index < num1)
-                        num1 = index;
-                }
-            }
-            if (world_pos_x < ship.x + num1)
-                worldX = ship.x + num1;
-            if (world_pos_x > ship.x + num2)
-                worldX = ship.x + num2;
-            if (world_pos_x == worldX)
-            {
-                Part? partAtWorldX = ship.GetPartAtWorldX(worldX);
-                if (partAtWorldX != null && partAtWorldX.type == PType.empty)
-                {
-                    int num3 = worldX - ship.x;
-                    int num4 = 99;
-                    int num5 = 0;
-                    for (int index = 0; index < ship.parts.Count - 1; ++index)
-                    {
-                        if (ship.parts[index].type != PType.empty && Math.Abs(num3 - index) < num4)
-                        {
-                            num5 = index;
-                            num4 = Math.Abs(num3 - index);
-                        }
-                    }
-                    worldX = ship.x + num5;
-                }
-            }
-            return worldX;
-        }
-
-
         public override void Begin(G g, State s, Combat c)
         {
             if (!c.stuff.TryGetValue(world_pos_x, out var stuff) || stuff is not ClusterMissile msl)
@@ -136,7 +90,6 @@ namespace JohannaTheTrucker.Actions
             {
                 if (will_hit)
                 {
-
                     OnHit(g, s, c);
                 }
                 else
@@ -145,6 +98,50 @@ namespace JohannaTheTrucker.Actions
                 }
                 done = true;
             }
+        }
+
+        private int GetSeekerImpact(State s, Combat c)
+        {
+            if (missile == null)
+                return -1;
+            int worldX = world_pos_x;
+
+            Ship ship = this.missile.targetPlayer ? s.ship : c.otherShip;
+            int num1 = 99;
+            int num2 = 0;
+            for (int index = 0; index < ship.parts.Count; ++index)
+            {
+                if (ship.parts[index].type != PType.empty)
+                {
+                    num2 = index;
+                    if (index < num1)
+                        num1 = index;
+                }
+            }
+            if (world_pos_x < ship.x + num1)
+                worldX = ship.x + num1;
+            if (world_pos_x > ship.x + num2)
+                worldX = ship.x + num2;
+            if (world_pos_x == worldX)
+            {
+                Part? partAtWorldX = ship.GetPartAtWorldX(worldX);
+                if (partAtWorldX != null && partAtWorldX.type == PType.empty)
+                {
+                    int num3 = worldX - ship.x;
+                    int num4 = 99;
+                    int num5 = 0;
+                    for (int index = 0; index < ship.parts.Count - 1; ++index)
+                    {
+                        if (ship.parts[index].type != PType.empty && Math.Abs(num3 - index) < num4)
+                        {
+                            num5 = index;
+                            num4 = Math.Abs(num3 - index);
+                        }
+                    }
+                    worldX = ship.x + num5;
+                }
+            }
+            return worldX;
         }
 
         /// <summary>
