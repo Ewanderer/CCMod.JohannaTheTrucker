@@ -45,9 +45,13 @@ namespace JohannaTheTrucker
         public static ExternalCard? MicroMissilesCard { get; private set; }
         public static ExternalCard? ReadjustCard { get; private set; }
         public static ExternalCard? RocketSiloCard { get; private set; }
+        public static ExternalCard? MultiplicityCard { get; private set; }
+        public static ExternalCard? MassUpgradeCard { get; private set; }
         public static ExternalCard? SmartExplosivesCard { get; private set; }
         public static ExternalSprite? SeekerClusterMissleIcon { get; private set; }
         public static ExternalSprite? SeekerClusterMissleToken { get; private set; }
+
+        public static ExternalGlossary? AGrowClusterGlossary { get; private set; }
         IEnumerable<string> ISpriteManifest.Dependencies => new string[0];
 
         public DirectoryInfo? ModRootFolder { get; set; }
@@ -195,7 +199,9 @@ namespace JohannaTheTrucker
             AHook_Glossary.AddLocalisation("en", "Hookshot", "Align ship's missile bay with the closest midrow object", null);
             registry.RegisterGlossary(AHook_Glossary);
 
-
+            AGrowClusterGlossary = new ExternalGlossary("JohannaTheTrucker.Glossary.AGrowClusterGlossary", "JohannaTheTruckerAGrowClusterGlossary", false, ExternalGlossary.GlossayType.action, GrowClusterSprite ?? throw new Exception("Miossing Hook Icon"));
+            AGrowClusterGlossary.AddLocalisation("en", "Grow Cluster", "Adds and or upgrades all of your missile clusters.", null);
+            registry.RegisterGlossary(AGrowClusterGlossary);
         }
 
         void ICardManifest.LoadManifest(ICardRegistry registry)
@@ -268,6 +274,14 @@ namespace JohannaTheTrucker
             SmartExplosivesCard = new ExternalCard("JohannaTheTrucker.Cards.SmartExplosives", typeof(SmartExplosives), card_art, JohannaDeck);
             registry.RegisterCard(SmartExplosivesCard);
             SmartExplosivesCard.AddLocalisation("Smart Explosives");
+
+            MultiplicityCard = new ExternalCard("JohannaTheTrucker.Cards.Multiplicity", typeof(Multiplicity), card_art, JohannaDeck);
+            registry.RegisterCard(MultiplicityCard);
+            MultiplicityCard.AddLocalisation("Multiplicity");
+
+            MassUpgradeCard = new ExternalCard("JohannaTheTrucker.Cards.MassUpgrade", typeof(MassUpgrade), card_art, JohannaDeck);
+            registry.RegisterCard(MassUpgradeCard);
+            MassUpgradeCard.AddLocalisation("Mass Upgrade");
         }
 
         void ICharacterManifest.LoadManifest(ICharacterRegistry registry)
