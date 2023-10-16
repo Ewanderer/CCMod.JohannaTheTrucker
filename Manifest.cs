@@ -8,6 +8,10 @@ namespace JohannaTheTrucker
     public partial class Manifest : ISpriteManifest, IDeckManifest, IGlossaryManifest, ICardManifest, ICharacterManifest, IAnimationManifest, IStatusManifest
     {
         public static ExternalGlossary? AHook_Glossary { get; private set; }
+        public static ExternalGlossary? ClusterMissile_Glossary { get; private set; }
+        public static ExternalGlossary? ClusterMissileHE_Glossary { get; private set; }
+        public static ExternalGlossary? ClusterMissileSeeker_Glossary { get; private set; }
+        public static ExternalGlossary? ClusterMissileHESeeker_Glossary { get; private set; }
         public static ExternalGlossary? AFlipMidrow_Glossary { get; private set; }
         public static ExternalSprite? ClusterMissleIcon { get; private set; }
         public static ExternalSprite? ClusterMissleToken { get; private set; }
@@ -200,9 +204,25 @@ namespace JohannaTheTrucker
             AHook_Glossary.AddLocalisation("en", "Hookshot", "Align ship's missile bay with the closest midrow object", null);
             registry.RegisterGlossary(AHook_Glossary);
 
-            AGrowClusterGlossary = new ExternalGlossary("JohannaTheTrucker.Glossary.AGrowClusterGlossary", "JohannaTheTruckerAGrowClusterGlossary", false, ExternalGlossary.GlossayType.action, GrowClusterSprite ?? throw new Exception("Miossing Hook Icon"));
+            AGrowClusterGlossary = new ExternalGlossary("JohannaTheTrucker.Glossary.AGrowClusterGlossary", "JohannaTheTruckerAGrowClusterGlossary", false, ExternalGlossary.GlossayType.action, GrowClusterSprite ?? throw new Exception("Miossing GrowClusterSprite"));
             AGrowClusterGlossary.AddLocalisation("en", "Grow Cluster", "Adds and or upgrades all of your missile clusters.", null);
             registry.RegisterGlossary(AGrowClusterGlossary);
+
+            ClusterMissile_Glossary = new ExternalGlossary("JohannaTheTrucker.Glossary.ClusterRocket_Glossary", "JohannaTheTruckerClusterRocketMidRow", false, ExternalGlossary.GlossayType.midrow, ClusterMissleIcon ?? throw new Exception("Missing ClusterMissleIcon"));
+            ClusterMissile_Glossary.AddLocalisation("en", "Cluster Missile", "A swarm of {0} rocklets. On their turn 1 flies forward dealing 1 damage on a hit. The entire stack dies in one hit.", null);
+            registry.RegisterGlossary(ClusterMissile_Glossary);
+
+            ClusterMissileHE_Glossary = new ExternalGlossary("JohannaTheTrucker.Glossary.ClusteMissileHE_Glossary", "JohannaTheTruckerHEClusterRocketMidRow", false, ExternalGlossary.GlossayType.midrow, HEClusterMissleIcon ?? throw new Exception("Missing ClusterMissleIcon"));
+            ClusterMissileHE_Glossary.AddLocalisation("en", "Heavy Cluster Missile", "A swarm of {0} heavy rocklets. On their turn 1 flies forward dealing 2 damage on a hit. The entire stack dies in one hit.", null);
+            registry.RegisterGlossary(ClusterMissileHE_Glossary);
+
+            ClusterMissileSeeker_Glossary = new ExternalGlossary("JohannaTheTrucker.Glossary.ClusteMissileSeeker_Glossary", "JohannaTheTruckerSeekerClusterRocketMidRow", false, ExternalGlossary.GlossayType.midrow, SeekerClusterMissleIcon ?? throw new Exception("Missing ClusterMissleIcon"));
+            ClusterMissileSeeker_Glossary.AddLocalisation("en", "Seeker Cluster Missile", "A swarm of {0} seeeker rocklets. On their turn 1 flies towards their target dealing 1 damage. The entire stack dies in one hit.", null);
+            registry.RegisterGlossary(ClusterMissileSeeker_Glossary);
+
+            ClusterMissileHESeeker_Glossary = new ExternalGlossary("JohannaTheTrucker.Glossary.ClusteMissileHESeeker_Glossary", "JohannaTheTruckerHESeekerClusterRocketMidRow", false, ExternalGlossary.GlossayType.midrow, HESeekerClusterMissleToken ?? throw new Exception("Missing ClusterMissleIcon"));
+            ClusterMissileHESeeker_Glossary.AddLocalisation("en", "HE-S Cluster Missile", "A swarm of {0} heavy seeeker rocklets. On their turn 2 flies towards their target dealing 1 damage. The entire stack dies in one hit.", null);
+            registry.RegisterGlossary(ClusterMissileHESeeker_Glossary);
         }
 
         void ICardManifest.LoadManifest(ICardRegistry registry)

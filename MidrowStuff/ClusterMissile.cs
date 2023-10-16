@@ -44,6 +44,31 @@ namespace JohannaTheTrucker.MidrowStuff
             }
         }
 
+        public override List<Tooltip> GetTooltips()
+        {
+            var result=new List<Tooltip>();
+
+            switch (stackType)
+            {
+                case MissileType.normal:
+                    result.Add(new TTGlossary(Manifest.ClusterMissile_Glossary?.Head??throw new Exception("Missing Glossary"),stackSize));
+                    break;
+                case MissileType.heavy:
+                    result.Add(new TTGlossary(Manifest.ClusterMissileHE_Glossary?.Head ?? throw new Exception("Missing Glossary"), stackSize));
+                    break;
+                case MissileType.seeker:
+                    result.Add(new TTGlossary(Manifest.ClusterMissileSeeker_Glossary?.Head ?? throw new Exception("Missing Glossary"), stackSize));
+                    break;
+                case MissileType.heavy_seeker:
+                    result.Add(new TTGlossary(Manifest.ClusterMissileHESeeker_Glossary?.Head ?? throw new Exception("Missing Glossary"), stackSize));
+                    break;
+                default:
+                    throw new NotImplementedException($"Unkown seeker missile type {stackType}");
+            }
+
+            return result;
+        }
+
         public override List<CardAction>? GetActions(State s, Combat c)
         {
             return new List<CardAction>() {
@@ -160,11 +185,7 @@ namespace JohannaTheTrucker.MidrowStuff
             }
         }
 
-        private int GetDamage()
-        {
-            return 1;
-        }
-
+  
         private Vec OffestFromStep(int i)
         {
             double y;
