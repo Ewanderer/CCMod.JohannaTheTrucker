@@ -33,7 +33,7 @@ namespace JohannaTheTrucker.Actions
             c.stuff.Clear();
             foreach (var entry in copy)
             {
-                var distance = entry.Key - pivot_world_x;
+                var distance = entry.Value.x - pivot_world_x;
                 var new_pos = -distance + pivot_world_x;
                 entry.Value.x = new_pos;
                 c.stuff.Add(new_pos, entry.Value);
