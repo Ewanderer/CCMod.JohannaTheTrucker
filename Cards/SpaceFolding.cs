@@ -21,6 +21,7 @@ namespace JohannaTheTrucker.Cards
             {
                 var pivot = s.ship.parts.IndexOf(missile_bay) + s.ship.x;
                 result.Add(new AFlipMidrow() { pivot_world_x = pivot });
+                missile_bay.pulse = 1;
             }
 
             if (upgrade == Upgrade.A)
