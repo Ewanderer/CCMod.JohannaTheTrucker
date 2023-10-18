@@ -53,6 +53,7 @@ namespace JohannaTheTrucker
         public static ExternalCard? MassUpgradeCard { get; private set; }
         public static ExternalCard? ReboundCard { get; private set; }
         public static ExternalCard? SmartExplosivesCard { get; private set; }
+        public static ExternalCard? BigSwingCard { get; private set; }
         public static ExternalSprite? SeekerClusterMissleIcon { get; private set; }
         public static ExternalSprite? SeekerClusterMissleToken { get; private set; }
 
@@ -307,6 +308,10 @@ namespace JohannaTheTrucker
             ReboundCard = new ExternalCard("JohannaTheTrucker.Cards.Rebound", typeof(Rebound), card_art, JohannaDeck);
             registry.RegisterCard(ReboundCard);
             ReboundCard.AddLocalisation("Rebound");
+
+            BigSwingCard = new ExternalCard("JohannaTheTrucker.Cards.BigSwing", typeof(BigSwing), card_art, JohannaDeck);
+            registry.RegisterCard(BigSwingCard);
+            BigSwingCard.AddLocalisation("Big Swing", "Hook <c=keyword>{0}</c> but move thrice the distance (<c=keyword>{1}</c>)");
         }
 
         void ICharacterManifest.LoadManifest(ICharacterRegistry registry)
