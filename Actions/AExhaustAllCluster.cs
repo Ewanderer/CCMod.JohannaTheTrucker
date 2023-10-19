@@ -214,7 +214,7 @@ namespace JohannaTheTrucker.Actions
                 future_hits.Remove(hit);
             }
             //stop actrion if we are done
-            if (fired >= 1 && !fired_once && unresolved_hits.Length == 0)
+            if (fired >= 1 && !fired_once && future_hits.Count() == 0)
             {
                 last_frame = true;
                 timer = -1;
