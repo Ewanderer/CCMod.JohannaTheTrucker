@@ -47,6 +47,7 @@ namespace JohannaTheTrucker
         public static ExternalCard? EnemyShiftCard { get; private set; }
         public static ExternalCard? ReplicatorCard { get; private set; }
         public static ExternalCard? MicroMissilesCard { get; private set; }
+        public static ExternalCard? FireFireFireCard { get; private set; }
         public static ExternalCard? ReadjustCard { get; private set; }
         public static ExternalCard? RocketSiloCard { get; private set; }
         public static ExternalCard? MultiplicityCard { get; private set; }
@@ -312,6 +313,10 @@ namespace JohannaTheTrucker
             BigSwingCard = new ExternalCard("JohannaTheTrucker.Cards.BigSwing", typeof(BigSwing), card_art, JohannaDeck);
             registry.RegisterCard(BigSwingCard);
             BigSwingCard.AddLocalisation("Big Swing", "Hook <c=keyword>{0}</c> but move thrice the distance (<c=keyword>{1}</c>)");
+
+            FireFireFireCard = new ExternalCard("JohannaTheTrucker.Cards.FireFireFire", typeof(FireFireFire), card_art, JohannaDeck);
+            registry.RegisterCard(FireFireFireCard);
+            FireFireFireCard.AddLocalisation("Fire! Fire! Fire!", "All missiles shoot until fully spent or unable to shoot.",null,"All missiles fire once.");
         }
 
         void ICharacterManifest.LoadManifest(ICharacterRegistry registry)
