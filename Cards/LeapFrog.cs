@@ -44,7 +44,8 @@ namespace JohannaTheTrucker.Cards
                     result.Add(new AMove()
                     {
                         dir = -2,
-                        fromEvade = false
+                        fromEvade = false,
+			targetPlayer=true,
                     });
                     break;
             }
