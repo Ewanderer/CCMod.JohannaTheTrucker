@@ -26,7 +26,8 @@ namespace JohannaTheTrucker.Cards
                 {
                     count = 1,
                     ignoreRetain = true,
-                    selectedCard = c.hand.Count > 0 ? c.hand[sel] : null
+                    selectedCard = c.hand.Count > 0 ? c.hand[sel] : null,
+                    disabled=!can_play,
                 });
 
                 {
