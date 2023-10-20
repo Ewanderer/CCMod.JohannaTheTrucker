@@ -24,7 +24,7 @@ namespace JohannaTheTrucker.Cards
 
             list.Add(new AMove()
             {
-                dir = distance*3,
+                dir = distance*2,
                 targetPlayer = true,
                 fromEvade = false,
                 disabled = distance == 0,
