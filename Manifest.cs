@@ -312,7 +312,7 @@ namespace JohannaTheTrucker
 
             BigSwingCard = new ExternalCard("JohannaTheTrucker.Cards.BigSwing", typeof(BigSwing), card_art, JohannaDeck);
             registry.RegisterCard(BigSwingCard);
-            BigSwingCard.AddLocalisation("Big Swing", "Hook <c=keyword>{0}</c> but move thrice the distance (<c=keyword>{1}</c>)");
+            BigSwingCard.AddLocalisation("Big Swing", "Hook <c=keyword>{0}</c> but move twice the distance (<c=keyword>{1}</c>)");
 
             FireFireFireCard = new ExternalCard("JohannaTheTrucker.Cards.FireFireFire", typeof(FireFireFire), card_art, JohannaDeck);
             registry.RegisterCard(FireFireFireCard);
