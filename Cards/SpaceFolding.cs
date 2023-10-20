@@ -24,15 +24,6 @@ namespace JohannaTheTrucker.Cards
                 missile_bay.pulse = 1;
             }
 
-            if (upgrade == Upgrade.A)
-            {
-                result.Add(new AStatus()
-                {
-                    status = Status.droneShift,
-                    statusAmount = 2,
-                    targetPlayer = true
-                });
-            }
             else if (upgrade == Upgrade.B)
             {
                 result.Add(new ABubbleField());
@@ -43,14 +34,14 @@ namespace JohannaTheTrucker.Cards
 
         public override CardData GetData(State state)
         {
-            string desc="Unkown Upgrade"; 
+            string desc="Unknown Upgrade"; 
             switch (upgrade)
             {
                 case Upgrade.None:
                     desc = Loc.GetLocString(Manifest.SpaceFoldingCard?.DescLocKey??throw new Exception("Missing card"));
                     break;
                 case Upgrade.A:
-                    desc = Loc.GetLocString(Manifest.SpaceFoldingCard?.DescALocKey ?? throw new Exception("Missing card"));
+                    desc = Loc.GetLocString(Manifest.SpaceFoldingCard?.DescLocKey ?? throw new Exception("Missing card"));
                     break;
                 case Upgrade.B:
                     desc = Loc.GetLocString(Manifest.SpaceFoldingCard?.DescBLocKey ?? throw new Exception("Missing card"));
@@ -60,6 +51,7 @@ namespace JohannaTheTrucker.Cards
             {
                 cost = upgrade == Upgrade.B ? 2 : 1,
                 description = desc
+                retain = upgrade = Upgrade.A,
             };
         }
 
