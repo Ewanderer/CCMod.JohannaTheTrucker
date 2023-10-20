@@ -136,7 +136,18 @@ namespace JohannaTheTrucker.Cards
         {
             return new CardData()
             {
-                cost = 1
+                switch (upgrade)
+            {
+                case Upgrade.None:
+                    cost = 2;
+                    break;
+                case Upgrade.A:
+                    cost = 2;
+                    break;
+                case Upgrade.B:
+                    cost = 3;
+                    break;
+            }
             };
         }
 
