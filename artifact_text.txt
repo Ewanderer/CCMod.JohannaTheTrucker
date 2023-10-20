@@ -1,0 +1,19 @@
+Inertial Engine: For every 6 spaces moved without using Evade, gain 1 Evade
+
+Decorative Salmon: Every time a cluster is completely spent (not destroyed) gain 1 Shield
+
+Lucky Lure: For every 4 missiles that hit the enemy, gain 1 Midshift
+
+Salmon Roe: For every 3 missiles that miss, the next cluster gains 1 charge
+
+Freebies!: (Boss) Launching or adding charges to clusters has a 50% chance to add 1 extra charge
+
+Quantum Lure Box: (Boss) For every 3 shots (Attack cards) gain a Micro Missiles card
+
+Shield Bypass Key: At the start of turn, lose 1 shield to gain 1 evade. (If you can't lose 1 shield you don't gain the other effect)
+
+Autolauncher: At the start of turn, launch 1 cluster missile with 1 charge.
+
+(Boss) Midrow Protector Protocol: If you don't have any bubbler, gain 1 bubbler at the start of turn. Start the battle with 99 "Lose All Midshift". (Isaac has an artifact that grants Bubbler after playing 4 of his own cards, this is the same buff)
+
+(Boss) Under-Wing Cargo Compartment: Gain 1 extra energy per turn. Start the battle with 99 "Lose All Evade".
