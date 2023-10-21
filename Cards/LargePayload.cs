@@ -1,4 +1,5 @@
-﻿using JohannaTheTrucker.Actions;
+﻿using FMOD;
+using JohannaTheTrucker.Actions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,12 +9,12 @@ using System.Threading.Tasks;
 namespace JohannaTheTrucker.Cards
 {
     [CardMeta(rarity = Rarity.common, upgradesTo = new Upgrade[] { Upgrade.A, Upgrade.B })]
-    public class LargePayload : Card
+    public class ShiftCluster : Card
     {
-
         public override List<CardAction> GetActions(State s, Combat c)
         {
-            var result = new List<CardAction>();
+            var list = new List<CardAction>();
+
             switch (upgrade)
             {
                 case Upgrade.None:
@@ -21,57 +22,59 @@ namespace JohannaTheTrucker.Cards
                     {
                         var cluster_missile = new MidrowStuff.ClusterMissile()
                         {
-                            stackSize = 6
+                            stackSize = 3
                         };
 
                         var spawn_cluster = new ASpawn()
                         {
-                            thing = cluster_missile
+                            thing = cluster_missile,
+                            offset=1
                         };
 
-                        result.Add(spawn_cluster);
+                        list.Add(spawn_cluster);
                     }
-                    break;
+
+                                        break;
                 case Upgrade.B:
                     {
+						var hook_action = new AHook()
+						{
+							//hookToRight = flipped
+						};
+
+						hook_action.disabled = hook_action.CalculateMove(s, c) == null;
+
+						list.Add(hook_action);
+						
                         var cluster_missile = new MidrowStuff.ClusterMissile()
                         {
-                            stackSize = 6,
-                            stackType = MidrowStuff.ClusterMissile.MissileType.heavy
+                            stackSize = 4
                         };
 
                         var spawn_cluster = new ASpawn()
                         {
-                            thing = cluster_missile
+                            thing = cluster_missile,
+                            offset = 0
                         };
 
-
-                        result.Add(spawn_cluster);
-
-                        result.Add(new AStatus()
-                        {
-                            status = Status.droneShift,
-                            statusAmount = 2,
-                            targetPlayer = true
-                        });
-
-
+                        list.Add(spawn_cluster);
                     }
+
                     break;
             }
-            return result;
+
+            return list;
         }
 
         public override CardData GetData(State state)
         {
-            return new CardData
+            return new CardData()
             {
-                cost = 1,
-                exhaust = upgrade != Upgrade.A
+				cost = 1,
+				flippable = upgrade == Upgrade.A,
             };
         }
 
-        public override string Name() => "Large Payload";
-
+        public override string Name() => "Shift Cluster";
     }
 }
