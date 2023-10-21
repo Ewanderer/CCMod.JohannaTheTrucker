@@ -18,11 +18,50 @@ namespace JohannaTheTrucker.Cards
             {
                 case Upgrade.None:
                     {
+
+                        var cluster_missile = new MidrowStuff.ClusterMissile()
+                        {
+                            stackSize = 2,
+                            stackType = MidrowStuff.ClusterMissile.MissileType.seeker
+                        };
+
+                        var spawn_cluster = new ASpawn()
+                        {
+                            thing = cluster_missile
+                        };
+
+                        result.Add(spawn_cluster);
+                        
                         result.Add(new ADroneMove()
                         {
                             dir = -1
                         });
+                    }
+                    break;
+                case Upgrade.A:
+                    {
 
+                        var cluster_missile = new MidrowStuff.ClusterMissile()
+                        {
+                            stackSize = 4,
+                            stackType = MidrowStuff.ClusterMissile.MissileType.seeker
+                        };
+
+                        var spawn_cluster = new ASpawn()
+                        {
+                            thing = cluster_missile
+                        };
+
+                        result.Add(spawn_cluster);
+
+                        result.Add(new ADroneMove()
+                        {
+                            dir = -1
+                        });
+                    }
+                    break;
+                case Upgrade.B:
+                    {
                         var cluster_missile = new MidrowStuff.ClusterMissile()
                         {
                             stackSize = 3,
@@ -31,65 +70,16 @@ namespace JohannaTheTrucker.Cards
 
                         var spawn_cluster = new ASpawn()
                         {
-                            thing = cluster_missile
+                            thing = cluster_missile;
                         };
 
                         result.Add(spawn_cluster);
                     }
-                    break;
-                case Upgrade.A:
-                    {
-
-                        result.Add(new ADroneMove()
+                    
+                    result.Add(new ADroneMove()
                         {
                             dir = -3
                         });
-
-                        var cluster_missile = new MidrowStuff.ClusterMissile()
-                        {
-                            stackSize = 5,
-                            stackType = MidrowStuff.ClusterMissile.MissileType.seeker
-                        };
-
-                        var spawn_cluster = new ASpawn()
-                        {
-                            thing = cluster_missile
-                        };
-
-                        result.Add(spawn_cluster);
-                    }
-                    break;
-                case Upgrade.B:
-                    {
-                        var cluster_missile = new MidrowStuff.ClusterMissile()
-                        {
-                            stackSize = 2,
-                            stackType = MidrowStuff.ClusterMissile.MissileType.seeker
-                        };
-
-                        var spawn_cluster = new ASpawn()
-                        {
-                            thing = cluster_missile,
-                            offset = -2
-                        };
-
-                        result.Add(spawn_cluster);
-                    }
-
-                    {
-                        var cluster_missile = new MidrowStuff.ClusterMissile()
-                        {
-                            stackSize = 2,
-                            stackType = MidrowStuff.ClusterMissile.MissileType.seeker
-                        };
-
-                        var spawn_cluster = new ASpawn()
-                        {
-                            thing = cluster_missile
-                        };
-
-                        result.Add(spawn_cluster);
-                    }
 
                     break;
             }
