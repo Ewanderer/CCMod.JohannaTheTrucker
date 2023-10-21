@@ -37,7 +37,7 @@ namespace JohannaTheTrucker.Cards
 
                 result.Add(new AGrowClusters()
                 {
-                    ammount = upgrade == Upgrade.None ? 2 : 1,
+                    ammount = 2,
                     cluster_type = MidrowStuff.ClusterMissile.MissileType.heavy,
                     fromPlayer = true,
                     disabled = flipped
@@ -47,7 +47,7 @@ namespace JohannaTheTrucker.Cards
 
                 result.Add(new AGrowClusters()
                 {
-                    ammount = upgrade == Upgrade.None ? 2 : 1,
+                    ammount = 2,
                     cluster_type = MidrowStuff.ClusterMissile.MissileType.seeker,
                     fromPlayer = true,
                     disabled = !flipped
@@ -78,7 +78,7 @@ namespace JohannaTheTrucker.Cards
             return new CardData
             {
                 cost = cost,
-                exhaust = upgrade == Upgrade.B,
+                exhaust = true,
                 floppable = upgrade != Upgrade.B,
             };
         }
