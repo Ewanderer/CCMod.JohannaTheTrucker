@@ -28,11 +28,19 @@ namespace JohannaTheTrucker
         public static ExternalSprite? HookLeftIcon { get; private set; }
         public static ExternalSprite? HookRightIcon { get; private set; }
         public static ExternalSprite? JohannaCardFrame { get; private set; }
+        public static ExternalSprite? JohannaUncommonCardFrame { get; private set; }
+        public static ExternalSprite? JohannaRareCardFrame { get; private set; }
         public static ExternalCharacter? JohannaCharacter { get; private set; }
         public static ExternalDeck? JohannaDeck { get; private set; }
         public static ExternalAnimation? JohannaDefaultAnimation { get; private set; }
         public static ExternalSprite? JohannaMini { get; private set; }
         public static ExternalAnimation? JohannaMiniAnimation { get; private set; }
+        public static ExternalAnimation? TalkAngryAnimation { get; private set; }
+        public static ExternalAnimation? TalkLaughAnimation { get; private set; }
+        public static ExternalAnimation? TalkNeutralAnimation { get; private set; }
+        public static ExternalAnimation? TalkReminisceAnimation { get; private set; }
+        public static ExternalAnimation? TalkSadAnimation { get; private set; }
+        public static ExternalAnimation? TalkScaredAnimation { get; private set; }
         public static ExternalSprite? JohannaPotrait { get; private set; }
         public static ExternalCard? ReelInCard { get; private set; }
         public static ExternalCard? SaturationFireCard { get; private set; }
@@ -60,6 +68,13 @@ namespace JohannaTheTrucker
 
         public static ExternalGlossary? AGrowClusterGlossary { get; private set; }
         IEnumerable<string> ISpriteManifest.Dependencies => new string[0];
+
+        public static List<ExternalSprite> TalkAngrySprites { get; private set; } = new List<ExternalSprite>();
+        public static List<ExternalSprite> TalkLaughSprites { get; private set; } = new List<ExternalSprite>();
+        public static List<ExternalSprite> TalkNeutralSprites { get; private set; } = new List<ExternalSprite>();
+        public static List<ExternalSprite> TalkReminisceSprites { get; private set; } = new List<ExternalSprite>();
+        public static List<ExternalSprite> TalkSadSprites { get; private set; } = new List<ExternalSprite>();
+        public static List<ExternalSprite> TalkScaredSprites { get; private set; } = new List<ExternalSprite>();
 
         public DirectoryInfo? ModRootFolder { get; set; }
         public string Name { get; init; } = "Actionmartini.JohannaTheTrucker";
@@ -181,6 +196,72 @@ namespace JohannaTheTrucker
                 var path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("JoCardFrame.png"));
                 JohannaCardFrame = new ExternalSprite("JohannaTheTrucker.JohannaDeckFrame", new FileInfo(path));
                 artRegistry.RegisterArt(JohannaCardFrame);
+            }
+
+            {
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("JoCardFrameRA.png"));
+                JohannaRareCardFrame = new ExternalSprite("JohannaTheTrucker.JohannaRareDeckFrame", new FileInfo(path));
+                artRegistry.RegisterArt(JohannaRareCardFrame);
+            }
+
+            {
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("JoCardFrameUC.png"));
+                JohannaUncommonCardFrame = new ExternalSprite("JohannaTheTrucker.JohannaUncommonDeckFrame", new FileInfo(path));
+                artRegistry.RegisterArt(JohannaUncommonCardFrame);
+            }
+            //talk animations
+            {
+                var dir_path = Path.Combine(ModRootFolder.FullName, "Sprites", "talk_angry");
+                var files = Directory.GetFiles(dir_path).Select(e => new FileInfo(e)).ToArray();
+                for (int i = 0; i < files.Length; i++)
+                {
+                    TalkAngrySprites.Add(new ExternalSprite("JohannaTheTrucker.TalkAngry" + i, files[i]));
+                }
+            }
+
+            {
+                var dir_path = Path.Combine(ModRootFolder.FullName, "Sprites", "talk_laugh");
+                var files = Directory.GetFiles(dir_path).Select(e => new FileInfo(e)).ToArray();
+                for (int i = 0; i < files.Length; i++)
+                {
+                    TalkLaughSprites.Add(new ExternalSprite("JohannaTheTrucker.TalkLaugh" + i, files[i]));
+                }
+            }
+
+            {
+                var dir_path = Path.Combine(ModRootFolder.FullName, "Sprites", "talk_neutral");
+                var files = Directory.GetFiles(dir_path).Select(e => new FileInfo(e)).ToArray();
+                for (int i = 0; i < files.Length; i++)
+                {
+                    TalkNeutralSprites.Add(new ExternalSprite("JohannaTheTrucker.TalkNeutral" + i, files[i]));
+                }
+            }
+
+            {
+                var dir_path = Path.Combine(ModRootFolder.FullName, "Sprites", "talk_reminisce");
+                var files = Directory.GetFiles(dir_path).Select(e => new FileInfo(e)).ToArray();
+                for (int i = 0; i < files.Length; i++)
+                {
+                    TalkReminisceSprites.Add(new ExternalSprite("JohannaTheTrucker.TalkReminisce" + i, files[i]));
+                }
+            }
+
+            {
+                var dir_path = Path.Combine(ModRootFolder.FullName, "Sprites", "talk_sad");
+                var files = Directory.GetFiles(dir_path).Select(e => new FileInfo(e)).ToArray();
+                for (int i = 0; i < files.Length; i++)
+                {
+                    TalkSadSprites.Add(new ExternalSprite("JohannaTheTrucker.TalkSad" + i, files[i]));
+                }
+            }
+
+            {
+                var dir_path = Path.Combine(ModRootFolder.FullName, "Sprites", "talk_scared");
+                var files = Directory.GetFiles(dir_path).Select(e => new FileInfo(e)).ToArray();
+                for (int i = 0; i < files.Length; i++)
+                {
+                    TalkScaredSprites.Add(new ExternalSprite("JohannaTheTrucker.TalkScared" + i, files[i]));
+                }
             }
         }
 
@@ -316,7 +397,7 @@ namespace JohannaTheTrucker
 
             FireFireFireCard = new ExternalCard("JohannaTheTrucker.Cards.FireFireFire", typeof(FireFireFire), card_art, JohannaDeck);
             registry.RegisterCard(FireFireFireCard);
-            FireFireFireCard.AddLocalisation("Fire! Fire! Fire!", "All missiles shoot until fully spent or unable to shoot.",null,"All missiles fire once.");
+            FireFireFireCard.AddLocalisation("Fire! Fire! Fire!", "All missiles shoot until fully spent or unable to shoot.", null, "All missiles fire once.");
         }
 
         void ICharacterManifest.LoadManifest(ICharacterRegistry registry)
@@ -351,6 +432,24 @@ namespace JohannaTheTrucker
                new ExternalSprite[] { JohannaMini ?? throw new Exception("missing mini") });
 
             registry.RegisterAnimation(JohannaMiniAnimation);
+
+            TalkAngryAnimation = new ExternalAnimation("JohannaTheTrucker.Animation.TalkAngry", JohannaDeck, "talk_angry", false, TalkAngrySprites);
+            registry.RegisterAnimation(TalkAngryAnimation);
+
+            TalkLaughAnimation = new ExternalAnimation("JohannaTheTrucker.Animation.TalkLaugh", JohannaDeck, "talk_laugh", false, TalkLaughSprites);
+            registry.RegisterAnimation(TalkLaughAnimation);
+
+            TalkNeutralAnimation = new ExternalAnimation("JohannaTheTrucker.Animation.TalkNeutral", JohannaDeck, "talk_neutral", false, TalkNeutralSprites);
+            registry.RegisterAnimation(TalkNeutralAnimation);
+
+            TalkReminisceAnimation = new ExternalAnimation("JohannaTheTrucker.Animation.TalkReminisce", JohannaDeck, "talk_reminisce", false, TalkReminisceSprites);
+            registry.RegisterAnimation(TalkReminisceAnimation);
+
+            TalkSadAnimation = new ExternalAnimation("JohannaTheTrucker.Animation.TalkSad", JohannaDeck, "talk_sad", false, TalkSadSprites);
+            registry.RegisterAnimation(TalkSadAnimation);
+
+            TalkScaredAnimation = new ExternalAnimation("JohannaTheTrucker.Animation.TalkScared", JohannaDeck, "talk_scared", false, TalkScaredSprites);
+            registry.RegisterAnimation(TalkScaredAnimation);
         }
 
 
