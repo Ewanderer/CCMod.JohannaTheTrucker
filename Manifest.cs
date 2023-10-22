@@ -41,6 +41,7 @@ namespace JohannaTheTrucker
         public static ExternalAnimation? TalkReminisceAnimation { get; private set; }
         public static ExternalAnimation? TalkSadAnimation { get; private set; }
         public static ExternalAnimation? TalkScaredAnimation { get; private set; }
+        public static ExternalAnimation? GameoverAnimation { get; private set; }
         public static ExternalSprite? JohannaPotrait { get; private set; }
         public static ExternalCard? ReelInCard { get; private set; }
         public static ExternalCard? SaturationFireCard { get; private set; }
@@ -215,7 +216,9 @@ namespace JohannaTheTrucker
                 var files = Directory.GetFiles(dir_path).Select(e => new FileInfo(e)).ToArray();
                 for (int i = 0; i < files.Length; i++)
                 {
-                    TalkAngrySprites.Add(new ExternalSprite("JohannaTheTrucker.TalkAngry" + i, files[i]));
+                    var spr = new ExternalSprite("JohannaTheTrucker.TalkAngry" + i, files[i]);
+                    TalkAngrySprites.Add(spr);
+                    artRegistry.RegisterArt(spr);
                 }
             }
 
@@ -224,7 +227,9 @@ namespace JohannaTheTrucker
                 var files = Directory.GetFiles(dir_path).Select(e => new FileInfo(e)).ToArray();
                 for (int i = 0; i < files.Length; i++)
                 {
-                    TalkLaughSprites.Add(new ExternalSprite("JohannaTheTrucker.TalkLaugh" + i, files[i]));
+                    var spr = new ExternalSprite("JohannaTheTrucker.TalkLaugh" + i, files[i]);
+                    TalkLaughSprites.Add(spr);
+                    artRegistry.RegisterArt(spr);
                 }
             }
 
@@ -233,7 +238,9 @@ namespace JohannaTheTrucker
                 var files = Directory.GetFiles(dir_path).Select(e => new FileInfo(e)).ToArray();
                 for (int i = 0; i < files.Length; i++)
                 {
-                    TalkNeutralSprites.Add(new ExternalSprite("JohannaTheTrucker.TalkNeutral" + i, files[i]));
+                    var spr = new ExternalSprite("JohannaTheTrucker.TalkNeutral" + i, files[i]);
+                    TalkNeutralSprites.Add(spr);
+                    artRegistry.RegisterArt(spr);
                 }
             }
 
@@ -242,7 +249,9 @@ namespace JohannaTheTrucker
                 var files = Directory.GetFiles(dir_path).Select(e => new FileInfo(e)).ToArray();
                 for (int i = 0; i < files.Length; i++)
                 {
-                    TalkReminisceSprites.Add(new ExternalSprite("JohannaTheTrucker.TalkReminisce" + i, files[i]));
+                    var spr = (new ExternalSprite("JohannaTheTrucker.TalkReminisce" + i, files[i]));
+                    TalkReminisceSprites.Add(spr);
+                    artRegistry.RegisterArt(spr);
                 }
             }
 
@@ -251,7 +260,9 @@ namespace JohannaTheTrucker
                 var files = Directory.GetFiles(dir_path).Select(e => new FileInfo(e)).ToArray();
                 for (int i = 0; i < files.Length; i++)
                 {
-                    TalkSadSprites.Add(new ExternalSprite("JohannaTheTrucker.TalkSad" + i, files[i]));
+                    var spr = (new ExternalSprite("JohannaTheTrucker.TalkSad" + i, files[i]));
+                    TalkSadSprites.Add(spr);
+                    artRegistry.RegisterArt(spr);
                 }
             }
 
@@ -260,9 +271,13 @@ namespace JohannaTheTrucker
                 var files = Directory.GetFiles(dir_path).Select(e => new FileInfo(e)).ToArray();
                 for (int i = 0; i < files.Length; i++)
                 {
-                    TalkScaredSprites.Add(new ExternalSprite("JohannaTheTrucker.TalkScared" + i, files[i]));
+                    var spr = (new ExternalSprite("JohannaTheTrucker.TalkScared" + i, files[i]));
+                    TalkScaredSprites.Add(spr);
+                    artRegistry.RegisterArt(spr);
                 }
             }
+
+
         }
 
         private static System.Drawing.Color Johanna_Primary_Color = System.Drawing.Color.FromArgb(65, 144, 195);
@@ -450,6 +465,9 @@ namespace JohannaTheTrucker
 
             TalkScaredAnimation = new ExternalAnimation("JohannaTheTrucker.Animation.TalkScared", JohannaDeck, "talk_scared", false, TalkScaredSprites);
             registry.RegisterAnimation(TalkScaredAnimation);
+
+            GameoverAnimation = new ExternalAnimation("JohannaTheTrucker.Animation.GameOver", JohannaDeck, "gameover", false, TalkScaredSprites);
+            registry.RegisterAnimation(GameoverAnimation);
         }
 
 
