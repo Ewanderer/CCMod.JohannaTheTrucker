@@ -14,8 +14,6 @@ namespace JohannaTheTrucker.Artifacts
     public class DecorativeSalmon : Artifact
     {
 
-
-
         public DecorativeSalmon()
         {
             Manifest.EventHub.ConnectToEvent<Tuple<ClusterMissile, Combat, State>>("JohannaTheTrucker.ClusterMissileExpended", OnClusterMissileExpended);
@@ -28,13 +26,14 @@ namespace JohannaTheTrucker.Artifacts
 
         private void OnClusterMissileExpended(Tuple<ClusterMissile, Combat, State> evt)
         {
-
-
             var clusterMissile = evt.Item1;
             var combat = evt.Item2;
             var state = evt.Item3;
+            //check if this artifact is valid.
             if (!state.artifacts.Contains(this))
             {
+                //make sure cleanup is only performed once.
+                Manifest.EventHub.DisconnectFromEvent<Tuple<ClusterMissile, Combat, State>>("JohannaTheTrucker.ClusterMissileExpended", OnClusterMissileExpended);
                 return;
             }
             if (!clusterMissile.fromPlayer)
