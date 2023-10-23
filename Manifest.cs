@@ -5,7 +5,7 @@ using JohannaTheTrucker.Cards;
 
 namespace JohannaTheTrucker
 {
-    public partial class Manifest : ISpriteManifest, IDeckManifest, IGlossaryManifest, ICardManifest, ICharacterManifest, IAnimationManifest, IStatusManifest
+    public partial class Manifest : ISpriteManifest, IDeckManifest, IGlossaryManifest, ICardManifest, ICharacterManifest, IAnimationManifest, IStatusManifest, ICustomEventManifest, IArtifactManifest
     {
         public static ExternalGlossary? AHook_Glossary { get; private set; }
         public static ExternalGlossary? ClusterMissile_Glossary { get; private set; }
@@ -30,6 +30,7 @@ namespace JohannaTheTrucker
         public static ExternalSprite? JohannaCardFrame { get; private set; }
         public static ExternalSprite? JohannaUncommonCardFrame { get; private set; }
         public static ExternalSprite? JohannaRareCardFrame { get; private set; }
+        public static ExternalSprite? DecorativeSalmonSprite { get; private set; }
         public static ExternalCharacter? JohannaCharacter { get; private set; }
         public static ExternalDeck? JohannaDeck { get; private set; }
         public static ExternalAnimation? JohannaDefaultAnimation { get; private set; }
@@ -88,6 +89,14 @@ namespace JohannaTheTrucker
         {
             if (ModRootFolder == null)
                 throw new Exception("Root Folder not set");
+            //artifacts
+
+            {
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites","artifact_icons", Path.GetFileName("decorative_salmon.png"));
+                DecorativeSalmonSprite = new ExternalSprite("JohannaTheTrucker.decorative_salmon", new FileInfo(path));
+                artRegistry.RegisterArt(DecorativeSalmonSprite);
+            }
+
             //load the character sprite
 
             {
@@ -402,7 +411,7 @@ namespace JohannaTheTrucker
 
             SpaceFoldingCard = new ExternalCard("JohannaTheTrucker.Cards.SpaceFolding", typeof(SpaceFolding), folding_art, JohannaDeck);
             registry.RegisterCard(SpaceFoldingCard);
-            SpaceFoldingCard.AddLocalisation("Space Folding", "Flip midrow using your missile bay as pivot.", "Flip midrow using your missile bay as pivot. Gain 2 midshift.", "Bubble and Flip midrow using your missile bay as pivot.");
+            SpaceFoldingCard.AddLocalisation("Space Folding", "Flip midrow using your missile bay as pivot.", "Flip midrow using your missile bay as pivot. Gain 2 midshift.", "Bubble and Flip midrow usinyour missile bay as pivot.");
 
             VarietyPackCard = new ExternalCard("JohannaTheTrucker.Cards.VarietyPack", typeof(VarietyPack), cluster_art, JohannaDeck);
             registry.RegisterCard(VarietyPackCard);

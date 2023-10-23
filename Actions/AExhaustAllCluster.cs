@@ -169,7 +169,7 @@ namespace JohannaTheTrucker.Actions
                     //if cluster size is 0 remove from stuff (item reference is stored in future hits.)
                     if (entry.cluster.stackSize <= 0)
                     {
-                        ArtifactLogicManifest.EventHub.SignalEvent<Tuple<ClusterMissile, Combat, State>>("JohannaTheTrucker.ClusterMissileExpended", new(entry.cluster, c, s));
+                        Manifest.EventHub.SignalEvent<Tuple<ClusterMissile, Combat, State>>("JohannaTheTrucker.ClusterMissileExpended", new(entry.cluster, c, s));
                         c.stuff.Remove(entry.Key);
                     }
                 }

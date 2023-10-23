@@ -14,16 +14,29 @@ namespace JohannaTheTrucker.Artifacts
     public class DecorativeSalmon : Artifact
     {
 
+
+
         public DecorativeSalmon()
         {
-            ArtifactLogicManifest.EventHub.ConnectToEvent<Tuple<ClusterMissile, Combat, State>>("JohannaTheTrucker.ClusterMissileExpended", OnClusterMissileExpended);
+            Manifest.EventHub.ConnectToEvent<Tuple<ClusterMissile, Combat, State>>("JohannaTheTrucker.ClusterMissileExpended", OnClusterMissileExpended);
+        }
+
+        public override void OnRemoveArtifact(State state)
+        {
+            Manifest.EventHub.DisconnectFromEvent<Tuple<ClusterMissile, Combat, State>>("JohannaTheTrucker.ClusterMissileExpended", OnClusterMissileExpended);
         }
 
         private void OnClusterMissileExpended(Tuple<ClusterMissile, Combat, State> evt)
         {
+
+
             var clusterMissile = evt.Item1;
-            var state = evt.Item3;
             var combat = evt.Item2;
+            var state = evt.Item3;
+            if (!state.artifacts.Contains(this))
+            {
+                return;
+            }
             if (!clusterMissile.fromPlayer)
                 return;
             combat.QueueImmediate(new AStatus()

@@ -80,7 +80,7 @@ namespace JohannaTheTrucker.Actions
             if (missile.stackSize == 0)
             {
                 c.stuff.Remove(world_pos_x);
-                ArtifactLogicManifest.EventHub.SignalEvent<Tuple<ClusterMissile, Combat, State>>("JohannaTheTrucker.ClusterMissileExpended", new(missile, c, s));
+                Manifest.EventHub.SignalEvent<Tuple<ClusterMissile, Combat, State>>("JohannaTheTrucker.ClusterMissileExpended", new(missile, c, s));
             }
         }
 
