@@ -30,6 +30,7 @@ namespace JohannaTheTrucker
         public static ExternalSprite? JohannaCardFrame { get; private set; }
         public static ExternalSprite? JohannaUncommonCardFrame { get; private set; }
         public static ExternalSprite? JohannaRareCardFrame { get; private set; }
+        public static ExternalSprite? JohannaPanelFrame { get; private set; }
         public static ExternalSprite? DecorativeSalmonSprite { get; private set; }
         public static ExternalSprite? InertialEngineSprite { get; private set; }
         public static ExternalSprite? LuckyLureSprite { get; private set; }
@@ -174,6 +175,12 @@ namespace JohannaTheTrucker
                 var path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("JohannaMini.png"));
                 JohannaMini = new ExternalSprite("JohannaTheTrucker.JohannaMini", new FileInfo(path));
                 artRegistry.RegisterArt(JohannaMini);
+            }
+
+            {
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("JoFrame.png"));
+                JohannaPanelFrame = new ExternalSprite("JohannaTheTrucker.JohannaPanelFrame", new FileInfo(path));
+                artRegistry.RegisterArt(JohannaPanelFrame);
             }
 
             //hook sprite
@@ -538,7 +545,7 @@ namespace JohannaTheTrucker
         {
             JohannaCharacter = new ExternalCharacter("JohannaTheTrucker.Character.Johanna",
                 JohannaDeck ?? throw new Exception("Missing Deck"),
-                JohannaPotrait ?? throw new Exception("Missing Potrait"),
+                JohannaPanelFrame ?? throw new Exception("Missing Potrait"),
                 new Type[] { typeof(ReelIn), typeof(ClusterRocket) },
                 new Type[0],
                 JohannaDefaultAnimation ?? throw new Exception("missing default animation"),
