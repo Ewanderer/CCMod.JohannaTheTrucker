@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace JohannaTheTrucker.Artifacts
+﻿namespace JohannaTheTrucker.Artifacts
 {
     /// <summary>
     /// Lucky Lure: For every 4 missiles that hit the enemy, gain 1 Midshift
@@ -12,28 +6,18 @@ namespace JohannaTheTrucker.Artifacts
     [ArtifactMeta(pools = new ArtifactPool[] { ArtifactPool.Common })]
     public class LuckyLure : Artifact
     {
-        public override int? GetDisplayNumber(State s) => counter == 0 ? null : counter;
+        public int counter;
 
         public LuckyLure()
         {
             Manifest.EventHub.ConnectToEvent<Tuple<StuffBase, bool, Combat, State>>("JohannaTheTrucker.MissileFlying", OnAMissileHitDone);
         }
 
+        public override int? GetDisplayNumber(State s) => counter == 0 ? null : counter;
+
         public override void OnRemoveArtifact(State state)
         {
             Manifest.EventHub.DisconnectFromEvent<Tuple<StuffBase, bool, Combat, State>>("JohannaTheTrucker.MissileFlying", OnAMissileHitDone);
-        }
-
-        public int counter;
-
-        private static void AMissileHit_Update_Pre(AMissileHit __instance, State s, Combat c, out Missile? __state)
-        {
-            //try and grab missile
-            c.stuff.TryGetValue(__instance.worldX, out var stuffBase);
-            if (stuffBase is Missile m && m.yAnimation >= 3.5)
-                __state = m;
-            else
-                __state = null;
         }
 
         private static void AMissileHit_Update_Post(AMissileHit __instance, State s, Combat c, Missile? __state)
@@ -44,6 +28,16 @@ namespace JohannaTheTrucker.Artifacts
             var was_miss = c.stuffOutro.LastOrDefault() == __state;
 
             Manifest.EventHub.SignalEvent<Tuple<StuffBase, bool, Combat, State>>("JohannaTheTrucker.MissileFlying", new(__state, !was_miss, c, s));
+        }
+
+        private static void AMissileHit_Update_Pre(AMissileHit __instance, State s, Combat c, out Missile? __state)
+        {
+            //try and grab missile
+            c.stuff.TryGetValue(__instance.worldX, out var stuffBase);
+            if (stuffBase is Missile m && m.yAnimation >= 3.5)
+                __state = m;
+            else
+                __state = null;
         }
 
         private void OnAMissileHitDone(Tuple<StuffBase, bool, Combat, State> evt)
@@ -71,9 +65,6 @@ namespace JohannaTheTrucker.Artifacts
                     status = Status.droneShift
                 });
             }
-
-
         }
-
     }
 }

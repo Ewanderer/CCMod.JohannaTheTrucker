@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using JohannaTheTrucker.MidrowStuff;
+﻿using JohannaTheTrucker.MidrowStuff;
 
 namespace JohannaTheTrucker.Artifacts
 {
@@ -13,7 +8,6 @@ namespace JohannaTheTrucker.Artifacts
     [ArtifactMeta(pools = new ArtifactPool[] { ArtifactPool.Common })]
     public class DecorativeSalmon : Artifact
     {
-
         public DecorativeSalmon()
         {
             Manifest.EventHub.ConnectToEvent<Tuple<ClusterMissile, Combat, State>>("JohannaTheTrucker.ClusterMissileExpended", OnClusterMissileExpended);

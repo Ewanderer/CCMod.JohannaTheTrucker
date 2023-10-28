@@ -1,9 +1,4 @@
 ﻿using JohannaTheTrucker.MidrowStuff;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JohannaTheTrucker.Artifacts
 {
@@ -23,6 +18,20 @@ namespace JohannaTheTrucker.Artifacts
             Manifest.EventHub.DisconnectFromEvent<Tuple<ClusterMissile, State>>("JohannaTheTrucker.ClusterMissileGrown", OnClusterMissileGrown);
         }
 
+        public override StuffBase ReplaceSpawnedThing(State state, Combat combat, StuffBase thing, bool spawnedByPlayer)
+        {
+            if (!spawnedByPlayer)
+                return thing;
+            if (thing is not ClusterMissile cm)
+                return thing;
+            if (state.rngActions.Next() >= 0.5)
+            {
+                cm.stackSize++;
+                Pulse();
+            }
+            return cm;
+        }
+
         private void OnClusterMissileGrown(Tuple<ClusterMissile, State> evt)
         {
             if (!evt.Item2.artifacts.Contains(this))
@@ -38,20 +47,6 @@ namespace JohannaTheTrucker.Artifacts
                 cluster.stackSize++;
                 Pulse();
             }
-        }
-
-        public override StuffBase ReplaceSpawnedThing(State state, Combat combat, StuffBase thing, bool spawnedByPlayer)
-        {
-            if (!spawnedByPlayer)
-                return thing;
-            if (thing is not ClusterMissile cm)
-                return thing;
-            if (state.rngActions.Next() >= 0.5)
-            {
-                cm.stackSize++;
-                Pulse();
-            }
-            return cm;
         }
     }
 }

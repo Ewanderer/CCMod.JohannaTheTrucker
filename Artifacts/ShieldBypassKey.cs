@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace JohannaTheTrucker.Artifacts
+﻿namespace JohannaTheTrucker.Artifacts
 {
     /// <summary>
     /// Shield Bypass Key: At the start of turn, lose 1 shield to gain 1 evade. (If you can't lose 1 shield you don't gain the other effect)

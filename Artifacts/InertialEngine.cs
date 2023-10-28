@@ -1,11 +1,4 @@
-﻿using JohannaTheTrucker.MidrowStuff;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace JohannaTheTrucker.Artifacts
+﻿namespace JohannaTheTrucker.Artifacts
 {
     /// <summary>
     /// Inertial Engine: For every 6 spaces moved without using Evade, gain 1 Evade
@@ -13,15 +6,14 @@ namespace JohannaTheTrucker.Artifacts
     [ArtifactMeta(pools = new ArtifactPool[] { ArtifactPool.Common })]
     public class InertialEngine : Artifact
     {
-
         public int counter;
-
-        public override int? GetDisplayNumber(State s) => counter == 0 ? null : counter;
 
         public InertialEngine()
         {
             Manifest.EventHub.ConnectToEvent<Tuple<int, bool, bool, Combat, State>>("JohannaTheTrucker.ShipMoved", ShipMoved);
         }
+
+        public override int? GetDisplayNumber(State s) => counter == 0 ? null : counter;
 
         public override void OnRemoveArtifact(State state)
         {
@@ -77,6 +69,5 @@ namespace JohannaTheTrucker.Artifacts
                 });
             }
         }
-
     }
 }
