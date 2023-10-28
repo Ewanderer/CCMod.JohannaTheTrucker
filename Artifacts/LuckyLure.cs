@@ -9,6 +9,7 @@ namespace JohannaTheTrucker.Artifacts
     /// <summary>
     /// Lucky Lure: For every 4 missiles that hit the enemy, gain 1 Midshift
     /// </summary>
+    [ArtifactMeta(pools = new ArtifactPool[] { ArtifactPool.Common })]
     public class LuckyLure : Artifact
     {
 
