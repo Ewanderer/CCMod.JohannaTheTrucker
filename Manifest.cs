@@ -419,19 +419,19 @@ namespace JohannaTheTrucker
             registry.RegisterGlossary(AGrowClusterGlossary);
 
             ClusterMissile_Glossary = new ExternalGlossary("JohannaTheTrucker.Glossary.ClusterRocket_Glossary", "JohannaTheTruckerClusterRocketMidRow", false, ExternalGlossary.GlossayType.midrow, ClusterMissleIcon ?? throw new Exception("Missing ClusterMissleIcon"));
-            ClusterMissile_Glossary.AddLocalisation("en", "Cluster Missile", "A swarm of {0} rocklets. On their turn 1 flies forward dealing 1 damage on a hit. The entire stack dies in one hit.", null);
+            ClusterMissile_Glossary.AddLocalisation("en", "Cluster Missile", "A swarm of {0} rocklets. On their turn, one flies forward dealing 1 damage on hit. The entire stack is destroyed in one hit.", null);
             registry.RegisterGlossary(ClusterMissile_Glossary);
 
             ClusterMissileHE_Glossary = new ExternalGlossary("JohannaTheTrucker.Glossary.ClusteMissileHE_Glossary", "JohannaTheTruckerHEClusterRocketMidRow", false, ExternalGlossary.GlossayType.midrow, HEClusterMissleIcon ?? throw new Exception("Missing ClusterMissleIcon"));
-            ClusterMissileHE_Glossary.AddLocalisation("en", "Heavy Cluster Missile", "A swarm of {0} heavy rocklets. On their turn 1 flies forward dealing 2 damage on a hit. The entire stack dies in one hit.", null);
+            ClusterMissileHE_Glossary.AddLocalisation("en", "Heavy Cluster Missile", "A swarm of {0} heavy rocklets. On their turn, one flies forward dealing 2 damage on hit. The entire stack is destroyed in one hit.", null);
             registry.RegisterGlossary(ClusterMissileHE_Glossary);
 
             ClusterMissileSeeker_Glossary = new ExternalGlossary("JohannaTheTrucker.Glossary.ClusteMissileSeeker_Glossary", "JohannaTheTruckerSeekerClusterRocketMidRow", false, ExternalGlossary.GlossayType.midrow, SeekerClusterMissleIcon ?? throw new Exception("Missing ClusterMissleIcon"));
-            ClusterMissileSeeker_Glossary.AddLocalisation("en", "Seeker Cluster Missile", "A swarm of {0} seeeker rocklets. On their turn 1 flies towards their target dealing 1 damage. The entire stack dies in one hit.", null);
+            ClusterMissileSeeker_Glossary.AddLocalisation("en", "Seeker Cluster Missile", "A swarm of {0} seeeker rocklets. On their turn, one flies towards the enemy ship dealing 1 damage. The entire stack is destroyed in one hit.", null);
             registry.RegisterGlossary(ClusterMissileSeeker_Glossary);
 
             ClusterMissileHESeeker_Glossary = new ExternalGlossary("JohannaTheTrucker.Glossary.ClusteMissileHESeeker_Glossary", "JohannaTheTruckerHESeekerClusterRocketMidRow", false, ExternalGlossary.GlossayType.midrow, HESeekerClusterMissleToken ?? throw new Exception("Missing ClusterMissleIcon"));
-            ClusterMissileHESeeker_Glossary.AddLocalisation("en", "HE-S Cluster Missile", "A swarm of {0} heavy seeeker rocklets. On their turn 2 flies towards their target dealing 1 damage. The entire stack dies in one hit.", null);
+            ClusterMissileHESeeker_Glossary.AddLocalisation("en", "HE-S Cluster Missile", "A swarm of {0} heavy seeeker rocklets. On their turn, one flies towards the enemy ship dealing 2 damage on hit. The entire stack is destroyed in one hit.", null);
             registry.RegisterGlossary(ClusterMissileHESeeker_Glossary);
         }
 
@@ -553,7 +553,7 @@ namespace JohannaTheTrucker
 
             JohannaCharacter.AddNameLocalisation("Johanna");
 
-            JohannaCharacter.AddDescLocalisation("A space trucker. Uses a grappling hook and cluster missiles to deal with pirates.");
+            JohannaCharacter.AddDescLocalisation("<c=dizzy>JOHANNA</c>\nA private transporter. Her cards launch and combine a variety of missiles and uses them to reposition the ship.");
 
             registry.RegisterCharacter(JohannaCharacter);
         }
