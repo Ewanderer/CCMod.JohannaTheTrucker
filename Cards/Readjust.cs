@@ -64,7 +64,7 @@ namespace JohannaTheTrucker.Cards
         {
             return new CardData
             {
-                cost = 1,
+                cost = 2,
                 exhaust = true
             };
         }

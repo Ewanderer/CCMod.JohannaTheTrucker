@@ -55,7 +55,7 @@ namespace JohannaTheTrucker
         public static ExternalSprite? JohannaPotrait { get; private set; }
         public static ExternalCard? ReelInCard { get; private set; }
         public static ExternalCard? SaturationFireCard { get; private set; }
-        public static ExternalCard? LargePayloadCard { get; private set; }
+        public static ExternalCard? ShiftClusterCard { get; private set; }
         public static ExternalCard? HEClusterCard { get; private set; }
         public static ExternalCard? SeekingClusterCard { get; private set; }
         public static ExternalCard? LeapFrogCard { get; private set; }
@@ -74,6 +74,7 @@ namespace JohannaTheTrucker
         public static ExternalCard? ReboundCard { get; private set; }
         public static ExternalCard? SmartExplosivesCard { get; private set; }
         public static ExternalCard? BigSwingCard { get; private set; }
+        public static ExternalCard? EngineStallCard { get; private set; }
         public static ExternalSprite? SeekerClusterMissleIcon { get; private set; }
         public static ExternalSprite? SeekerClusterMissleToken { get; private set; }
         public static ExternalSprite? FoldingCardSprite { get; private set; }
@@ -435,6 +436,7 @@ namespace JohannaTheTrucker
             var cluster_art = MissileCardSprite ?? throw new Exception();
             var folding_art = FoldingCardSprite ?? throw new Exception();
             var readjust_art = ExternalSprite.GetRaw((int)Spr.cards_Dodge);
+            var engine_art = ExternalSprite.GetRaw((int)Spr.cards_ExtraBattery);
             var enemy_shift_art = ExternalSprite.GetRaw((int)Spr.cards_ScootRight);
             var smart_explosives_art = ExternalSprite.GetRaw((int)Spr.cards_Desktop);
           //  var mass_upgrade_art = ExternalSprite.GetRaw((int)Spr.adap);
@@ -451,9 +453,9 @@ namespace JohannaTheTrucker
             registry.RegisterCard(SaturationFireCard);
             SaturationFireCard.AddLocalisation("Saturation Fire");
 
-            LargePayloadCard = new ExternalCard("JohannaTheTrucker.Cards.LargePayload", typeof(LargePayload), cluster_art, JohannaDeck);
-            registry.RegisterCard(LargePayloadCard);
-            LargePayloadCard.AddLocalisation("Large Payload");
+            ShiftClusterCard = new ExternalCard("JohannaTheTrucker.Cards.ShiftCluster", typeof(ShiftCluster), cluster_art, JohannaDeck);
+            registry.RegisterCard(ShiftClusterCard);
+            ShiftClusterCard.AddLocalisation("Shift Cluster");
 
             HEClusterCard = new ExternalCard("JohannaTheTrucker.Cards.HECluster", typeof(HECluster), cluster_art, JohannaDeck);
             registry.RegisterCard(HEClusterCard);
@@ -468,7 +470,7 @@ namespace JohannaTheTrucker
             LeapFrogCard.AddLocalisation("Leap Frog");
 
             SmallManeuverCard = new ExternalCard("JohannaTheTrucker.Cards.SmallManeuver", typeof(SmallManeuver), readjust_art, JohannaDeck);
-            registry.RegisterCard(SmallManeuverCard);
+           // registry.RegisterCard(SmallManeuverCard);
             SmallManeuverCard.AddLocalisation("Small Maneuver");
 
             DoubleHookCard = new ExternalCard("JohannaTheTrucker.Cards.DoubleHook", typeof(DoubleHook), hook_art, JohannaDeck);
@@ -521,11 +523,15 @@ namespace JohannaTheTrucker
 
             BigSwingCard = new ExternalCard("JohannaTheTrucker.Cards.BigSwing", typeof(BigSwing), hook_art, JohannaDeck);
             registry.RegisterCard(BigSwingCard);
-            BigSwingCard.AddLocalisation("Big Swing", "Hook <c=keyword>{0}</c> but move thrice the distance (<c=keyword>{1}</c>)");
+            BigSwingCard.AddLocalisation("Big Swing", "Hook <c=keyword>{0}</c> but move twice the distance (<c=keyword>{1}</c>)");
 
             FireFireFireCard = new ExternalCard("JohannaTheTrucker.Cards.FireFireFire", typeof(FireFireFire), cluster_art, JohannaDeck);
             registry.RegisterCard(FireFireFireCard);
             FireFireFireCard.AddLocalisation("Fire! Fire! Fire!", "All missiles shoot until fully spent or unable to shoot.", null, "All missiles fire once.");
+
+            EngineStallCard = new ExternalCard("JohannaTheTrucker.Cards.EngineStall", typeof(EngineStall), engine_art, JohannaDeck);
+            registry.RegisterCard(EngineStallCard);
+            EngineStallCard.AddLocalisation("Engine Stall");
         }
 
         void ICharacterManifest.LoadManifest(ICharacterRegistry registry)

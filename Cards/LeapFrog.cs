@@ -15,7 +15,7 @@ namespace JohannaTheTrucker.Cards
             var result = new List<CardAction>();
             switch (upgrade)
             {
-                case Upgrade.B:
+                case Upgrade.A:
                 case Upgrade.None:
                     result.Add(new ADroneMove()
                     {
@@ -32,7 +32,7 @@ namespace JohannaTheTrucker.Cards
                         targetPlayer=true,
                     });
                     break;
-                case Upgrade.A:
+                case Upgrade.B:
                     result.Add(new ADroneMove()
                     {
                         dir = -2
@@ -44,7 +44,8 @@ namespace JohannaTheTrucker.Cards
                     result.Add(new AMove()
                     {
                         dir = -2,
-                        fromEvade = false
+                        fromEvade = false,
+			targetPlayer=true,
                     });
                     break;
             }
@@ -57,7 +58,8 @@ namespace JohannaTheTrucker.Cards
             {
                 cost = 1,
                 flippable = true,
-                recycle = upgrade == Upgrade.B
+                recycle = upgrade == Upgrade.A,
+				exhaust = upgrade == Upgrade.B,
             };
         }
 

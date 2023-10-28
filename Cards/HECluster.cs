@@ -42,7 +42,7 @@ namespace JohannaTheTrucker.Cards
                     {
                         var cluster_missile = new MidrowStuff.ClusterMissile()
                         {
-                            stackSize = 2,
+                            stackSize = 4,
                             stackType = MidrowStuff.ClusterMissile.MissileType.heavy
                         };
 
@@ -56,7 +56,7 @@ namespace JohannaTheTrucker.Cards
                         result.Add(new AStatus()
                         {
                             status = Status.droneShift,
-                            statusAmount = 1,
+                            statusAmount = 2,
                             targetPlayer = true
                         });
                     }
@@ -92,7 +92,7 @@ namespace JohannaTheTrucker.Cards
         {
             return new CardData
             {
-                cost = upgrade == Upgrade.A ? 1 : 2,
+                cost = 2,
                 flippable = upgrade == Upgrade.B
             };
         }
