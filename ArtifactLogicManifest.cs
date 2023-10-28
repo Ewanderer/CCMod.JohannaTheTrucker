@@ -37,28 +37,14 @@ namespace JohannaTheTrucker
 
             var amove_begin_method = typeof(AMove).GetMethod("Begin") ?? throw new Exception("AMove.Begin method not found.");
 
-            var amove_begin_postfix = typeof(Manifest).GetMethod("AMove_Begin_Post", BindingFlags.Static | BindingFlags.NonPublic) ?? throw new Exception("Manifest.AMove_Begin_Post method not found.");
-            var amove_begin_prefix = typeof(Manifest).GetMethod("AMove_Begin_Pre", BindingFlags.Static | BindingFlags.NonPublic) ?? throw new Exception("Manifest.AMove_Begin_Pre method not found.");
+            var amove_begin_postfix = typeof(InertialEngine).GetMethod("AMove_Begin_Post", BindingFlags.Static | BindingFlags.NonPublic) ?? throw new Exception("Manifest.AMove_Begin_Post method not found.");
+            var amove_begin_prefix = typeof(InertialEngine).GetMethod("AMove_Begin_Pre", BindingFlags.Static | BindingFlags.NonPublic) ?? throw new Exception("Manifest.AMove_Begin_Pre method not found.");
 
             harmony.Patch(amove_begin_method, postfix: new HarmonyMethod(amove_begin_postfix), prefix: new HarmonyMethod(amove_begin_prefix));
 
         }
 
-        private static void AMove_Begin_Post(AMove __instance, int __state, State s, Combat c)
-        {
-            var new_pos = __instance.targetPlayer ? s.ship.x : c.otherShip.x;
-
-            var distance = Math.Abs(new_pos - __state);
-            if (distance > 0)
-            {
-                EventHub.SignalEvent<Tuple<int, bool, bool, Combat, State>>("JohannaTheTrucker.ShipMoved", new(distance, __instance.targetPlayer, __instance.fromEvade, c, s));
-            }
-        }
-
-        private static void AMove_Begin_Pre(AMove __instance, State s, Combat c, out int __state)
-        {
-            __state = __instance.targetPlayer ? s.ship.x : c.otherShip.x;
-        }
+ 
 
         public void LoadManifest(IArtifactRegistry registry)
         {

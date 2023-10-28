@@ -26,6 +26,22 @@ namespace JohannaTheTrucker.Artifacts
             Manifest.EventHub.DisconnectFromEvent<Tuple<int, bool, bool, Combat, State>>("JohannaTheTrucker.ShipMoved", ShipMoved);
         }
 
+        private static void AMove_Begin_Post(AMove __instance, int __state, State s, Combat c)
+        {
+            var new_pos = __instance.targetPlayer ? s.ship.x : c.otherShip.x;
+
+            var distance = Math.Abs(new_pos - __state);
+            if (distance > 0)
+            {
+               Manifest.EventHub.SignalEvent<Tuple<int, bool, bool, Combat, State>>("JohannaTheTrucker.ShipMoved", new(distance, __instance.targetPlayer, __instance.fromEvade, c, s));
+            }
+        }
+
+        private static void AMove_Begin_Pre(AMove __instance, State s, Combat c, out int __state)
+        {
+            __state = __instance.targetPlayer ? s.ship.x : c.otherShip.x;
+        }
+
         private void ShipMoved(Tuple<int, bool, bool, Combat, State> evt)
         {
             var distance = evt.Item1;
