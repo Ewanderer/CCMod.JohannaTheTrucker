@@ -19,10 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Sprites\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Lib.Harmony" Version="2.2.2" />
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303" />
   </ItemGroup>
@@ -73,7 +69,7 @@
     <None Update="Sprites\artifact_icons\midrow_protector_protocol.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Sprites\artifact_icons\quantum_lore_box.png">
+    <None Update="Sprites\artifact_icons\quantum_lure_box.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Sprites\artifact_icons\salmon_roe.png">

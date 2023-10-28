@@ -26,6 +26,7 @@ namespace JohannaTheTrucker
         public static ExternalArtifact? InertialEnginenArtifact { get; private set; }
         public static ExternalArtifact? LuckyLureArtifact { get; private set; }
         public static ExternalArtifact? FreebiesArtifact { get; private set; }
+        public static ExternalArtifact? QuantumLureBoxArtifact { get; private set; }
 
         public void LoadManifest(ICustomEventHub eventHub)
         {
@@ -92,6 +93,14 @@ namespace JohannaTheTrucker
                 FreebiesArtifact.AddLocalisation("en", "Freebies!", " Launching or adding charges to clusters has a 50% chance to add 1 extra charge");
 
                 registry.RegisterArtifact(FreebiesArtifact);
+            }
+
+            {
+                QuantumLureBoxArtifact = new ExternalArtifact(typeof(QuantumLureBox), "JohannaTheTrucker.Artifacts.QuantumLureBox", QuantumLureBoxSprite ?? throw new Exception("missing QuantumLureBox sprite"), Manifest.JohannaDeck ?? throw new Exception("missing johanna deck."), new ExternalGlossary[0]);
+
+                QuantumLureBoxArtifact.AddLocalisation("en", "Quantum Lure Box", "For every 3 shots (Attack cards) add a Micro Missiles to your hand.");
+
+                registry.RegisterArtifact(QuantumLureBoxArtifact);
             }
 
         }
