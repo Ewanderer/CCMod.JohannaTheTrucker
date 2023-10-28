@@ -71,6 +71,7 @@ namespace JohannaTheTrucker.Artifacts
                     targetPlayer = true,
                     statusAmount = ammount,
                     status = Status.evade,
+                    artifactPulse=Key(),
                 });
             }
         }
