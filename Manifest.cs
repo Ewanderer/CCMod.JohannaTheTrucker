@@ -33,6 +33,7 @@ namespace JohannaTheTrucker
         public static ExternalSprite? DecorativeSalmonSprite { get; private set; }
         public static ExternalSprite? InertialEngineSprite { get; private set; }
         public static ExternalSprite? LuckyLureSprite { get; private set; }
+        public static ExternalSprite? FreebiesSprite { get; private set; }
         public static ExternalCharacter? JohannaCharacter { get; private set; }
         public static ExternalDeck? JohannaDeck { get; private set; }
         public static ExternalAnimation? JohannaDefaultAnimation { get; private set; }
@@ -110,6 +111,13 @@ namespace JohannaTheTrucker
                 LuckyLureSprite = new ExternalSprite("JohannaTheTrucker.lucky_lore", new FileInfo(path));
                 artRegistry.RegisterArt(LuckyLureSprite);
             }
+
+            {
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites", "artifact_icons", Path.GetFileName("freebies.png"));
+                FreebiesSprite = new ExternalSprite("JohannaTheTrucker.freebies", new FileInfo(path));
+                artRegistry.RegisterArt(FreebiesSprite);
+            }
+
 
             //load the character sprite
 

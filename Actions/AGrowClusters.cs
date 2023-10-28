@@ -63,6 +63,8 @@ namespace JohannaTheTrucker.Actions
                         age = -0.8
                     });
                 }
+                if (ammount > 0)
+                    Manifest.EventHub.SignalEvent<Tuple<ClusterMissile,State>>("JohannaTheTrucker.ClusterMissileGrown", new(cluster,s));
             }
             timer = 0.8;
         }
