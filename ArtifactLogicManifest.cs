@@ -95,7 +95,7 @@ namespace JohannaTheTrucker
             {
                 FreebiesArtifact = new ExternalArtifact(typeof(Freebies), "JohannaTheTrucker.Artifacts.Freebies", FreebiesSprite ?? throw new Exception("missing Freebies sprite"), Manifest.JohannaDeck ?? throw new Exception("missing johanna deck."), new ExternalGlossary[0]);
 
-                FreebiesArtifact.AddLocalisation("en", "Freebies!", " Launching or adding charges to clusters has a 50% chance to add 1 extra charge");
+                FreebiesArtifact.AddLocalisation("en", "Freebies!", "Launching or adding charges to clusters has a 50% chance to add 1 extra charge");
 
                 registry.RegisterArtifact(FreebiesArtifact);
             }
@@ -135,7 +135,7 @@ namespace JohannaTheTrucker
             {
                 UnderWingCargoCompartmentArtifact = new ExternalArtifact(typeof(UnderWingCargoCompartment), "JohannaTheTrucker.Artifacts.UnderWingCargoCompartment", UnderWingCargoCompartmentSprite ?? throw new Exception("missing UnderWingCargoCompartment sprite"), Manifest.JohannaDeck ?? throw new Exception("missing johanna deck."), new ExternalGlossary[0]);
 
-                UnderWingCargoCompartmentArtifact.AddLocalisation("en", "Under-Wing Cargo Compartment", " Gain 1 extra energy per turn. Loose all evade at the start of your turns past the first.");
+                UnderWingCargoCompartmentArtifact.AddLocalisation("en", "Under-Wing Cargo Compartment", " Gain 1 extra energy per turn. Lose all evade at the start of your turns past the first.");
 
                 registry.RegisterArtifact(UnderWingCargoCompartmentArtifact);
             }
