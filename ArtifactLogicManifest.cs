@@ -29,7 +29,8 @@ namespace JohannaTheTrucker
         public static ExternalArtifact? QuantumLureBoxArtifact { get; private set; }
         public static ExternalArtifact? ShieldBypassKeyArtifact { get; private set; }
         public static ExternalArtifact? AutolauncherArtifact { get; private set; }
-        public static ExternalArtifact? MidrowProtectorProtocolrArtifact { get; private set; }
+        public static ExternalArtifact? MidrowProtectorProtocolArtifact { get; private set; }
+        public static ExternalArtifact? UnderWingCargoCompartmentArtifact { get; private set; }
 
         public void LoadManifest(ICustomEventHub eventHub)
         {
@@ -123,11 +124,19 @@ namespace JohannaTheTrucker
             }
 
             {
-                MidrowProtectorProtocolrArtifact = new ExternalArtifact(typeof(MidrowProtectorProtocol), "JohannaTheTrucker.Artifacts.MidrowProtectorProtocol", MidrowProtectorProtocolSprite ?? throw new Exception("missing MidrowProtectorProtocol sprite"), Manifest.JohannaDeck ?? throw new Exception("missing johanna deck."), new ExternalGlossary[0]);
+                MidrowProtectorProtocolArtifact = new ExternalArtifact(typeof(MidrowProtectorProtocol), "JohannaTheTrucker.Artifacts.MidrowProtectorProtocol", MidrowProtectorProtocolSprite ?? throw new Exception("missing MidrowProtectorProtocol sprite"), Manifest.JohannaDeck ?? throw new Exception("missing johanna deck."), new ExternalGlossary[0]);
 
-                MidrowProtectorProtocolrArtifact.AddLocalisation("en", "Midrow Protector Protocol", "Gain 1 bubbler at the start of your turn, if you don't have any. Start every battle with 99 <c=status>Lose All Midshift</c>.");
+                MidrowProtectorProtocolArtifact.AddLocalisation("en", "Midrow Protector Protocol", "Gain 1 bubbler at the start of your turn, if you don't have any. Start every battle with 99 <c=status>Lose All Midshift</c>.");
 
-                registry.RegisterArtifact(MidrowProtectorProtocolrArtifact);
+                registry.RegisterArtifact(MidrowProtectorProtocolArtifact);
+            }
+
+            {
+                UnderWingCargoCompartmentArtifact = new ExternalArtifact(typeof(UnderWingCargoCompartment), "JohannaTheTrucker.Artifacts.UnderWingCargoCompartment", UnderWingCargoCompartmentSprite ?? throw new Exception("missing UnderWingCargoCompartment sprite"), Manifest.JohannaDeck ?? throw new Exception("missing johanna deck."), new ExternalGlossary[0]);
+
+                UnderWingCargoCompartmentArtifact.AddLocalisation("en", "Under-Wing Cargo Compartment", " Gain 1 extra energy per turn. Loose all evade at the start of your turns past the first.");
+
+                registry.RegisterArtifact(UnderWingCargoCompartmentArtifact);
             }
 
         }
