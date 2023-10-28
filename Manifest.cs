@@ -36,6 +36,7 @@ namespace JohannaTheTrucker
         public static ExternalSprite? FreebiesSprite { get; private set; }
         public static ExternalSprite? QuantumLureBoxSprite { get; private set; }
         public static ExternalSprite? ShieldBypassKeySprite { get; private set; }
+        public static ExternalSprite? SalmonRoeSprite { get; private set; }
         public static ExternalSprite? AutolauncherSprite { get; private set; }
         public static ExternalSprite? MidrowProtectorProtocolSprite { get; private set; }
         public static ExternalSprite? UnderWingCargoCompartmentSprite { get; private set; }
@@ -152,6 +153,12 @@ namespace JohannaTheTrucker
                 var path = Path.Combine(ModRootFolder.FullName, "Sprites", "artifact_icons", Path.GetFileName("underwing_cargo_compartment.png"));
                 UnderWingCargoCompartmentSprite = new ExternalSprite("JohannaTheTrucker.underwing_cargo_compartment", new FileInfo(path));
                 artRegistry.RegisterArt(UnderWingCargoCompartmentSprite);
+            }
+
+            {
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites", "artifact_icons", Path.GetFileName("salmon_roe.png"));
+                SalmonRoeSprite = new ExternalSprite("JohannaTheTrucker.salmon_roe", new FileInfo(path));
+                artRegistry.RegisterArt(SalmonRoeSprite);
             }
 
             //load the character sprite

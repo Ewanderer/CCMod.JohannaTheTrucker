@@ -31,6 +31,7 @@ namespace JohannaTheTrucker
         public static ExternalArtifact? AutolauncherArtifact { get; private set; }
         public static ExternalArtifact? MidrowProtectorProtocolArtifact { get; private set; }
         public static ExternalArtifact? UnderWingCargoCompartmentArtifact { get; private set; }
+        public static ExternalArtifact? SalmonRoeArtifact { get; private set; }
 
         public void LoadManifest(ICustomEventHub eventHub)
         {
@@ -137,6 +138,14 @@ namespace JohannaTheTrucker
                 UnderWingCargoCompartmentArtifact.AddLocalisation("en", "Under-Wing Cargo Compartment", " Gain 1 extra energy per turn. Loose all evade at the start of your turns past the first.");
 
                 registry.RegisterArtifact(UnderWingCargoCompartmentArtifact);
+            }
+
+            {
+                SalmonRoeArtifact = new ExternalArtifact(typeof(SalmonRoe), "JohannaTheTrucker.Artifacts.SalmonRoe", SalmonRoeSprite ?? throw new Exception("missing SalmonRoe sprite"), Manifest.JohannaDeck ?? throw new Exception("missing johanna deck."), new ExternalGlossary[0]);
+
+                SalmonRoeArtifact.AddLocalisation("en", "Salmon Roe", " For every 3 missiles that miss, the next cluster gains 1 charge");
+
+                registry.RegisterArtifact(SalmonRoeArtifact);
             }
 
         }
