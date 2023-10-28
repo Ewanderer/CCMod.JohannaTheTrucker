@@ -27,6 +27,7 @@ namespace JohannaTheTrucker
         public static ExternalArtifact? LuckyLureArtifact { get; private set; }
         public static ExternalArtifact? FreebiesArtifact { get; private set; }
         public static ExternalArtifact? QuantumLureBoxArtifact { get; private set; }
+        public static ExternalArtifact? ShieldBypassKeyArtifact { get; private set; }
 
         public void LoadManifest(ICustomEventHub eventHub)
         {
@@ -101,6 +102,14 @@ namespace JohannaTheTrucker
                 QuantumLureBoxArtifact.AddLocalisation("en", "Quantum Lure Box", "For every 3 shots (Attack cards) add a Micro Missiles to your hand.");
 
                 registry.RegisterArtifact(QuantumLureBoxArtifact);
+            }
+
+            {
+                ShieldBypassKeyArtifact = new ExternalArtifact(typeof(ShieldBypassKey), "JohannaTheTrucker.Artifacts.ShieldBypassKey", ShieldBypassKeySprite ?? throw new Exception("missing ShieldBypassKey sprite"), Manifest.JohannaDeck ?? throw new Exception("missing johanna deck."), new ExternalGlossary[0]);
+
+                ShieldBypassKeyArtifact.AddLocalisation("en", "Shield Bypass Key ", "If you start your turn with at 1 shield, lose 1 and gain 1 evade.");
+
+                registry.RegisterArtifact(ShieldBypassKeyArtifact);
             }
 
         }

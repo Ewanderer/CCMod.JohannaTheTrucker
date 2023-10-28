@@ -35,6 +35,7 @@ namespace JohannaTheTrucker
         public static ExternalSprite? LuckyLureSprite { get; private set; }
         public static ExternalSprite? FreebiesSprite { get; private set; }
         public static ExternalSprite? QuantumLureBoxSprite { get; private set; }
+        public static ExternalSprite? ShieldBypassKeySprite { get; private set; }
         public static ExternalCharacter? JohannaCharacter { get; private set; }
         public static ExternalDeck? JohannaDeck { get; private set; }
         public static ExternalAnimation? JohannaDefaultAnimation { get; private set; }
@@ -123,6 +124,12 @@ namespace JohannaTheTrucker
                 var path = Path.Combine(ModRootFolder.FullName, "Sprites", "artifact_icons", Path.GetFileName("quantum_lure_box.png"));
                 QuantumLureBoxSprite = new ExternalSprite("JohannaTheTrucker.quantum_lure_box", new FileInfo(path));
                 artRegistry.RegisterArt(QuantumLureBoxSprite);
+            }
+
+            {
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites", "artifact_icons", Path.GetFileName("shield_bypass_key.png"));
+                ShieldBypassKeySprite = new ExternalSprite("JohannaTheTrucker.shield_bypass_key", new FileInfo(path));
+                artRegistry.RegisterArt(ShieldBypassKeySprite);
             }
 
             //load the character sprite
