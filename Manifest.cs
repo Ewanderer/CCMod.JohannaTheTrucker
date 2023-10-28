@@ -36,6 +36,7 @@ namespace JohannaTheTrucker
         public static ExternalSprite? FreebiesSprite { get; private set; }
         public static ExternalSprite? QuantumLureBoxSprite { get; private set; }
         public static ExternalSprite? ShieldBypassKeySprite { get; private set; }
+        public static ExternalSprite? AutolauncherSprite { get; private set; }
         public static ExternalCharacter? JohannaCharacter { get; private set; }
         public static ExternalDeck? JohannaDeck { get; private set; }
         public static ExternalAnimation? JohannaDefaultAnimation { get; private set; }
@@ -132,6 +133,12 @@ namespace JohannaTheTrucker
                 artRegistry.RegisterArt(ShieldBypassKeySprite);
             }
 
+            {
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites", "artifact_icons", Path.GetFileName("autolauncher.png"));
+                AutolauncherSprite = new ExternalSprite("JohannaTheTrucker.autolauncher", new FileInfo(path));
+                artRegistry.RegisterArt(AutolauncherSprite);
+            }
+
             //load the character sprite
 
             {
@@ -165,6 +172,8 @@ namespace JohannaTheTrucker
                 HookRightIcon = new ExternalSprite("JohannaTheTrucker.HookRightIcon", new FileInfo(path));
                 artRegistry.RegisterArt(HookRightIcon);
             }
+
+          
 
             //cluster missile sprite
 

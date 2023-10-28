@@ -28,6 +28,7 @@ namespace JohannaTheTrucker
         public static ExternalArtifact? FreebiesArtifact { get; private set; }
         public static ExternalArtifact? QuantumLureBoxArtifact { get; private set; }
         public static ExternalArtifact? ShieldBypassKeyArtifact { get; private set; }
+        public static ExternalArtifact? AutolauncherArtifact { get; private set; }
 
         public void LoadManifest(ICustomEventHub eventHub)
         {
@@ -107,9 +108,17 @@ namespace JohannaTheTrucker
             {
                 ShieldBypassKeyArtifact = new ExternalArtifact(typeof(ShieldBypassKey), "JohannaTheTrucker.Artifacts.ShieldBypassKey", ShieldBypassKeySprite ?? throw new Exception("missing ShieldBypassKey sprite"), Manifest.JohannaDeck ?? throw new Exception("missing johanna deck."), new ExternalGlossary[0]);
 
-                ShieldBypassKeyArtifact.AddLocalisation("en", "Shield Bypass Key ", "If you start your turn with at 1 shield, lose 1 and gain 1 evade.");
+                ShieldBypassKeyArtifact.AddLocalisation("en", "Shield Bypass Key", "If you start your turn with at 1 shield, lose 1 and gain 1 evade.");
 
                 registry.RegisterArtifact(ShieldBypassKeyArtifact);
+            }
+
+            {
+                AutolauncherArtifact = new ExternalArtifact(typeof(Autolauncher), "JohannaTheTrucker.Artifacts.Autolauncher", AutolauncherSprite ?? throw new Exception("missing Autolauncher sprite"), Manifest.JohannaDeck ?? throw new Exception("missing johanna deck."), new ExternalGlossary[0]);
+
+                AutolauncherArtifact.AddLocalisation("en", "Autolauncher", "At the start of your turn, launch 1 cluster missile with 1 charge.");
+
+                registry.RegisterArtifact(AutolauncherArtifact);
             }
 
         }
