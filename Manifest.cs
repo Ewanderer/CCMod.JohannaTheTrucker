@@ -5,7 +5,7 @@ using JohannaTheTrucker.Cards;
 
 namespace JohannaTheTrucker
 {
-    public partial class Manifest : ISpriteManifest, IDeckManifest, IGlossaryManifest, ICardManifest, ICharacterManifest, IAnimationManifest, IStatusManifest
+    public partial class Manifest : ISpriteManifest, IDeckManifest, IGlossaryManifest, ICardManifest, ICharacterManifest, IAnimationManifest, IStatusManifest, ICustomEventManifest, IArtifactManifest
     {
         public static ExternalGlossary? AHook_Glossary { get; private set; }
         public static ExternalGlossary? ClusterMissile_Glossary { get; private set; }
@@ -28,11 +28,30 @@ namespace JohannaTheTrucker
         public static ExternalSprite? HookLeftIcon { get; private set; }
         public static ExternalSprite? HookRightIcon { get; private set; }
         public static ExternalSprite? JohannaCardFrame { get; private set; }
+        public static ExternalSprite? JohannaUncommonCardFrame { get; private set; }
+        public static ExternalSprite? JohannaRareCardFrame { get; private set; }
+        public static ExternalSprite? DecorativeSalmonSprite { get; private set; }
+        public static ExternalSprite? InertialEngineSprite { get; private set; }
+        public static ExternalSprite? LuckyLureSprite { get; private set; }
+        public static ExternalSprite? FreebiesSprite { get; private set; }
+        public static ExternalSprite? QuantumLureBoxSprite { get; private set; }
+        public static ExternalSprite? ShieldBypassKeySprite { get; private set; }
+        public static ExternalSprite? SalmonRoeSprite { get; private set; }
+        public static ExternalSprite? AutolauncherSprite { get; private set; }
+        public static ExternalSprite? MidrowProtectorProtocolSprite { get; private set; }
+        public static ExternalSprite? UnderWingCargoCompartmentSprite { get; private set; }
         public static ExternalCharacter? JohannaCharacter { get; private set; }
         public static ExternalDeck? JohannaDeck { get; private set; }
         public static ExternalAnimation? JohannaDefaultAnimation { get; private set; }
         public static ExternalSprite? JohannaMini { get; private set; }
         public static ExternalAnimation? JohannaMiniAnimation { get; private set; }
+        public static ExternalAnimation? TalkAngryAnimation { get; private set; }
+        public static ExternalAnimation? TalkLaughAnimation { get; private set; }
+        public static ExternalAnimation? TalkNeutralAnimation { get; private set; }
+        public static ExternalAnimation? TalkReminisceAnimation { get; private set; }
+        public static ExternalAnimation? TalkSadAnimation { get; private set; }
+        public static ExternalAnimation? TalkScaredAnimation { get; private set; }
+        public static ExternalAnimation? GameoverAnimation { get; private set; }
         public static ExternalSprite? JohannaPotrait { get; private set; }
         public static ExternalCard? ReelInCard { get; private set; }
         public static ExternalCard? SaturationFireCard { get; private set; }
@@ -57,9 +76,20 @@ namespace JohannaTheTrucker
         public static ExternalCard? BigSwingCard { get; private set; }
         public static ExternalSprite? SeekerClusterMissleIcon { get; private set; }
         public static ExternalSprite? SeekerClusterMissleToken { get; private set; }
+        public static ExternalSprite? FoldingCardSprite { get; private set; }
+        public static ExternalSprite? HookCardSprite { get; private set; }
+        public static ExternalSprite? MissileCardSprite { get; private set; }
+        public static ExternalSprite? StallCardSprite { get; private set; }
 
         public static ExternalGlossary? AGrowClusterGlossary { get; private set; }
         IEnumerable<string> ISpriteManifest.Dependencies => new string[0];
+
+        public static List<ExternalSprite> TalkAngrySprites { get; private set; } = new List<ExternalSprite>();
+        public static List<ExternalSprite> TalkLaughSprites { get; private set; } = new List<ExternalSprite>();
+        public static List<ExternalSprite> TalkNeutralSprites { get; private set; } = new List<ExternalSprite>();
+        public static List<ExternalSprite> TalkReminisceSprites { get; private set; } = new List<ExternalSprite>();
+        public static List<ExternalSprite> TalkSadSprites { get; private set; } = new List<ExternalSprite>();
+        public static List<ExternalSprite> TalkScaredSprites { get; private set; } = new List<ExternalSprite>();
 
         public DirectoryInfo? ModRootFolder { get; set; }
         public string Name { get; init; } = "Actionmartini.JohannaTheTrucker";
@@ -68,6 +98,69 @@ namespace JohannaTheTrucker
         {
             if (ModRootFolder == null)
                 throw new Exception("Root Folder not set");
+            //artifacts
+
+            {
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites","artifact_icons", Path.GetFileName("decorative_salmon.png"));
+                DecorativeSalmonSprite = new ExternalSprite("JohannaTheTrucker.decorative_salmon", new FileInfo(path));
+                artRegistry.RegisterArt(DecorativeSalmonSprite);
+            }
+
+            {
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites", "artifact_icons", Path.GetFileName("intertial_engine.png"));
+                InertialEngineSprite = new ExternalSprite("JohannaTheTrucker.intertial_engine", new FileInfo(path));
+                artRegistry.RegisterArt(InertialEngineSprite);
+            }
+
+            {
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites", "artifact_icons", Path.GetFileName("lucky_lore.png"));
+                LuckyLureSprite = new ExternalSprite("JohannaTheTrucker.lucky_lore", new FileInfo(path));
+                artRegistry.RegisterArt(LuckyLureSprite);
+            }
+
+            {
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites", "artifact_icons", Path.GetFileName("freebies.png"));
+                FreebiesSprite = new ExternalSprite("JohannaTheTrucker.freebies", new FileInfo(path));
+                artRegistry.RegisterArt(FreebiesSprite);
+            }
+
+            {
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites", "artifact_icons", Path.GetFileName("quantum_lure_box.png"));
+                QuantumLureBoxSprite = new ExternalSprite("JohannaTheTrucker.quantum_lure_box", new FileInfo(path));
+                artRegistry.RegisterArt(QuantumLureBoxSprite);
+            }
+
+            {
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites", "artifact_icons", Path.GetFileName("shield_bypass_key.png"));
+                ShieldBypassKeySprite = new ExternalSprite("JohannaTheTrucker.shield_bypass_key", new FileInfo(path));
+                artRegistry.RegisterArt(ShieldBypassKeySprite);
+            }
+
+            {
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites", "artifact_icons", Path.GetFileName("autolauncher.png"));
+                AutolauncherSprite = new ExternalSprite("JohannaTheTrucker.autolauncher", new FileInfo(path));
+                artRegistry.RegisterArt(AutolauncherSprite);
+            }
+
+
+            {
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites", "artifact_icons", Path.GetFileName("midrow_protector_protocol.png"));
+                MidrowProtectorProtocolSprite = new ExternalSprite("JohannaTheTrucker.midrow_protector_protocol", new FileInfo(path));
+                artRegistry.RegisterArt(MidrowProtectorProtocolSprite);
+            }
+
+            {
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites", "artifact_icons", Path.GetFileName("underwing_cargo_compartment.png"));
+                UnderWingCargoCompartmentSprite = new ExternalSprite("JohannaTheTrucker.underwing_cargo_compartment", new FileInfo(path));
+                artRegistry.RegisterArt(UnderWingCargoCompartmentSprite);
+            }
+
+            {
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites", "artifact_icons", Path.GetFileName("salmon_roe.png"));
+                SalmonRoeSprite = new ExternalSprite("JohannaTheTrucker.salmon_roe", new FileInfo(path));
+                artRegistry.RegisterArt(SalmonRoeSprite);
+            }
+
             //load the character sprite
 
             {
@@ -101,6 +194,8 @@ namespace JohannaTheTrucker
                 HookRightIcon = new ExternalSprite("JohannaTheTrucker.HookRightIcon", new FileInfo(path));
                 artRegistry.RegisterArt(HookRightIcon);
             }
+
+
 
             //cluster missile sprite
 
@@ -182,6 +277,111 @@ namespace JohannaTheTrucker
                 JohannaCardFrame = new ExternalSprite("JohannaTheTrucker.JohannaDeckFrame", new FileInfo(path));
                 artRegistry.RegisterArt(JohannaCardFrame);
             }
+
+            {
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("JoCardFrameRA.png"));
+                JohannaRareCardFrame = new ExternalSprite("JohannaTheTrucker.JohannaRareDeckFrame", new FileInfo(path));
+                artRegistry.RegisterArt(JohannaRareCardFrame);
+            }
+
+            {
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("JoCardFrameUC.png"));
+                JohannaUncommonCardFrame = new ExternalSprite("JohannaTheTrucker.JohannaUncommonDeckFrame", new FileInfo(path));
+                artRegistry.RegisterArt(JohannaUncommonCardFrame);
+            }
+            //card sprites
+            {
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("JoCardArtHook.png"));
+                HookCardSprite = new ExternalSprite("JohannaTheTrucker.HookCardSprite", new FileInfo(path));
+                artRegistry.RegisterArt(HookCardSprite);
+            }
+
+            {
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("JoCardArtMissiles.png"));
+                MissileCardSprite = new ExternalSprite("JohannaTheTrucker.MissileCardSprite", new FileInfo(path));
+                artRegistry.RegisterArt(MissileCardSprite);
+            }
+
+            {
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("JoCardArtFolding.png"));
+                FoldingCardSprite = new ExternalSprite("JohannaTheTrucker.FoldingCardSprite", new FileInfo(path));
+                artRegistry.RegisterArt(FoldingCardSprite);
+            }
+
+            {
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("JoCardArtStall.png"));
+                StallCardSprite = new ExternalSprite("JohannaTheTrucker.StallCardSprite", new FileInfo(path));
+                artRegistry.RegisterArt(StallCardSprite);
+            }
+
+            //talk animations
+            {
+                var dir_path = Path.Combine(ModRootFolder.FullName, "Sprites", "talk_angry");
+                var files = Directory.GetFiles(dir_path).Select(e => new FileInfo(e)).ToArray();
+                for (int i = 0; i < files.Length; i++)
+                {
+                    var spr = new ExternalSprite("JohannaTheTrucker.TalkAngry" + i, files[i]);
+                    TalkAngrySprites.Add(spr);
+                    artRegistry.RegisterArt(spr);
+                }
+            }
+
+            {
+                var dir_path = Path.Combine(ModRootFolder.FullName, "Sprites", "talk_laugh");
+                var files = Directory.GetFiles(dir_path).Select(e => new FileInfo(e)).ToArray();
+                for (int i = 0; i < files.Length; i++)
+                {
+                    var spr = new ExternalSprite("JohannaTheTrucker.TalkLaugh" + i, files[i]);
+                    TalkLaughSprites.Add(spr);
+                    artRegistry.RegisterArt(spr);
+                }
+            }
+
+            {
+                var dir_path = Path.Combine(ModRootFolder.FullName, "Sprites", "talk_neutral");
+                var files = Directory.GetFiles(dir_path).Select(e => new FileInfo(e)).ToArray();
+                for (int i = 0; i < files.Length; i++)
+                {
+                    var spr = new ExternalSprite("JohannaTheTrucker.TalkNeutral" + i, files[i]);
+                    TalkNeutralSprites.Add(spr);
+                    artRegistry.RegisterArt(spr);
+                }
+            }
+
+            {
+                var dir_path = Path.Combine(ModRootFolder.FullName, "Sprites", "talk_reminisce");
+                var files = Directory.GetFiles(dir_path).Select(e => new FileInfo(e)).ToArray();
+                for (int i = 0; i < files.Length; i++)
+                {
+                    var spr = (new ExternalSprite("JohannaTheTrucker.TalkReminisce" + i, files[i]));
+                    TalkReminisceSprites.Add(spr);
+                    artRegistry.RegisterArt(spr);
+                }
+            }
+
+            {
+                var dir_path = Path.Combine(ModRootFolder.FullName, "Sprites", "talk_sad");
+                var files = Directory.GetFiles(dir_path).Select(e => new FileInfo(e)).ToArray();
+                for (int i = 0; i < files.Length; i++)
+                {
+                    var spr = (new ExternalSprite("JohannaTheTrucker.TalkSad" + i, files[i]));
+                    TalkSadSprites.Add(spr);
+                    artRegistry.RegisterArt(spr);
+                }
+            }
+
+            {
+                var dir_path = Path.Combine(ModRootFolder.FullName, "Sprites", "talk_scared");
+                var files = Directory.GetFiles(dir_path).Select(e => new FileInfo(e)).ToArray();
+                for (int i = 0; i < files.Length; i++)
+                {
+                    var spr = (new ExternalSprite("JohannaTheTrucker.TalkScared" + i, files[i]));
+                    TalkScaredSprites.Add(spr);
+                    artRegistry.RegisterArt(spr);
+                }
+            }
+
+
         }
 
         private static System.Drawing.Color Johanna_Primary_Color = System.Drawing.Color.FromArgb(65, 144, 195);
@@ -230,93 +430,102 @@ namespace JohannaTheTrucker
         void ICardManifest.LoadManifest(ICardRegistry registry)
         {
             var card_art = ExternalSprite.GetRaw((int)Spr.cards_colorless);
-            ReelInCard = new ExternalCard("JohannaTheTrucker.Cards.ReelIn", typeof(ReelIn), card_art, JohannaDeck);
+
+            var hook_art = HookCardSprite ?? throw new Exception();
+            var cluster_art = MissileCardSprite ?? throw new Exception();
+            var folding_art = FoldingCardSprite ?? throw new Exception();
+            var readjust_art = ExternalSprite.GetRaw((int)Spr.cards_Dodge);
+            var enemy_shift_art = ExternalSprite.GetRaw((int)Spr.cards_ScootRight);
+            var smart_explosives_art = ExternalSprite.GetRaw((int)Spr.cards_Desktop);
+          //  var mass_upgrade_art = ExternalSprite.GetRaw((int)Spr.adap);
+
+            ReelInCard = new ExternalCard("JohannaTheTrucker.Cards.ReelIn", typeof(ReelIn), hook_art, JohannaDeck);
             registry.RegisterCard(ReelInCard);
             ReelInCard.AddLocalisation("Reel In");
 
-            ClusterRocketCard = new ExternalCard("JohannaTheTrucker.Cards.ClusterRocket", typeof(ClusterRocket), card_art, JohannaDeck);
+            ClusterRocketCard = new ExternalCard("JohannaTheTrucker.Cards.ClusterRocket", typeof(ClusterRocket), cluster_art, JohannaDeck);
             registry.RegisterCard(ClusterRocketCard);
             ClusterRocketCard.AddLocalisation("Cluster Rocket");
 
-            SaturationFireCard = new ExternalCard("JohannaTheTrucker.Cards.SaturationFire", typeof(SaturationFire), card_art, JohannaDeck);
+            SaturationFireCard = new ExternalCard("JohannaTheTrucker.Cards.SaturationFire", typeof(SaturationFire), cluster_art, JohannaDeck);
             registry.RegisterCard(SaturationFireCard);
             SaturationFireCard.AddLocalisation("Saturation Fire");
 
-            LargePayloadCard = new ExternalCard("JohannaTheTrucker.Cards.LargePayload", typeof(LargePayload), card_art, JohannaDeck);
+            LargePayloadCard = new ExternalCard("JohannaTheTrucker.Cards.LargePayload", typeof(LargePayload), cluster_art, JohannaDeck);
             registry.RegisterCard(LargePayloadCard);
             LargePayloadCard.AddLocalisation("Large Payload");
 
-            HEClusterCard = new ExternalCard("JohannaTheTrucker.Cards.HECluster", typeof(HECluster), card_art, JohannaDeck);
+            HEClusterCard = new ExternalCard("JohannaTheTrucker.Cards.HECluster", typeof(HECluster), cluster_art, JohannaDeck);
             registry.RegisterCard(HEClusterCard);
             HEClusterCard.AddLocalisation("HE-Cluster");
 
-            SeekingClusterCard = new ExternalCard("JohannaTheTrucker.Cards.SeekingCluster", typeof(SeekingCluster), card_art, JohannaDeck);
+            SeekingClusterCard = new ExternalCard("JohannaTheTrucker.Cards.SeekingCluster", typeof(SeekingCluster), cluster_art, JohannaDeck);
             registry.RegisterCard(SeekingClusterCard);
             SeekingClusterCard.AddLocalisation("Seeking Cluster");
 
-            LeapFrogCard = new ExternalCard("JohannaTheTrucker.Cards.LeapFrog", typeof(LeapFrog), card_art, JohannaDeck);
+            LeapFrogCard = new ExternalCard("JohannaTheTrucker.Cards.LeapFrog", typeof(LeapFrog), hook_art, JohannaDeck);
             registry.RegisterCard(LeapFrogCard);
             LeapFrogCard.AddLocalisation("Leap Frog");
 
-            SmallManeuverCard = new ExternalCard("JohannaTheTrucker.Cards.SmallManeuver", typeof(SmallManeuver), card_art, JohannaDeck);
+            SmallManeuverCard = new ExternalCard("JohannaTheTrucker.Cards.SmallManeuver", typeof(SmallManeuver), readjust_art, JohannaDeck);
             registry.RegisterCard(SmallManeuverCard);
             SmallManeuverCard.AddLocalisation("Small Maneuver");
 
-            DoubleHookCard = new ExternalCard("JohannaTheTrucker.Cards.DoubleHook", typeof(DoubleHook), card_art, JohannaDeck);
+            DoubleHookCard = new ExternalCard("JohannaTheTrucker.Cards.DoubleHook", typeof(DoubleHook), hook_art, JohannaDeck);
             registry.RegisterCard(DoubleHookCard);
             DoubleHookCard.AddLocalisation("Double Hook");
 
-            SpaceFoldingCard = new ExternalCard("JohannaTheTrucker.Cards.SpaceFolding", typeof(SpaceFolding), card_art, JohannaDeck);
+            SpaceFoldingCard = new ExternalCard("JohannaTheTrucker.Cards.SpaceFolding", typeof(SpaceFolding), folding_art, JohannaDeck);
             registry.RegisterCard(SpaceFoldingCard);
-            SpaceFoldingCard.AddLocalisation("Space Folding", "Flip midrow using your missile bay as pivot.", "Flip midrow using your missile bay as pivot. Gain 2 midshift.", "Bubble and Flip midrow using your missile bay as pivot.");
+            SpaceFoldingCard.AddLocalisation("Space Folding", "Flip midrow using your missile bay as pivot.", "Flip midrow using your missile bay as pivot. Gain 2 midshift.", "Bubble and Flip midrow usinyour missile bay as pivot.");
 
-            VarietyPackCard = new ExternalCard("JohannaTheTrucker.Cards.VarietyPack", typeof(VarietyPack), card_art, JohannaDeck);
+            VarietyPackCard = new ExternalCard("JohannaTheTrucker.Cards.VarietyPack", typeof(VarietyPack), cluster_art, JohannaDeck);
             registry.RegisterCard(VarietyPackCard);
             VarietyPackCard.AddLocalisation("Variety Pack");
 
-            EnemyShiftCard = new ExternalCard("JohannaTheTrucker.Cards.EnemyShift", typeof(EnemyShift), card_art, JohannaDeck);
+            EnemyShiftCard = new ExternalCard("JohannaTheTrucker.Cards.EnemyShift", typeof(EnemyShift), enemy_shift_art, JohannaDeck);
             registry.RegisterCard(EnemyShiftCard);
             EnemyShiftCard.AddLocalisation("Enemy Shift");
 
-            ReplicatorCard = new ExternalCard("JohannaTheTrucker.Cards.Replicator", typeof(Replicator), card_art, JohannaDeck);
+            ReplicatorCard = new ExternalCard("JohannaTheTrucker.Cards.Replicator", typeof(Replicator), cluster_art, JohannaDeck);
             registry.RegisterCard(ReplicatorCard);
             ReplicatorCard.AddLocalisation("Replicator");
 
-            MicroMissilesCard = new ExternalCard("JohannaTheTrucker.Cards.MicroMissiles", typeof(MicroMissiles), card_art, JohannaDeck);
+            MicroMissilesCard = new ExternalCard("JohannaTheTrucker.Cards.MicroMissiles", typeof(MicroMissiles), cluster_art, JohannaDeck);
             registry.RegisterCard(MicroMissilesCard);
             MicroMissilesCard.AddLocalisation("Micro Missiles");
 
-            ReadjustCard = new ExternalCard("JohannaTheTrucker.Cards.Readjust", typeof(Readjust), card_art, JohannaDeck);
+            ReadjustCard = new ExternalCard("JohannaTheTrucker.Cards.Readjust", typeof(Readjust), readjust_art, JohannaDeck);
             registry.RegisterCard(ReadjustCard);
             ReadjustCard.AddLocalisation("Readjust");
 
-            RocketSiloCard = new ExternalCard("JohannaTheTrucker.Cards.RocketSilo", typeof(RocketSilo), card_art, JohannaDeck);
+            RocketSiloCard = new ExternalCard("JohannaTheTrucker.Cards.RocketSilo", typeof(RocketSilo), cluster_art, JohannaDeck);
             registry.RegisterCard(RocketSiloCard);
             RocketSiloCard.AddLocalisation("Rocket Silo");
 
-            SmartExplosivesCard = new ExternalCard("JohannaTheTrucker.Cards.SmartExplosives", typeof(SmartExplosives), card_art, JohannaDeck);
+            SmartExplosivesCard = new ExternalCard("JohannaTheTrucker.Cards.SmartExplosives", typeof(SmartExplosives), smart_explosives_art, JohannaDeck);
             registry.RegisterCard(SmartExplosivesCard);
             SmartExplosivesCard.AddLocalisation("Smart Explosives");
 
-            MultiplicityCard = new ExternalCard("JohannaTheTrucker.Cards.Multiplicity", typeof(Multiplicity), card_art, JohannaDeck);
+            MultiplicityCard = new ExternalCard("JohannaTheTrucker.Cards.Multiplicity", typeof(Multiplicity), cluster_art, JohannaDeck);
             registry.RegisterCard(MultiplicityCard);
             MultiplicityCard.AddLocalisation("Multiplicity");
 
-            MassUpgradeCard = new ExternalCard("JohannaTheTrucker.Cards.MassUpgrade", typeof(MassUpgrade), card_art, JohannaDeck);
+            MassUpgradeCard = new ExternalCard("JohannaTheTrucker.Cards.MassUpgrade", typeof(MassUpgrade), cluster_art, JohannaDeck);
             registry.RegisterCard(MassUpgradeCard);
             MassUpgradeCard.AddLocalisation("Mass Upgrade");
 
-            ReboundCard = new ExternalCard("JohannaTheTrucker.Cards.Rebound", typeof(Rebound), card_art, JohannaDeck);
+            ReboundCard = new ExternalCard("JohannaTheTrucker.Cards.Rebound", typeof(Rebound), hook_art, JohannaDeck);
             registry.RegisterCard(ReboundCard);
             ReboundCard.AddLocalisation("Rebound");
 
-            BigSwingCard = new ExternalCard("JohannaTheTrucker.Cards.BigSwing", typeof(BigSwing), card_art, JohannaDeck);
+            BigSwingCard = new ExternalCard("JohannaTheTrucker.Cards.BigSwing", typeof(BigSwing), hook_art, JohannaDeck);
             registry.RegisterCard(BigSwingCard);
             BigSwingCard.AddLocalisation("Big Swing", "Hook <c=keyword>{0}</c> but move twice the distance (<c=keyword>{1}</c>)");
 
-            FireFireFireCard = new ExternalCard("JohannaTheTrucker.Cards.FireFireFire", typeof(FireFireFire), card_art, JohannaDeck);
+            FireFireFireCard = new ExternalCard("JohannaTheTrucker.Cards.FireFireFire", typeof(FireFireFire), cluster_art, JohannaDeck);
             registry.RegisterCard(FireFireFireCard);
-            FireFireFireCard.AddLocalisation("Fire! Fire! Fire!", "All missiles shoot until fully spent or unable to shoot.",null,"All missiles fire once.");
+            FireFireFireCard.AddLocalisation("Fire! Fire! Fire!", "All missiles shoot until fully spent or unable to shoot.", null, "All missiles fire once.");
         }
 
         void ICharacterManifest.LoadManifest(ICharacterRegistry registry)
@@ -351,6 +560,27 @@ namespace JohannaTheTrucker
                new ExternalSprite[] { JohannaMini ?? throw new Exception("missing mini") });
 
             registry.RegisterAnimation(JohannaMiniAnimation);
+
+            TalkAngryAnimation = new ExternalAnimation("JohannaTheTrucker.Animation.TalkAngry", JohannaDeck, "talk_angry", false, TalkAngrySprites);
+            registry.RegisterAnimation(TalkAngryAnimation);
+
+            TalkLaughAnimation = new ExternalAnimation("JohannaTheTrucker.Animation.TalkLaugh", JohannaDeck, "talk_laugh", false, TalkLaughSprites);
+            registry.RegisterAnimation(TalkLaughAnimation);
+
+            TalkNeutralAnimation = new ExternalAnimation("JohannaTheTrucker.Animation.TalkNeutral", JohannaDeck, "talk_neutral", false, TalkNeutralSprites);
+            registry.RegisterAnimation(TalkNeutralAnimation);
+
+            TalkReminisceAnimation = new ExternalAnimation("JohannaTheTrucker.Animation.TalkReminisce", JohannaDeck, "talk_reminisce", false, TalkReminisceSprites);
+            registry.RegisterAnimation(TalkReminisceAnimation);
+
+            TalkSadAnimation = new ExternalAnimation("JohannaTheTrucker.Animation.TalkSad", JohannaDeck, "talk_sad", false, TalkSadSprites);
+            registry.RegisterAnimation(TalkSadAnimation);
+
+            TalkScaredAnimation = new ExternalAnimation("JohannaTheTrucker.Animation.TalkScared", JohannaDeck, "talk_scared", false, TalkScaredSprites);
+            registry.RegisterAnimation(TalkScaredAnimation);
+
+            GameoverAnimation = new ExternalAnimation("JohannaTheTrucker.Animation.GameOver", JohannaDeck, "gameover", false, TalkScaredSprites);
+            registry.RegisterAnimation(GameoverAnimation);
         }
 
 

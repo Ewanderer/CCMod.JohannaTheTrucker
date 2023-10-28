@@ -25,6 +25,7 @@ namespace JohannaTheTrucker.Cards
             {
                 fire_only_once = upgrade == Upgrade.B,
                 fromPlayer = true,
+                canRunAfterKill = true,
             });
 
             return result;

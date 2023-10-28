@@ -37,12 +37,14 @@ namespace JohannaTheTrucker.Cards
                     statusAmount = 1,
                     targetPlayer = true
                 });
-                result.Add(new AStatus()
-                {
-                    status = lose_drone_shift_status,
-                    statusAmount = 1,
-                    targetPlayer = true
-                });
+
+                if (s.ship.Get(lose_drone_shift_status) == 0)
+                    result.Add(new AStatus()
+                    {
+                        status = lose_drone_shift_status,
+                        statusAmount = 1,
+                        targetPlayer = true
+                    });
             }
 
             if (upgrade != Upgrade.B)

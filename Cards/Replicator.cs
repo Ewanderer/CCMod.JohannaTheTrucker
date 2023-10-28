@@ -17,14 +17,17 @@ namespace JohannaTheTrucker.Cards
             if (upgrade != Upgrade.B)
             {
 
-                var can_play = s.ship.Get(Status.drawLessNextTurn) < s.ship.baseDraw + s.ship.Get(Status.drawNextTurn);
 
-                result.Add(new AStatus()
+
+                var can_play = c.hand.Count > 0;
+                var sel = (int)Math.Round((c.hand.Count - 1) * s.rngActions.Next());
+
+                result.Add(new ADiscard()
                 {
-                    status = Status.drawLessNextTurn,
-                    statusAmount = 1,
-                    disabled = !can_play,
-                    targetPlayer = true,
+                    count = 1,
+                    ignoreRetain = true,
+                    selectedCard = c.hand.Count > 0 ? c.hand[sel] : null,
+                    disabled=!can_play,
                 });
 
                 {

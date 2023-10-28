@@ -164,11 +164,17 @@ namespace JohannaTheTrucker.Actions
                         //put cluster in future time
                         future_hits.Add(new(entry.cluster, g.time + flight_time, target_x));
                     }
+
+                    Manifest.EventHub.SignalEvent<Tuple<StuffBase, bool, Combat, State>>("JohannaTheTrucker.MissileFlying", new(entry.cluster, will_hit, c, s));
+
                     //reduce cluster size by 1
                     entry.cluster.stackSize--;
                     //if cluster size is 0 remove from stuff (item reference is stored in future hits.)
                     if (entry.cluster.stackSize <= 0)
+                    {
+                        Manifest.EventHub.SignalEvent<Tuple<ClusterMissile, Combat, State>>("JohannaTheTrucker.ClusterMissileExpended", new(entry.cluster, c, s));
                         c.stuff.Remove(entry.Key);
+                    }
                 }
                 //smart exploisive safety on last frame.
                 if (!fired_once)

@@ -48,7 +48,8 @@ namespace JohannaTheTrucker.Actions
                 //check if can hit
                 will_hit = target.HasNonEmptyPartAtWorldX(world_pos_x);
             }
-            //create fx
+
+            //check smart explosives lock
 
             if (!will_hit && Manifest.SmartExplosiveStatus?.Id != null)
             {
@@ -57,7 +58,13 @@ namespace JohannaTheTrucker.Actions
                     return;
             }
 
+            // send event
+            Manifest.EventHub.SignalEvent<Tuple<StuffBase, bool, Combat, State>>("JohannaTheTrucker.MissileFlying", new(missile, will_hit, c, s));
+
+            //create fx
+
             missile_fx = new FlightFX();
+
             missile_fx.miss = !will_hit;
 
             missile_fx.texture = SpriteLoader.Get(missile.GetIcon() ?? Spr.icons_recycle);
@@ -80,6 +87,7 @@ namespace JohannaTheTrucker.Actions
             if (missile.stackSize == 0)
             {
                 c.stuff.Remove(world_pos_x);
+                Manifest.EventHub.SignalEvent<Tuple<ClusterMissile, Combat, State>>("JohannaTheTrucker.ClusterMissileExpended", new(missile, c, s));
             }
         }
 

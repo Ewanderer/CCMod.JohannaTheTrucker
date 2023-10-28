@@ -80,6 +80,8 @@ namespace JohannaTheTrucker.Cards
                 cost = cost,
                 exhaust = true,
                 floppable = upgrade != Upgrade.B,
+                art= new Spr?(this.flipped ? Spr.cards_Adaptability_Bottom : Spr.cards_Adaptability_Top),
+                artTint= "ffffff",
             };
         }
 
