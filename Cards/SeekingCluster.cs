@@ -70,7 +70,7 @@ namespace JohannaTheTrucker.Cards
 
                         var spawn_cluster = new ASpawn()
                         {
-                            thing = cluster_missile;
+                            thing = cluster_missile
                         };
 
                         result.Add(spawn_cluster);

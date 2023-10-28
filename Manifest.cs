@@ -55,7 +55,7 @@ namespace JohannaTheTrucker
         public static ExternalSprite? JohannaPotrait { get; private set; }
         public static ExternalCard? ReelInCard { get; private set; }
         public static ExternalCard? SaturationFireCard { get; private set; }
-        public static ExternalCard? LargePayloadCard { get; private set; }
+        public static ExternalCard? ShiftClusterCard { get; private set; }
         public static ExternalCard? HEClusterCard { get; private set; }
         public static ExternalCard? SeekingClusterCard { get; private set; }
         public static ExternalCard? LeapFrogCard { get; private set; }
@@ -451,9 +451,9 @@ namespace JohannaTheTrucker
             registry.RegisterCard(SaturationFireCard);
             SaturationFireCard.AddLocalisation("Saturation Fire");
 
-            LargePayloadCard = new ExternalCard("JohannaTheTrucker.Cards.LargePayload", typeof(LargePayload), cluster_art, JohannaDeck);
-            registry.RegisterCard(LargePayloadCard);
-            LargePayloadCard.AddLocalisation("Large Payload");
+            ShiftClusterCard = new ExternalCard("JohannaTheTrucker.Cards.ShiftCluster", typeof(ShiftCluster), cluster_art, JohannaDeck);
+            registry.RegisterCard(ShiftClusterCard);
+            ShiftClusterCard.AddLocalisation("Shift Cluster");
 
             HEClusterCard = new ExternalCard("JohannaTheTrucker.Cards.HECluster", typeof(HECluster), cluster_art, JohannaDeck);
             registry.RegisterCard(HEClusterCard);

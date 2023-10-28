@@ -28,7 +28,7 @@ namespace JohannaTheTrucker.Cards
                         var spawn_cluster = new ASpawn()
                         {
                             thing = cluster_missile,
-                            offset=-1
+                            offset = -1
                         };
 
                         list.Add(spawn_cluster);
@@ -134,9 +134,8 @@ namespace JohannaTheTrucker.Cards
 
         public override CardData GetData(State state)
         {
-            return new CardData()
-            {
-                switch (upgrade)
+            int cost;
+            switch (upgrade)
             {
                 case Upgrade.None:
                     cost = 2;
@@ -147,7 +146,12 @@ namespace JohannaTheTrucker.Cards
                 case Upgrade.B:
                     cost = 3;
                     break;
+                default:
+                    throw new NotImplementedException();
             }
+            return new CardData()
+            {
+                cost = cost,
             };
         }
 

@@ -24,7 +24,7 @@ namespace JohannaTheTrucker.Cards
                 missile_bay.pulse = 1;
             }
 
-            else if (upgrade == Upgrade.B)
+            if (upgrade == Upgrade.B)
             {
                 result.Add(new ABubbleField());
             }
@@ -50,8 +50,8 @@ namespace JohannaTheTrucker.Cards
             return new CardData()
             {
                 cost = upgrade == Upgrade.B ? 2 : 1,
-                description = desc
-                retain = upgrade = Upgrade.A,
+                description = desc,
+                retain = upgrade == Upgrade.A,
             };
         }
 

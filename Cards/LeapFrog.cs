@@ -58,8 +58,8 @@ namespace JohannaTheTrucker.Cards
             {
                 cost = 1,
                 flippable = true,
-                recycle = upgrade == Upgrade.A
-				exhaust = upgrade = Upgrade.B
+                recycle = upgrade == Upgrade.A,
+				exhaust = upgrade == Upgrade.B,
             };
         }
 
