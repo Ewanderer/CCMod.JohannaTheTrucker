@@ -29,6 +29,7 @@ namespace JohannaTheTrucker
         public static ExternalArtifact? QuantumLureBoxArtifact { get; private set; }
         public static ExternalArtifact? ShieldBypassKeyArtifact { get; private set; }
         public static ExternalArtifact? AutolauncherArtifact { get; private set; }
+        public static ExternalArtifact? MidrowProtectorProtocolrArtifact { get; private set; }
 
         public void LoadManifest(ICustomEventHub eventHub)
         {
@@ -119,6 +120,14 @@ namespace JohannaTheTrucker
                 AutolauncherArtifact.AddLocalisation("en", "Autolauncher", "At the start of your turn, launch 1 cluster missile with 1 charge.");
 
                 registry.RegisterArtifact(AutolauncherArtifact);
+            }
+
+            {
+                MidrowProtectorProtocolrArtifact = new ExternalArtifact(typeof(MidrowProtectorProtocol), "JohannaTheTrucker.Artifacts.MidrowProtectorProtocol", MidrowProtectorProtocolSprite ?? throw new Exception("missing MidrowProtectorProtocol sprite"), Manifest.JohannaDeck ?? throw new Exception("missing johanna deck."), new ExternalGlossary[0]);
+
+                MidrowProtectorProtocolrArtifact.AddLocalisation("en", "Midrow Protector Protocol", "Gain 1 bubbler at the start of your turn, if you don't have any. Start every battle with 99 <c=status>Lose All Midshift</c>.");
+
+                registry.RegisterArtifact(MidrowProtectorProtocolrArtifact);
             }
 
         }

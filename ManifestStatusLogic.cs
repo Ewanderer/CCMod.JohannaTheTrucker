@@ -60,7 +60,7 @@ namespace JohannaTheTrucker
             if (__instance.Get(status) <= 0)
                 return;
             __instance.Set(Status.droneShift, 0);
-            __instance.Set(status, 0);
+            __instance.Add(status, -1);
         }
 
 

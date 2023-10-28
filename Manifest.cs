@@ -37,6 +37,7 @@ namespace JohannaTheTrucker
         public static ExternalSprite? QuantumLureBoxSprite { get; private set; }
         public static ExternalSprite? ShieldBypassKeySprite { get; private set; }
         public static ExternalSprite? AutolauncherSprite { get; private set; }
+        public static ExternalSprite? MidrowProtectorProtocolSprite { get; private set; }
         public static ExternalCharacter? JohannaCharacter { get; private set; }
         public static ExternalDeck? JohannaDeck { get; private set; }
         public static ExternalAnimation? JohannaDefaultAnimation { get; private set; }
@@ -139,6 +140,13 @@ namespace JohannaTheTrucker
                 artRegistry.RegisterArt(AutolauncherSprite);
             }
 
+
+            {
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites", "artifact_icons", Path.GetFileName("midrow_protector_protocol.png"));
+                MidrowProtectorProtocolSprite = new ExternalSprite("JohannaTheTrucker.midrow_protector_protocol", new FileInfo(path));
+                artRegistry.RegisterArt(MidrowProtectorProtocolSprite);
+            }
+
             //load the character sprite
 
             {
@@ -173,7 +181,7 @@ namespace JohannaTheTrucker
                 artRegistry.RegisterArt(HookRightIcon);
             }
 
-          
+
 
             //cluster missile sprite
 
