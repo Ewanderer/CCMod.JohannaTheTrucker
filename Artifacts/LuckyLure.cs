@@ -12,6 +12,7 @@ namespace JohannaTheTrucker.Artifacts
     [ArtifactMeta(pools = new ArtifactPool[] { ArtifactPool.Common })]
     public class LuckyLure : Artifact
     {
+        public override int? GetDisplayNumber(State s) => counter == 0 ? null : counter;
 
         public LuckyLure()
         {
@@ -24,16 +25,6 @@ namespace JohannaTheTrucker.Artifacts
         }
 
         public int counter;
-
-        public override void OnCombatStart(State state, Combat combat)
-        {
-            counter = 0;
-        }
-
-        public override void OnCombatEnd(State state)
-        {
-            counter = 0;
-        }
 
         private static void AMissileHit_Update_Pre(AMissileHit __instance, State s, Combat c, out Missile? __state)
         {

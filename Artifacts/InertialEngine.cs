@@ -16,6 +16,8 @@ namespace JohannaTheTrucker.Artifacts
 
         public int counter;
 
+        public override int? GetDisplayNumber(State s) => counter == 0 ? null : counter;
+
         public InertialEngine()
         {
             Manifest.EventHub.ConnectToEvent<Tuple<int, bool, bool, Combat, State>>("JohannaTheTrucker.ShipMoved", ShipMoved);
@@ -33,7 +35,7 @@ namespace JohannaTheTrucker.Artifacts
             var distance = Math.Abs(new_pos - __state);
             if (distance > 0)
             {
-               Manifest.EventHub.SignalEvent<Tuple<int, bool, bool, Combat, State>>("JohannaTheTrucker.ShipMoved", new(distance, __instance.targetPlayer, __instance.fromEvade, c, s));
+                Manifest.EventHub.SignalEvent<Tuple<int, bool, bool, Combat, State>>("JohannaTheTrucker.ShipMoved", new(distance, __instance.targetPlayer, __instance.fromEvade, c, s));
             }
         }
 
@@ -71,7 +73,7 @@ namespace JohannaTheTrucker.Artifacts
                     targetPlayer = true,
                     statusAmount = ammount,
                     status = Status.evade,
-                    artifactPulse=Key(),
+                    artifactPulse = Key(),
                 });
             }
         }

@@ -1,6 +1,7 @@
 ﻿using JohannaTheTrucker.Cards;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,16 +15,7 @@ namespace JohannaTheTrucker.Artifacts
     public class QuantumLureBox :Artifact
     {
         public int Counter;
-
-        public override void OnCombatStart(State state, Combat combat)
-        {
-            Counter = 0;
-        }
-
-        public override void OnCombatEnd(State state)
-        {
-            Counter = 0;
-        }
+        public override int? GetDisplayNumber(State s) => Counter == 0 ? null : Counter;
 
         public override void OnPlayerPlayCard(int energyCost, Deck deck, Card card, State state, Combat combat, int handPosition, int handCount)
         {
