@@ -164,6 +164,9 @@ namespace JohannaTheTrucker.Actions
                         //put cluster in future time
                         future_hits.Add(new(entry.cluster, g.time + flight_time, target_x));
                     }
+
+                    Manifest.EventHub.SignalEvent<Tuple<StuffBase, bool, Combat, State>>("JohannaTheTrucker.MissileFlying", new(entry.cluster, will_hit, c, s));
+
                     //reduce cluster size by 1
                     entry.cluster.stackSize--;
                     //if cluster size is 0 remove from stuff (item reference is stored in future hits.)

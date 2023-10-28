@@ -24,6 +24,7 @@ namespace JohannaTheTrucker
 
         public static ExternalArtifact? DecorativeSalmonArtifact { get; private set; }
         public static ExternalArtifact? InertialEnginenArtifact { get; private set; }
+        public static ExternalArtifact? LuckyLureArtifact { get; private set; }
 
         public void LoadManifest(ICustomEventHub eventHub)
         {
@@ -31,8 +32,11 @@ namespace JohannaTheTrucker
             _eventHub = eventHub;
             eventHub.MakeEvent<Tuple<ClusterMissile, Combat, State>>("JohannaTheTrucker.ClusterMissileExpended");
 
-
+            //distance, target_player, from_evade, combat, state
             eventHub.MakeEvent<Tuple<int, bool, bool, Combat, State>>("JohannaTheTrucker.ShipMoved");
+            //fired missile (missile, cluster missile, etc), hit_target, combat, state 
+            eventHub.MakeEvent<Tuple<StuffBase, bool, Combat, State>>("JohannaTheTrucker.MissileFlying");
+
             var harmony = new Harmony("JohannaTheTrucker.Artifacts");
 
             var amove_begin_method = typeof(AMove).GetMethod("Begin") ?? throw new Exception("AMove.Begin method not found.");
@@ -42,9 +46,15 @@ namespace JohannaTheTrucker
 
             harmony.Patch(amove_begin_method, postfix: new HarmonyMethod(amove_begin_postfix), prefix: new HarmonyMethod(amove_begin_prefix));
 
+            var amissilehit_begin_method = typeof(AMissileHit).GetMethod("Update") ?? throw new Exception("AMissileHit.Update method not found.");
+
+            var amissilehit_update_postfix = typeof(LuckyLure).GetMethod("AMissileHit_Update_Post", BindingFlags.Static | BindingFlags.NonPublic) ?? throw new Exception("AMissileHit_Update_Post method not found.");
+            var amissilehit_update_prefix = typeof(LuckyLure).GetMethod("AMissileHit_Update_Pre", BindingFlags.Static | BindingFlags.NonPublic) ?? throw new Exception("AMissileHit_Update_Pre method not found.");
+
+            harmony.Patch(amissilehit_begin_method, prefix: new HarmonyMethod(amissilehit_update_prefix), postfix: new HarmonyMethod(amissilehit_update_postfix));
         }
 
- 
+
 
         public void LoadManifest(IArtifactRegistry registry)
         {
@@ -59,6 +69,12 @@ namespace JohannaTheTrucker
             InertialEnginenArtifact.AddLocalisation("en", "Inertial Engine", "For every 6 spaces moved without using Evade, gain 1 Evade");
 
             registry.RegisterArtifact(InertialEnginenArtifact);
+
+            LuckyLureArtifact = new ExternalArtifact(typeof(LuckyLure), "JohannaTheTrucker.Artifacts.LuckyLure", LuckyLureSprite ?? throw new Exception("missing LuckyLure sprite"), Manifest.JohannaDeck ?? throw new Exception("missing johanna deck."), new ExternalGlossary[0]);
+
+            LuckyLureArtifact.AddLocalisation("en", "Lucky Lure", "For every 4 missiles that hit the enemy, gain 1 Midshift");
+
+            registry.RegisterArtifact(LuckyLureArtifact);
         }
 
 
