@@ -44,7 +44,7 @@
             var combat = evt.Item4;
             var state = evt.Item5;
 
-            if (!state.artifacts.Contains(this))
+            if (!state.characters.SelectMany(e => e.artifacts).Concat(state.artifacts).Contains(this))
             {
                 //make sure cleanup is only performed once.
                 Manifest.EventHub.DisconnectFromEvent<Tuple<int, bool, bool, Combat, State>>("JohannaTheTrucker.ShipMoved", ShipMoved);

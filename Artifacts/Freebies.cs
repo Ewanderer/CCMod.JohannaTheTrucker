@@ -34,7 +34,7 @@ namespace JohannaTheTrucker.Artifacts
 
         private void OnClusterMissileGrown(Tuple<ClusterMissile, State> evt)
         {
-            if (!evt.Item2.artifacts.Contains(this))
+            if (!evt.Item2.characters.SelectMany(e => e.artifacts).Concat(evt.Item2.artifacts).Contains(this))
             {
                 Manifest.EventHub.DisconnectFromEvent<Tuple<ClusterMissile, State>>("JohannaTheTrucker.ClusterMissileGrown", OnClusterMissileGrown);
                 return;

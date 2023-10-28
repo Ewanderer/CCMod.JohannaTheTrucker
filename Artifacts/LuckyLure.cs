@@ -48,7 +48,7 @@
             var missile = evt.Item1;
             if (!missile.fromPlayer)
                 return;
-            if (!evt.Item4.artifacts.Contains(this))
+            if (!evt.Item4.characters.SelectMany(e => e.artifacts).Concat(evt.Item4.artifacts).Contains(this))
             {
                 Manifest.EventHub.DisconnectFromEvent<Tuple<StuffBase, bool, Combat, State>>("JohannaTheTrucker.MissileFlying", OnAMissileHitDone);
             }

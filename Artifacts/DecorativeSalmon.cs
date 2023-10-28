@@ -24,7 +24,8 @@ namespace JohannaTheTrucker.Artifacts
             var combat = evt.Item2;
             var state = evt.Item3;
             //check if this artifact is valid.
-            if (!state.artifacts.Contains(this))
+            //  if (!state.artifacts.Contains(this))
+            if (!state.characters.SelectMany(e => e.artifacts).Concat(state.artifacts).Contains(this))
             {
                 //make sure cleanup is only performed once.
                 Manifest.EventHub.DisconnectFromEvent<Tuple<ClusterMissile, Combat, State>>("JohannaTheTrucker.ClusterMissileExpended", OnClusterMissileExpended);
