@@ -28,11 +28,11 @@ namespace JohannaTheTrucker
 
             //create status objects
             SmartExplosiveStatus = new ExternalStatus("JohannaTheTrucker.Status.SmartExplosive", true, Johanna_Primary_Color, null, SmartExplosiveSprite ?? throw new Exception("MissingSprite"), true);
-            SmartExplosiveStatus.AddLocalisation("Smart Explosives", "Your missiles and cluster's won't fire if they would miss. Reduces by 1 at the start of your turn.");
+            SmartExplosiveStatus.AddLocalisation("Smart Explosives", "Your missiles and clusters won't fire if they would miss. Reduced by 1 at the start of your turn.");
             statusRegistry.RegisterStatus(SmartExplosiveStatus);
 
             RocketSiloStatus = new ExternalStatus("JohannaTheTrucker.Status.RocketSiloStatus", true, Johanna_Primary_Color, null, RocketSiloSprite ?? throw new Exception("MissingSprite"), true);
-            RocketSiloStatus.AddLocalisation("Rocket Silo", "For each stack gain a Micro Missile card at the start of your turn.");
+            RocketSiloStatus.AddLocalisation("Rocket Silo", "For each stack gain a Micro Missiles card at the start of your turn.");
             statusRegistry.RegisterStatus(RocketSiloStatus);
 
             PopBubblesStatus = new ExternalStatus("JohannaTheTrucker.Status.PopBubblesStatus", true, Johanna_Primary_Color, null, PopBubblesSprite ?? throw new Exception("MissingSprite"), true);
@@ -40,7 +40,7 @@ namespace JohannaTheTrucker
             statusRegistry.RegisterStatus(PopBubblesStatus);
 
             LoseDroneShiftStatus = new ExternalStatus("JohannaTheTrucker.Status.LoseDroneShiftStatus", true, Johanna_Primary_Color, null, LoseDroneShiftSprite ?? throw new Exception("MissingSprite"), true);
-            LoseDroneShiftStatus.AddLocalisation("Lose Drone Shift", "Lose all drone shift at the start of your next turn.");
+            LoseDroneShiftStatus.AddLocalisation("Lose Droneshift", "Lose all droneshift at the start of your next turn.");
             statusRegistry.RegisterStatus(LoseDroneShiftStatus);
         }
 
