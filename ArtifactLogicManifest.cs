@@ -72,14 +72,14 @@ namespace JohannaTheTrucker
             {
                 DecorativeSalmonArtifact = new ExternalArtifact(typeof(DecorativeSalmon), "JohannaTheTrucker.Artifacts.DecorativeSalmon", DecorativeSalmonSprite ?? throw new Exception("missing deco salom sprite"), Manifest.JohannaDeck ?? throw new Exception("missing johanna deck."), new ExternalGlossary[0]);
 
-                DecorativeSalmonArtifact.AddLocalisation("en", "Decorative Salmon", "Every time a cluster is completely spent (not destroyed) gain 1 Shield");
+                DecorativeSalmonArtifact.AddLocalisation("en", "DECORATIVE SALMON", "Every time a cluster is completely spent (not destroyed) gain 1 <c=status>Shield.</c>");
 
                 registry.RegisterArtifact(DecorativeSalmonArtifact);
             }
             {
                 InertialEnginenArtifact = new ExternalArtifact(typeof(InertialEngine), "JohannaTheTrucker.Artifacts.InertialEngine", InertialEngineSprite ?? throw new Exception("missing InertialEngine sprite"), Manifest.JohannaDeck ?? throw new Exception("missing johanna deck."), new ExternalGlossary[0]);
 
-                InertialEnginenArtifact.AddLocalisation("en", "Inertial Engine", "For every 6 spaces moved without using Evade, gain 1 Evade");
+                InertialEnginenArtifact.AddLocalisation("en", "INERTIAL ENGINE", "For every 6 spaces moved without using <c=status>Evade</c>, gain 1 <c=status>Evade.</c>");
 
                 registry.RegisterArtifact(InertialEnginenArtifact);
             }
@@ -87,7 +87,7 @@ namespace JohannaTheTrucker
             {
                 LuckyLureArtifact = new ExternalArtifact(typeof(LuckyLure), "JohannaTheTrucker.Artifacts.LuckyLure", LuckyLureSprite ?? throw new Exception("missing LuckyLure sprite"), Manifest.JohannaDeck ?? throw new Exception("missing johanna deck."), new ExternalGlossary[0]);
 
-                LuckyLureArtifact.AddLocalisation("en", "Lucky Lure", "For every 4 missiles that hit the enemy, gain 1 Midshift");
+                LuckyLureArtifact.AddLocalisation("en", "LUCKY LURE", "For every 4 missiles that hit the enemy, gain 1 <c=status>Midshift</c>");
 
                 registry.RegisterArtifact(LuckyLureArtifact);
             }
@@ -95,7 +95,7 @@ namespace JohannaTheTrucker
             {
                 FreebiesArtifact = new ExternalArtifact(typeof(Freebies), "JohannaTheTrucker.Artifacts.Freebies", FreebiesSprite ?? throw new Exception("missing Freebies sprite"), Manifest.JohannaDeck ?? throw new Exception("missing johanna deck."), new ExternalGlossary[0]);
 
-                FreebiesArtifact.AddLocalisation("en", "Freebies!", "Launching or adding charges to clusters has a 50% chance to add 1 extra charge");
+                FreebiesArtifact.AddLocalisation("en", "FREEBIES!", "Launching or adding charges to clusters has a 50% chance to add 1 extra charge");
 
                 registry.RegisterArtifact(FreebiesArtifact);
             }
@@ -103,7 +103,7 @@ namespace JohannaTheTrucker
             {
                 QuantumLureBoxArtifact = new ExternalArtifact(typeof(QuantumLureBox), "JohannaTheTrucker.Artifacts.QuantumLureBox", QuantumLureBoxSprite ?? throw new Exception("missing QuantumLureBox sprite"), Manifest.JohannaDeck ?? throw new Exception("missing johanna deck."), new ExternalGlossary[0]);
 
-                QuantumLureBoxArtifact.AddLocalisation("en", "Quantum Lure Box", "For every 3 shots (Attack cards) add a Micro Missiles to your hand.");
+                QuantumLureBoxArtifact.AddLocalisation("en", "QUANTUM LURE BOX", "For every 3 shots (Attack cards) add a Micro Missiles to your hand.");
 
                 registry.RegisterArtifact(QuantumLureBoxArtifact);
             }
@@ -111,7 +111,7 @@ namespace JohannaTheTrucker
             {
                 ShieldBypassKeyArtifact = new ExternalArtifact(typeof(ShieldBypassKey), "JohannaTheTrucker.Artifacts.ShieldBypassKey", ShieldBypassKeySprite ?? throw new Exception("missing ShieldBypassKey sprite"), Manifest.JohannaDeck ?? throw new Exception("missing johanna deck."), new ExternalGlossary[0]);
 
-                ShieldBypassKeyArtifact.AddLocalisation("en", "Shield Bypass Key", "If you start your turn with at 1 shield, lose 1 and gain 1 evade.");
+                ShieldBypassKeyArtifact.AddLocalisation("en", "SHIELD BYPASS KEY", "If you start your turn with at least 1 <c=status>shield</c>, <c=downside>lose 1</c> and gain 1 <c=status>evade.</c>");
 
                 registry.RegisterArtifact(ShieldBypassKeyArtifact);
             }
@@ -119,7 +119,7 @@ namespace JohannaTheTrucker
             {
                 AutolauncherArtifact = new ExternalArtifact(typeof(Autolauncher), "JohannaTheTrucker.Artifacts.Autolauncher", AutolauncherSprite ?? throw new Exception("missing Autolauncher sprite"), Manifest.JohannaDeck ?? throw new Exception("missing johanna deck."), new ExternalGlossary[0]);
 
-                AutolauncherArtifact.AddLocalisation("en", "Autolauncher", "At the start of your turn, launch 1 cluster missile with 1 charge.");
+                AutolauncherArtifact.AddLocalisation("en", "AUTOLAUNCHER", "At the start of your turn, launch 1 cluster missile with 1 charge.");
 
                 registry.RegisterArtifact(AutolauncherArtifact);
             }
@@ -127,7 +127,7 @@ namespace JohannaTheTrucker
             {
                 MidrowProtectorProtocolArtifact = new ExternalArtifact(typeof(MidrowProtectorProtocol), "JohannaTheTrucker.Artifacts.MidrowProtectorProtocol", MidrowProtectorProtocolSprite ?? throw new Exception("missing MidrowProtectorProtocol sprite"), Manifest.JohannaDeck ?? throw new Exception("missing johanna deck."), new ExternalGlossary[0]);
 
-                MidrowProtectorProtocolArtifact.AddLocalisation("en", "Midrow Protector Protocol", "Gain 1 bubbler at the start of your turn, if you don't have any. Start every battle with 99 <c=status>Lose All Midshift</c>.");
+                MidrowProtectorProtocolArtifact.AddLocalisation("en", "MIDROW PROTECTOR PROTOCOL", "Gain 1 <c=status>bubbler</c> at the start of your turn if you don't have any. <c=downside>Start every battle with 99 Lose All Midshift</c>.");
 
                 registry.RegisterArtifact(MidrowProtectorProtocolArtifact);
             }
@@ -135,7 +135,7 @@ namespace JohannaTheTrucker
             {
                 UnderWingCargoCompartmentArtifact = new ExternalArtifact(typeof(UnderWingCargoCompartment), "JohannaTheTrucker.Artifacts.UnderWingCargoCompartment", UnderWingCargoCompartmentSprite ?? throw new Exception("missing UnderWingCargoCompartment sprite"), Manifest.JohannaDeck ?? throw new Exception("missing johanna deck."), new ExternalGlossary[0]);
 
-                UnderWingCargoCompartmentArtifact.AddLocalisation("en", "Under-Wing Cargo Compartment", " Gain 1 extra energy per turn. Lose all evade at the start of your turns past the first.");
+                UnderWingCargoCompartmentArtifact.AddLocalisation("en", "UNDER-WING CARGO COMPARTMENT", "Gain 1 extra energy per turn. <c=downside>Lose all evade at the start of your turns past the first.</c>");
 
                 registry.RegisterArtifact(UnderWingCargoCompartmentArtifact);
             }
@@ -143,7 +143,7 @@ namespace JohannaTheTrucker
             {
                 SalmonRoeArtifact = new ExternalArtifact(typeof(SalmonRoe), "JohannaTheTrucker.Artifacts.SalmonRoe", SalmonRoeSprite ?? throw new Exception("missing SalmonRoe sprite"), Manifest.JohannaDeck ?? throw new Exception("missing johanna deck."), new ExternalGlossary[0]);
 
-                SalmonRoeArtifact.AddLocalisation("en", "Salmon Roe", " For every 3 missiles that miss, the next cluster gains 1 charge");
+                SalmonRoeArtifact.AddLocalisation("en", "SALMON ROE", "For every 3 missiles that miss, the next cluster gains 1 charge");
 
                 registry.RegisterArtifact(SalmonRoeArtifact);
             }
