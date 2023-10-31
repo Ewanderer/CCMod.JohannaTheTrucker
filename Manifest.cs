@@ -5,8 +5,19 @@ using JohannaTheTrucker.Cards;
 
 namespace JohannaTheTrucker
 {
-    public partial class Manifest : ISpriteManifest, IDeckManifest, IGlossaryManifest, ICardManifest, ICharacterManifest, IAnimationManifest, IStatusManifest, ICustomEventManifest, IArtifactManifest
+    public partial class Manifest : ISpriteManifest, IDeckManifest, IGlossaryManifest, ICardManifest, ICharacterManifest, IAnimationManifest, IStatusManifest, ICustomEventManifest, IArtifactManifest, IShipPartManifest, IShipManifest, IStartershipManifest
     {
+
+        public static ExternalSprite? Ship_Bay_Sprite { get; private set; }
+        public static ExternalSprite? Ship_Cannon_Sprite { get; private set; }
+        public static ExternalSprite? Ship_Cargo_Right_Sprite { get; private set; }
+        public static ExternalSprite? Ship_Chassis_Sprite { get; private set; }
+        public static ExternalSprite? Ship_Cockpit_Sprite { get; private set; }
+        public static ExternalSprite? Ship_Hull_Sprite { get; private set; }
+        public static ExternalSprite? Ship_Cargo_Left_Sprite { get; private set; }
+        public static ExternalSprite? Ship_Scaffholding_Sprite { get; private set; }
+        public static ExternalSprite? ExtraCargoPodArtifactSprite { get; private set; }
+
         public static ExternalGlossary? AHook_Glossary { get; private set; }
         public static ExternalGlossary? ClusterMissile_Glossary { get; private set; }
         public static ExternalGlossary? ClusterMissileHE_Glossary { get; private set; }
@@ -100,10 +111,62 @@ namespace JohannaTheTrucker
         {
             if (ModRootFolder == null)
                 throw new Exception("Root Folder not set");
+
+            //ship parts
+
+            {
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites", "UrsaeMajoris", Path.GetFileName("UrsaeMajorisBay.png"));
+                Ship_Bay_Sprite = new ExternalSprite("JohannaTheTrucker.sprites.UrsaeMajorisBay", new FileInfo(path));
+                artRegistry.RegisterArt(Ship_Bay_Sprite);
+            }
+
+            {
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites", "UrsaeMajoris", Path.GetFileName("UrsaeMajorisCannon.png"));
+                Ship_Cannon_Sprite = new ExternalSprite("JohannaTheTrucker.sprites.UrsaeMajorisCannon", new FileInfo(path));
+                artRegistry.RegisterArt(Ship_Cannon_Sprite);
+            }
+
+            {
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites", "UrsaeMajoris", Path.GetFileName("UrsaeMajorisCargoLeft.png"));
+                Ship_Cargo_Left_Sprite = new ExternalSprite("JohannaTheTrucker.sprites.UrsaeMajorisCargoLeft", new FileInfo(path));
+                artRegistry.RegisterArt(Ship_Cargo_Left_Sprite);
+            }
+
+            {
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites", "UrsaeMajoris", Path.GetFileName("UrsaeMajorisCargoRight.png"));
+                Ship_Cargo_Right_Sprite = new ExternalSprite("JohannaTheTrucker.sprites.UrsaeMajorisCargoRight", new FileInfo(path));
+                artRegistry.RegisterArt(Ship_Cargo_Right_Sprite);
+            }
+
+            {
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites", "UrsaeMajoris", Path.GetFileName("UrsaeMajorisChassis.png"));
+                Ship_Chassis_Sprite = new ExternalSprite("JohannaTheTrucker.sprites.UrsaeMajorisChassis", new FileInfo(path));
+                artRegistry.RegisterArt(Ship_Chassis_Sprite);
+            }
+
+            {
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites", "UrsaeMajoris", Path.GetFileName("UrsaeMajorisHull.png"));
+                Ship_Hull_Sprite = new ExternalSprite("JohannaTheTrucker.sprites.UrsaeMajorisHull", new FileInfo(path));
+                artRegistry.RegisterArt(Ship_Hull_Sprite);
+            }
+
+            {
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites", "UrsaeMajoris", Path.GetFileName("UrsaeMajorisScaffholding.png"));
+                Ship_Scaffholding_Sprite = new ExternalSprite("JohannaTheTrucker.sprites.UrsaeMajorisScaffholding", new FileInfo(path));
+                artRegistry.RegisterArt(Ship_Scaffholding_Sprite);
+            }
+
+            {
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites", "UrsaeMajoris", Path.GetFileName("UrsaeMajorisCockpit.png"));
+                Ship_Cockpit_Sprite = new ExternalSprite("JohannaTheTrucker.sprites.UrsaeMajorisCockpit", new FileInfo(path));
+                artRegistry.RegisterArt(Ship_Cockpit_Sprite);
+            }
+
+
             //artifacts
 
             {
-                var path = Path.Combine(ModRootFolder.FullName, "Sprites","artifact_icons", Path.GetFileName("decorative_salmon.png"));
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites", "artifact_icons", Path.GetFileName("decorative_salmon.png"));
                 DecorativeSalmonSprite = new ExternalSprite("JohannaTheTrucker.decorative_salmon", new FileInfo(path));
                 artRegistry.RegisterArt(DecorativeSalmonSprite);
             }
@@ -161,6 +224,12 @@ namespace JohannaTheTrucker
                 var path = Path.Combine(ModRootFolder.FullName, "Sprites", "artifact_icons", Path.GetFileName("salmon_roe.png"));
                 SalmonRoeSprite = new ExternalSprite("JohannaTheTrucker.salmon_roe", new FileInfo(path));
                 artRegistry.RegisterArt(SalmonRoeSprite);
+            }
+
+            {
+                var path = Path.Combine(ModRootFolder.FullName, "Sprites", "artifact_icons", Path.GetFileName("extra_cargo_pod.png"));
+                ExtraCargoPodArtifactSprite = new ExternalSprite("JohannaTheTrucker.extra_cargo_pod", new FileInfo(path));
+                artRegistry.RegisterArt(ExtraCargoPodArtifactSprite);
             }
 
             //load the character sprite
@@ -446,7 +515,7 @@ namespace JohannaTheTrucker
             var engine_art = ExternalSprite.GetRaw((int)Spr.cards_ExtraBattery);
             var enemy_shift_art = ExternalSprite.GetRaw((int)Spr.cards_ScootRight);
             var smart_explosives_art = ExternalSprite.GetRaw((int)Spr.cards_Desktop);
-          //  var mass_upgrade_art = ExternalSprite.GetRaw((int)Spr.adap);
+            //  var mass_upgrade_art = ExternalSprite.GetRaw((int)Spr.adap);
 
             ReelInCard = new ExternalCard("JohannaTheTrucker.Cards.ReelIn", typeof(ReelIn), hook_art, JohannaDeck);
             registry.RegisterCard(ReelInCard);
@@ -477,7 +546,7 @@ namespace JohannaTheTrucker
             LeapFrogCard.AddLocalisation("Leap Frog");
 
             SmallManeuverCard = new ExternalCard("JohannaTheTrucker.Cards.SmallManeuver", typeof(SmallManeuver), readjust_art, JohannaDeck);
-           // registry.RegisterCard(SmallManeuverCard);
+            // registry.RegisterCard(SmallManeuverCard);
             SmallManeuverCard.AddLocalisation("Small Maneuver");
 
             DoubleHookCard = new ExternalCard("JohannaTheTrucker.Cards.DoubleHook", typeof(DoubleHook), hook_art, JohannaDeck);

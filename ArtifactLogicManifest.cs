@@ -32,6 +32,7 @@ namespace JohannaTheTrucker
         public static ExternalArtifact? MidrowProtectorProtocolArtifact { get; private set; }
         public static ExternalArtifact? UnderWingCargoCompartmentArtifact { get; private set; }
         public static ExternalArtifact? SalmonRoeArtifact { get; private set; }
+        public static ExternalArtifact? ExtraCargoPodArtifact { get; private set; }
 
         public void LoadManifest(ICustomEventHub eventHub)
         {
@@ -146,6 +147,14 @@ namespace JohannaTheTrucker
                 SalmonRoeArtifact.AddLocalisation("en", "SALMON ROE", "For every 3 missiles that miss, the next cluster gains 1 charge");
 
                 registry.RegisterArtifact(SalmonRoeArtifact);
+            }
+
+            {
+                ExtraCargoPodArtifact = new ExternalArtifact(typeof(ExtraCargoPod), "JohannaTheTrucker.Artifacts.ExtraCargoPodArtifact", ExtraCargoPodArtifactSprite ?? throw new Exception("missing ExtraCargoPod sprite"), Manifest.JohannaDeck ?? throw new Exception("missing johanna deck."), new ExternalGlossary[0]);
+
+                ExtraCargoPodArtifact.AddLocalisation("en", "EXTRA CARGO POD", "You're shown an extra card on non-boss battle rewards.");
+
+                registry.RegisterArtifact(ExtraCargoPodArtifact);
             }
 
         }
