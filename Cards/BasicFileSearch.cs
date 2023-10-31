@@ -1,4 +1,4 @@
-﻿﻿using JohannaTheTrucker.Actions;
+﻿using JohannaTheTrucker.Actions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,33 +7,33 @@ using System.Threading.Tasks;
 
 namespace JohannaTheTrucker.Cards
 {
-    [CardMeta(rarity = Rarity.common, upgradesTo = new Upgrade[] { Upgrade.A, Upgrade.B })]
+    [CardMeta(deck = Deck.colorless, rarity = Rarity.common, upgradesTo = new Upgrade[] { Upgrade.A, Upgrade.B })]
     public class BasicFileSearch : Card
     {
         public override List<CardAction> GetActions(State s, Combat c)
         {
             var result = new List<CardAction>();
             switch (upgrade)
-            {               
+            {
                 case Upgrade.None:
                     result.Add(new ADrawCard()
-					{
-						count = 2
-					});
-                     break;
+                    {
+                        count = 2
+                    });
+                    break;
                 case Upgrade.A:
-					result.Add(new ADrawCard()
-					{
+                    result.Add(new ADrawCard()
+                    {
                         count = 1
-					}
-					);                    
+                    }
+                    );
                     break;
                 case Upgrade.B:
                     result.Add(new ADrawCard()
-					{
+                    {
                         count = 4
-					}
-					);
+                    }
+                    );
                     break;
             }
             return result;
@@ -43,7 +43,7 @@ namespace JohannaTheTrucker.Cards
         {
             return new CardData
             {
-                cost = upgrade == Upgrade.A? 0 : 1
+                cost = upgrade == Upgrade.A ? 0 : 1
             };
         }
 

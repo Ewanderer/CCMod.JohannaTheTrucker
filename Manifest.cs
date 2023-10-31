@@ -76,6 +76,8 @@ namespace JohannaTheTrucker
         public static ExternalCard? SmartExplosivesCard { get; private set; }
         public static ExternalCard? BigSwingCard { get; private set; }
         public static ExternalCard? EngineStallCard { get; private set; }
+        public static ExternalCard? BasicDefensivesCard { get; private set; }
+        public static ExternalCard? BasicFileSearchCard { get; private set; }
         public static ExternalSprite? SeekerClusterMissleIcon { get; private set; }
         public static ExternalSprite? SeekerClusterMissleToken { get; private set; }
         public static ExternalSprite? FoldingCardSprite { get; private set; }
@@ -539,6 +541,14 @@ namespace JohannaTheTrucker
             EngineStallCard = new ExternalCard("JohannaTheTrucker.Cards.EngineStall", typeof(EngineStall), engine_art, JohannaDeck);
             registry.RegisterCard(EngineStallCard);
             EngineStallCard.AddLocalisation("Engine Stall");
+
+            BasicDefensivesCard = new ExternalCard("JohannaTheTrucker.Cards.BasicDefensives", typeof(BasicDefensives), card_art, JohannaDeck);
+            registry.RegisterCard(BasicDefensivesCard);
+            BasicDefensivesCard.AddLocalisation("Basic Defensives");
+
+            BasicFileSearchCard = new ExternalCard("JohannaTheTrucker.Cards.BasicFileSearch", typeof(BasicFileSearch), card_art, JohannaDeck);
+            registry.RegisterCard(BasicDefensivesCard);
+            BasicDefensivesCard.AddLocalisation("Basic File Search");
         }
 
         void ICharacterManifest.LoadManifest(ICharacterRegistry registry)
