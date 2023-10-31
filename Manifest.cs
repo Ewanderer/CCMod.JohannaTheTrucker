@@ -616,8 +616,8 @@ namespace JohannaTheTrucker
             BasicDefensivesCard.AddLocalisation("Basic Defensives");
 
             BasicFileSearchCard = new ExternalCard("JohannaTheTrucker.Cards.BasicFileSearch", typeof(BasicFileSearch), card_art, JohannaDeck);
-            registry.RegisterCard(BasicDefensivesCard);
-            BasicDefensivesCard.AddLocalisation("Basic File Search");
+            registry.RegisterCard(BasicFileSearchCard);
+            BasicFileSearchCard.AddLocalisation("Basic File Search");
         }
 
         void ICharacterManifest.LoadManifest(ICharacterRegistry registry)
