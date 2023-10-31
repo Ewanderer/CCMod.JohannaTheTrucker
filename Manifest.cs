@@ -611,11 +611,11 @@ namespace JohannaTheTrucker
             registry.RegisterCard(EngineStallCard);
             EngineStallCard.AddLocalisation("Engine Stall");
 
-            BasicDefensivesCard = new ExternalCard("JohannaTheTrucker.Cards.BasicDefensives", typeof(BasicDefensives), card_art, JohannaDeck);
+            BasicDefensivesCard = new ExternalCard("JohannaTheTrucker.Cards.BasicDefensives", typeof(BasicDefensives), card_art);
             registry.RegisterCard(BasicDefensivesCard);
             BasicDefensivesCard.AddLocalisation("Basic Defensives");
 
-            BasicFileSearchCard = new ExternalCard("JohannaTheTrucker.Cards.BasicFileSearch", typeof(BasicFileSearch), card_art, JohannaDeck);
+            BasicFileSearchCard = new ExternalCard("JohannaTheTrucker.Cards.BasicFileSearch", typeof(BasicFileSearch), card_art);
             registry.RegisterCard(BasicFileSearchCard);
             BasicFileSearchCard.AddLocalisation("Basic File Search");
         }
