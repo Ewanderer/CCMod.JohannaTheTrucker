@@ -32,7 +32,17 @@ namespace JohannaTheTrucker.Cards
                 hook_action,
                 new AMove(){
                     targetPlayer=true,
-                    dir=upgrade==Upgrade.B?5: 2,
+                    switch (upgrade) {
+                        case Upgrade.none:
+                        dir = 2,
+                        break;
+                        case Upgrade.A:
+                        dir = 3
+                        break;
+                        case Upgrade.B:
+                        dir = 5
+                        break;
+                    }
                 },
                 new ASpawn()
                 {
@@ -51,6 +61,7 @@ namespace JohannaTheTrucker.Cards
                 cost = 1,
                 flippable = true,
                 retain = upgrade == Upgrade.B,
+                exhaust = upgrade == Upgrade.B
             };
         }
 
