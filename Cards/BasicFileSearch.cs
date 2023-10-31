@@ -14,28 +14,26 @@ namespace JohannaTheTrucker.Cards
         {
             var result = new List<CardAction>();
             switch (upgrade)
-            {
-               
+            {               
                 case Upgrade.None:
                     result.Add(new ADrawCard()
 					{
-						amount = 2;
-					}
-					)
+						count = 2
+					});
+                     break;
                 case Upgrade.A:
 					result.Add(new ADrawCard()
 					{
-						amount = 1;
+                        count = 1
 					}
-					)
-                    
+					);                    
                     break;
                 case Upgrade.B:
                     result.Add(new ADrawCard()
 					{
-						amount = 4;
+                        count = 4
 					}
-					)
+					);
                     break;
             }
             return result;
@@ -45,7 +43,7 @@ namespace JohannaTheTrucker.Cards
         {
             return new CardData
             {
-                cost = upgrade == upgrade.A? 0 : 1
+                cost = upgrade == Upgrade.A? 0 : 1
             };
         }
 
