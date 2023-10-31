@@ -17,7 +17,7 @@ namespace JohannaTheTrucker.Cards
                 new AStatus(){
                 targetPlayer=true,
                 status=smart_explosives_status,
-                statusAmount=upgrade==Upgrade.B?99:2,
+                statusAmount=upgrade==Upgrade.B?99:3,
                 }
             };
 
