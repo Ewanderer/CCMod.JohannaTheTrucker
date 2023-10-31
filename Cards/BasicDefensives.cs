@@ -29,7 +29,21 @@ namespace JohannaTheTrucker.Cards
                         targetPlayer = true
                     });
                     break;
-                case Upgrade.A:
+		case Upgrade.A:
+                    result.Add(new AStatus()
+                    {
+                        status = Status.evade,
+                        statusAmount = 1,
+                        targetPlayer = true
+                    });
+                    result.Add(new AStatus()
+                    {
+                        status = Status.shield,
+                        statusAmount = 2,
+                        targetPlayer = true
+                    });
+	    	break;
+                case Upgrade.B:
 					result.Add(new AStatus()
                     {
                         status = Status.shield,
@@ -42,22 +56,8 @@ namespace JohannaTheTrucker.Cards
                         statusAmount = 2,
                         targetPlayer = true
                     });
-                    
-                    break;
-                case Upgrade.B:
-                    result.Add(new AStatus()
-                    {
-                        status = Status.evade,
-                        statusAmount = 1,
-                        targetPlayer = true
-                    });
-                    result.Add(new AStatus()
-                    {
-                        status = Status.shield,
-                        statusAmount = 2,
-                        targetPlayer = true
-                    });
-                    break;
+	    	break;
+                
             }
             return result;
         }
