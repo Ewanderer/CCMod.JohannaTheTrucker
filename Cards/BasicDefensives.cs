@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace JohannaTheTrucker.Cards
 {
-    [CardMeta(deck =Deck.colorless, rarity = Rarity.common, upgradesTo = new Upgrade[] { Upgrade.A, Upgrade.B })]
+    [CardMeta(deck =Deck.colorless, rarity = Rarity.common, upgradesTo = new Upgrade[] { Upgrade.A, Upgrade.B },dontOffer =true)]
     public class BasicDefensives : Card
     {
         public override List<CardAction> GetActions(State s, Combat c)
