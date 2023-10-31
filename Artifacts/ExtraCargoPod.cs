@@ -11,6 +11,10 @@ namespace JohannaTheTrucker.Artifacts
     {
         public override int ModifyCardRewardCount(State state, bool inCombat)
         {
+            if (state.route is not Combat c)
+                return 0;
+            if (!c.EitherShipIsDead(state))
+                return 0;
             if (state.map.markers[state.map.currentLocation].contents is not MapBattle contents)
                 return 0;
             if (contents.battleType != BattleType.Boss)
