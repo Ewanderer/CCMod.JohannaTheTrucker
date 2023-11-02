@@ -136,7 +136,7 @@ namespace JohannaTheTrucker
             {
                 UnderWingCargoCompartmentArtifact = new ExternalArtifact(typeof(UnderWingCargoCompartment), "JohannaTheTrucker.Artifacts.UnderWingCargoCompartment", UnderWingCargoCompartmentSprite ?? throw new Exception("missing UnderWingCargoCompartment sprite"), Manifest.JohannaDeck ?? throw new Exception("missing johanna deck."), new ExternalGlossary[0]);
 
-                UnderWingCargoCompartmentArtifact.AddLocalisation("en", "UNDER-WING CARGO COMPARTMENT", "Gain 1 extra energy per turn. <c=downside>Lose all evade at the start of your turns past the first.</c>");
+                UnderWingCargoCompartmentArtifact.AddLocalisation("en", "UNDER-WING POWER CORE", "Gain 1 extra energy per turn. <c=downside>Lose all evade at the start of your turns past the first.</c>");
 
                 registry.RegisterArtifact(UnderWingCargoCompartmentArtifact);
             }
