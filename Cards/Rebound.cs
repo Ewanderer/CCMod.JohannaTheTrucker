@@ -27,27 +27,34 @@ namespace JohannaTheTrucker.Cards
 
             hook_action.disabled = hook_action.CalculateMove(s, c) == null;
 
+            int dir;
+            switch (upgrade)
+            {
+                case Upgrade.None:
+                    dir = 2;
+                        break;
+                case Upgrade.A:
+                    dir = 3;
+                        break;
+                case Upgrade.B:
+                    dir = 5;
+                        break;
+                default:
+                    throw new NotImplementedException();
+            }
+
             return new List<CardAction>()
             {
                 hook_action,
                 new AMove(){
                     targetPlayer=true,
-                    switch (upgrade) {
-                        case Upgrade.none:
-                        dir = 2,
-                        break;
-                        case Upgrade.A:
-                        dir = 3
-                        break;
-                        case Upgrade.B:
-                        dir = 5
-                        break;
+                    dir=dir,
                     }
-                },
+                ,
                 new ASpawn()
                 {
-                fromPlayer=true,
-                thing=cluster,
+                    fromPlayer = true,
+                    thing = cluster,
                 }
             };
 
