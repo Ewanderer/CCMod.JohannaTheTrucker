@@ -25,6 +25,8 @@ namespace JohannaTheTrucker
 
         string IManifest.Name => "Actionmartini.JohannaTheTrucker.ClusterLaunch";
 
+        public DirectoryInfo? GameRootFolder { get; set; }
+
         void IModManifest.BootMod(IModLoaderContact contact)
         {
             Harmony harmony = new Harmony("JohannaTheTrucker.ClusterLaunch");

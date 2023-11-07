@@ -108,6 +108,7 @@ namespace JohannaTheTrucker
 
         public DirectoryInfo? ModRootFolder { get; set; }
         public string Name { get; init; } = "Actionmartini.JohannaTheTrucker";
+        public DirectoryInfo? GameRootFolder { get; set; }
 
         void ISpriteManifest.LoadManifest(IArtRegistry artRegistry)
         {
