@@ -24,6 +24,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="LICENSE.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="README.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Sprites\action_icons\clear_bubble.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
