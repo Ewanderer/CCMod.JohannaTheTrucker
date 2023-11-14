@@ -99,17 +99,17 @@ namespace JohannaTheTrucker
         public void LoadManifest(IStartershipRegistry registry)
         {
             Ship_UrsaeMajoris_Starter = new ExternalStarterShip("JohannaTheTrucker.Starterships.UrsaeMajoris",
-                Ship_UrsaeMajoris_Main ?? throw new Exception(), 
-                new ExternalCard[0], 
-                new ExternalArtifact[] { ExtraCargoPodArtifact??throw new Exception() },
-                new Type[0], 
+                Ship_UrsaeMajoris_Main ?? throw new Exception(),
+                new ExternalCard[] { BasicDefensivesCard ?? throw new Exception(), BasicFileSearchCard ?? throw new Exception() },
+                new ExternalArtifact[] { ExtraCargoPodArtifact ?? throw new Exception() },
+                new Type[] { typeof(CannonColorless), typeof(CannonColorless) },
                 new Type[0]);
 
             Ship_UrsaeMajoris_Starter.AddLocalisation("Ursae Majoris", "An armored cargo ship, infamous among pirates who flee on sight.");
 
             registry.RegisterStartership(Ship_UrsaeMajoris_Starter);
 
-            
+
         }
     }
 }
