@@ -1,4 +1,6 @@
-﻿namespace JohannaTheTrucker.Actions
+﻿using JohannaTheTrucker.SpecialEffects;
+
+namespace JohannaTheTrucker.Actions
 {
     internal class AHook : CardAction
     {
@@ -7,16 +9,21 @@
 
         public override void Begin(G g, State s, Combat c)
         {
-            var move = CalculateMove(s, c);
+            var move = CalculateMove(s, c, out var start_x);
             if (move == null)
             {
                 return;
             }
             c.QueueImmediate(move);
+            c.fx.Add(new HookFX()
+            {
+                world_x_pos = move.dir + start_x
+            });
         }
 
-        public AMove? CalculateMove(State? s, Combat? c)
+        public AMove? CalculateMove(State? s, Combat? c, out int start_x)
         {
+            start_x = 0;
             if (s == null || c == null)
                 return null;
             //determine from where to hook
@@ -42,6 +49,7 @@
                 return null;
             //align with missile bay
             var target_x = target_pos.First();
+            start_x = pos_x;
             var move_action = new AMove()
             {
                 dir = target_x - pos_x,
@@ -72,7 +80,7 @@
             AMove? move;
             var glossary = new TTGlossary(Manifest.AHook_Glossary?.Head ?? throw new Exception("Missing AHook Glossary"));
             list.Add(glossary);
-            if (s.route is Combat c && (move = CalculateMove(s, c)) != null)
+            if (s.route is Combat c && (move = CalculateMove(s, c, out _)) != null)
             {
                 var dir_key = hookToRight;
                 list.AddRange(move.GetTooltips(s));

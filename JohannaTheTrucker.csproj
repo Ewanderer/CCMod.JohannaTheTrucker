@@ -126,6 +126,21 @@
     <None Update="Sprites\HookRightIcon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Sprites\hook_fx\JoHookAnim1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sprites\hook_fx\JoHookAnim2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sprites\hook_fx\JoHookAnim3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sprites\hook_fx\JoHookAnim4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sprites\hook_fx\JoHookAnim5.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Sprites\JoCardArtFolding.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -261,6 +276,10 @@
     <None Update="Sprites\UrsaeMajoris\UrsaeMajorisScaffholding.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Sprites\hook_fx\" />
   </ItemGroup>
 
 </Project>
