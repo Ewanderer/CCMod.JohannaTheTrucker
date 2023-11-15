@@ -52,6 +52,7 @@ namespace JohannaTheTrucker
         public static ExternalSprite? AutolauncherSprite { get; private set; }
         public static ExternalSprite? MidrowProtectorProtocolSprite { get; private set; }
         public static ExternalSprite? UnderWingCargoCompartmentSprite { get; private set; }
+        public static IEnumerable<ExternalSprite>? HookFxSprites { get; private set; }
         public static ExternalCharacter? JohannaCharacter { get; private set; }
         public static ExternalDeck? JohannaDeck { get; private set; }
         public static ExternalAnimation? JohannaDefaultAnimation { get; private set; }
@@ -394,7 +395,7 @@ namespace JohannaTheTrucker
                 artRegistry.RegisterArt(StallCardSprite);
             }
 
-            //talk animations
+            //hook fx animation
             {
                 var dir_path = Path.Combine(ModRootFolder.FullName, "Sprites", "talk_angry");
                 var files = Directory.GetFiles(dir_path).Select(e => new FileInfo(e)).ToArray();
@@ -404,6 +405,20 @@ namespace JohannaTheTrucker
                     TalkAngrySprites.Add(spr);
                     artRegistry.RegisterArt(spr);
                 }
+            }
+
+            //talk animations
+            {
+                var dir_path = Path.Combine(ModRootFolder.FullName, "Sprites", "hook_fx");
+                var files = Directory.GetFiles(dir_path).Select(e => new FileInfo(e)).ToArray();
+                var list = new List<ExternalSprite>();
+                for (int i = 0; i < files.Length; i++)
+                {
+                    var spr = new ExternalSprite("JohannaTheTrucker.HookFxSprite" + i, files[i]);
+                    list.Add(spr);
+                    artRegistry.RegisterArt(spr);
+                }
+                HookFxSprites = list;
             }
 
             {
