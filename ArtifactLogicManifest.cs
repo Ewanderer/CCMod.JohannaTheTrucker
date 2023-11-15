@@ -150,7 +150,7 @@ namespace JohannaTheTrucker
             }
 
             {
-                ExtraCargoPodArtifact = new ExternalArtifact(typeof(ExtraCargoPod), "JohannaTheTrucker.Artifacts.ExtraCargoPodArtifact", ExtraCargoPodArtifactSprite ?? throw new Exception("missing ExtraCargoPod sprite"), Manifest.JohannaDeck ?? throw new Exception("missing johanna deck."), new ExternalGlossary[0]);
+                ExtraCargoPodArtifact = new ExternalArtifact(typeof(ExtraCargoPod), "JohannaTheTrucker.Artifacts.ExtraCargoPodArtifact", ExtraCargoPodArtifactSprite ?? throw new Exception("missing ExtraCargoPod sprite"), null, new ExternalGlossary[0]);
 
                 ExtraCargoPodArtifact.AddLocalisation("en", "EXTRA CARGO POD", "You're shown an extra card on non-boss battle rewards.");
 

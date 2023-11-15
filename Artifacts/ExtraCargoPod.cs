@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JohannaTheTrucker.Artifacts
 {
-    [ArtifactMeta(unremovable = true)]
+    [ArtifactMeta(unremovable = true, owner = Deck.colorless, pools = new ArtifactPool[] { ArtifactPool.EventOnly })]
     public class ExtraCargoPod : Artifact
     {
         public override int ModifyCardRewardCount(State state, bool inCombat)
