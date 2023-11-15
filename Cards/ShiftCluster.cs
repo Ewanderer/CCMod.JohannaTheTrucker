@@ -42,7 +42,7 @@ namespace JohannaTheTrucker.Cards
 							//hookToRight = flipped
 						};
 
-						hook_action.disabled = hook_action.CalculateMove(s, c) == null;
+						hook_action.disabled = hook_action.CalculateMove(s, c, out _) == null;
 
 						list.Add(hook_action);
 						

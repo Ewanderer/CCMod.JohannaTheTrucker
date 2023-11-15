@@ -18,9 +18,9 @@ namespace JohannaTheTrucker.Cards
                 hookToRight = flipped
             };
 
-            hook_action.disabled = hook_action.CalculateMove(s, c) == null;
+            hook_action.disabled = hook_action.CalculateMove(s, c, out _) == null;
 
-            var distance = hook_action.CalculateMove(s, c)?.dir ?? 0;
+            var distance = hook_action.CalculateMove(s, c, out _)?.dir ?? 0;
 
             list.Add(new AMove()
             {
@@ -46,9 +46,9 @@ namespace JohannaTheTrucker.Cards
             if (state.route is Combat c)
             {
 
-                hook_action.disabled = hook_action.CalculateMove(state, c) == null;
+                hook_action.disabled = hook_action.CalculateMove(state, c, out _) == null;
 
-                distance = Math.Abs(hook_action.CalculateMove(state, c)?.dir ?? 0)*3;
+                distance = Math.Abs(hook_action.CalculateMove(state, c, out _)?.dir ?? 0)*3;
             }
 
             int cost;
