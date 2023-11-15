@@ -67,11 +67,11 @@ namespace JohannaTheTrucker.Actions
             if (Manifest.HookIcon?.Id == null)
                 return null;
             if (s.route is not Combat)
-                return new Icon((Spr)(Manifest.HookIcon?.Id ?? throw new Exception("missing hook icon")), 0, Colors.textMain);
+                return new Icon((Spr)(Manifest.HookIcon?.Id ?? throw new Exception("missing hook icon")), null, Colors.textMain);
             if (hookToRight)
-                return new Icon((Spr)(Manifest.HookRightIcon?.Id ?? throw new Exception("missing hook right icon")), 0, Colors.textMain);
+                return new Icon((Spr)(Manifest.HookRightIcon?.Id ?? throw new Exception("missing hook right icon")), null, Colors.textMain);
             else
-                return new Icon((Spr)(Manifest.HookLeftIcon?.Id ?? throw new Exception("missing hook left icon")), 0, Colors.textMain);
+                return new Icon((Spr)(Manifest.HookLeftIcon?.Id ?? throw new Exception("missing hook left icon")), null, Colors.textMain);
         }
 
         public override List<Tooltip> GetTooltips(State s)
