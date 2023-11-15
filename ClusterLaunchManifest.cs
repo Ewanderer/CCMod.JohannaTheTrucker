@@ -76,22 +76,9 @@ namespace JohannaTheTrucker
                 return false;
             }
             else
-            {
-                if (__instance.isaacNamesIt)
-                {
-                    List<string> list = __instance.thing.PossibleDroneNames().Where<string>((Func<string, bool>)(name => !s.storyVars.namedDronesSpawned.Contains(name))).ToList<string>();
-                    if (list.Count != 0 && Mutil.NextRand() < 0.2)
-                    {
-                        __instance.thing.droneNameAccordingToIsaac = list[Mutil.NextRandInt() % list.Count];
-                        s.storyVars.namedDronesSpawned.Add(__instance.thing.droneNameAccordingToIsaac);
-                    }
-                }
+            {             
                 __instance.thing.fromPlayer = __instance.fromPlayer;
-                if (__instance.fromPlayer)
-                {
-                    foreach (Artifact enumerateAllArtifact in s.EnumerateAllArtifacts())
-                        enumerateAllArtifact.OnPlayerSpawnSomething(s, c);
-                }
+             
                 foreach (Artifact enumerateAllArtifact in s.EnumerateAllArtifacts())
                     __instance.thing = enumerateAllArtifact.ReplaceSpawnedThing(s, c, __instance.thing, __instance.fromPlayer);
                 int worldX1 = __instance.GetWorldX(s, c);
@@ -100,19 +87,37 @@ namespace JohannaTheTrucker
                 Part? partAtWorldX = ship.GetPartAtWorldX(worldX2);
                 if (partAtWorldX != null)
                     partAtWorldX.pulse = 1.0;
-                ParticleBursts.DroneSpawn(num, __instance.fromPlayer);
-                if (ship.Get(Status.backwardsMissiles) > 0)
-                    __instance.thing.targetPlayer = !__instance.thing.targetPlayer;
-                if (!__instance.thing.bubbleShield && ship.Get(Status.bubbleJuice) > 0)
-                {
-                    __instance.thing.bubbleShield = true;
-                    ship.Set(Status.bubbleJuice, ship.Get(Status.bubbleJuice) - 1);
-                }
                 StuffBase? stuffBase;
                 if (c.stuff.TryGetValue(num, out stuffBase))
                 {
                     if (__instance.thing is ClusterMissile launched_cluster && stuffBase is ClusterMissile otherCluster)
                     {
+
+                        if (__instance.isaacNamesIt)
+                        {
+                            List<string> list = __instance.thing.PossibleDroneNames().Where<string>((Func<string, bool>)(name => !s.storyVars.namedDronesSpawned.Contains(name))).ToList<string>();
+                            if (list.Count != 0 && Mutil.NextRand() < 0.2)
+                            {
+                                __instance.thing.droneNameAccordingToIsaac = list[Mutil.NextRandInt() % list.Count];
+                                s.storyVars.namedDronesSpawned.Add(__instance.thing.droneNameAccordingToIsaac);
+                            }
+                        }
+
+                        if (__instance.fromPlayer)
+                        {
+                            foreach (Artifact enumerateAllArtifact in s.EnumerateAllArtifacts())
+                                enumerateAllArtifact.OnPlayerSpawnSomething(s, c);
+                        }
+
+                        ParticleBursts.DroneSpawn(num, __instance.fromPlayer);
+                        if (ship.Get(Status.backwardsMissiles) > 0)
+                            __instance.thing.targetPlayer = !__instance.thing.targetPlayer;
+                        if (!__instance.thing.bubbleShield && ship.Get(Status.bubbleJuice) > 0)
+                        {
+                            __instance.thing.bubbleShield = true;
+                            ship.Set(Status.bubbleJuice, ship.Get(Status.bubbleJuice) - 1);
+                        }
+
                         c.fx.Add(new FlightFX()
                         {
                             start_x = worldX2,
