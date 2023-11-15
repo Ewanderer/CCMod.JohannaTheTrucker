@@ -1,11 +1,14 @@
 ﻿using CobaltCoreModding.Definitions.ExternalItems;
 using CobaltCoreModding.Definitions.ModContactPoints;
 using CobaltCoreModding.Definitions.ModManifests;
+using HarmonyLib;
+using JohannaTheTrucker.Actions;
 using JohannaTheTrucker.Cards;
+using System.Reflection;
 
 namespace JohannaTheTrucker
 {
-    public partial class Manifest : ISpriteManifest, IDeckManifest, IGlossaryManifest, ICardManifest, ICharacterManifest, IAnimationManifest, IStatusManifest, ICustomEventManifest, IArtifactManifest, IShipPartManifest, IShipManifest, IStartershipManifest
+    public partial class Manifest : ISpriteManifest, IDeckManifest, IGlossaryManifest, ICardManifest, ICharacterManifest, IAnimationManifest, IStatusManifest, ICustomEventManifest, IArtifactManifest, IShipPartManifest, IShipManifest, IStartershipManifest, IModManifest
     {
 
         public static ExternalSprite? Ship_Bay_Sprite { get; private set; }
@@ -98,7 +101,7 @@ namespace JohannaTheTrucker
         public static ExternalSprite? StallCardSprite { get; private set; }
 
         public static ExternalGlossary? AGrowClusterGlossary { get; private set; }
-        IEnumerable<string> ISpriteManifest.Dependencies => new string[0];
+
 
         public static List<ExternalSprite> TalkAngrySprites { get; private set; } = new List<ExternalSprite>();
         public static List<ExternalSprite> TalkLaughSprites { get; private set; } = new List<ExternalSprite>();
@@ -110,6 +113,8 @@ namespace JohannaTheTrucker
         public DirectoryInfo? ModRootFolder { get; set; }
         public string Name { get; init; } = "Actionmartini.JohannaTheTrucker";
         public DirectoryInfo? GameRootFolder { get; set; }
+
+        public IEnumerable<string> Dependencies => new string[0];
 
         void ISpriteManifest.LoadManifest(IArtRegistry artRegistry)
         {
@@ -691,6 +696,222 @@ namespace JohannaTheTrucker
             registry.RegisterAnimation(GameoverAnimation);
         }
 
+        public void BootMod(IModLoaderContact contact)
+        {
+            {
+                //create action draw code for agrow cluster
+                var harmony = new Harmony("EWanderer.JohannaTheTrucker.AGrowClusterRendering");
+
+                var card_render_action_method = typeof(Card).GetMethod("RenderAction", BindingFlags.Public | BindingFlags.Static) ?? throw new Exception();
+
+                var card_render_action_prefix = this.GetType().GetMethod("AGrowClusterRenderActionPrefix", BindingFlags.NonPublic | BindingFlags.Static);
+
+                harmony.Patch(card_render_action_method, prefix: new HarmonyMethod(card_render_action_prefix));
+
+            }
+        }
+
+
+        private static bool AGrowClusterRenderActionPrefix(Card __instance, ref int __result, G g, State state, CardAction action, bool dontDraw = false, int shardAvailable = 0, int stunChargeAvailable = 0, int bubbleJuiceAvailable = 0)
+        {
+            if (action is not AGrowClusters grow_cluster_action)
+            {
+                return true;
+            }
+
+            Color spriteColor = action.disabled ? Colors.disabledIconTint : new Color("ffffff");
+            __result = 0;
+            if (Manifest.GrowClusterSprite?.Id == null)
+                return false;
+
+            int? cluster_spr_val = null;
+            switch (grow_cluster_action.cluster_type)
+            {
+                case MidrowStuff.ClusterMissile.MissileType.normal:
+                    cluster_spr_val = Manifest.ClusterMissleIcon?.Id;
+                    break;
+                case MidrowStuff.ClusterMissile.MissileType.heavy:
+                    cluster_spr_val = Manifest.HEClusterMissleIcon?.Id;
+                    break;
+                case MidrowStuff.ClusterMissile.MissileType.seeker:
+                    cluster_spr_val = Manifest.SeekerClusterMissleIcon?.Id;
+                    break;
+                case MidrowStuff.ClusterMissile.MissileType.heavy_seeker:
+                    cluster_spr_val = Manifest.HESeekerClusterMissleToken?.Id;
+                    break;
+                default:
+                    throw new NotImplementedException();
+            }
+            if (cluster_spr_val == null)
+                return false;
+
+            Icon multiplicity_icon = new Icon((Spr)Manifest.GrowClusterSprite.Id, null, Colors.textMain, false);
+            Icon cluster_icon = new Icon((Spr)cluster_spr_val, null, Colors.textMain, false);
+            int w = 0;
+            int iconWidth = 8;
+            int iconNumberPadding = 2;
+            int numberWidth = 6;
+            bool isFirst = true;
+            IconAndOrNumber(multiplicity_icon.path, null, new Color?(action.disabled ? Colors.disabledText : multiplicity_icon.color), false, null);
+            IconAndOrNumber(cluster_icon.path, grow_cluster_action.ammount, new Color?(action.disabled ? Colors.disabledText : cluster_icon.color), false, null);
+
+
+
+
+            __result = w;
+            return false;
+
+            void IconAndOrNumber(Spr icon, int? amount = null, Color? textColor = null, bool flipY = false, int? x = null)
+            {
+                if (!isFirst)
+                    w += 4;
+                Rect? nullable1;
+                if (!dontDraw)
+                {
+                    nullable1 = new Rect?(new Rect((double)w));
+                    global::UIKey? key = new global::UIKey?();
+                    Rect? rect = nullable1;
+                    Rect? rectForReticle = new Rect?();
+                    global::UIKey? rightHint = new global::UIKey?();
+                    global::UIKey? leftHint = new global::UIKey?();
+                    global::UIKey? upHint = new global::UIKey?();
+                    global::UIKey? downHint = new global::UIKey?();
+                    Vec xy = g.Push(key, rect, rectForReticle, rightHint: rightHint, leftHint: leftHint, upHint: upHint, downHint: downHint).rect.xy;
+                    Spr? id = new Spr?(icon);
+                    double x1 = xy.x;
+                    double y = xy.y;
+                    int num = flipY ? 1 : 0;
+                    Color? nullable2 = new Color?(spriteColor);
+                    Vec? originPx = new Vec?();
+                    Vec? originRel = new Vec?();
+                    Vec? scale = new Vec?();
+                    nullable1 = new Rect?();
+                    Rect? pixelRect = nullable1;
+                    Color? color = nullable2;
+                    Draw.Sprite(id, x1, y, flipY: num != 0, originPx: originPx, originRel: originRel, scale: scale, pixelRect: pixelRect, color: color);
+                    g.Pop();
+                }
+                w += iconWidth;
+                Color? nullable3;
+                if (amount.HasValue)
+                {
+                    int valueOrDefault = amount.GetValueOrDefault();
+                    if (!x.HasValue)
+                    {
+                        w += iconNumberPadding;
+                        string str = DB.IntStringCache(valueOrDefault);
+                        if (!dontDraw)
+                        {
+                            nullable1 = new Rect?(new Rect((double)w));
+                            global::UIKey? key = new global::UIKey?();
+                            Rect? rect = nullable1;
+                            Rect? rectForReticle = new Rect?();
+                            global::UIKey? rightHint = new global::UIKey?();
+                            global::UIKey? leftHint = new global::UIKey?();
+                            global::UIKey? upHint = new global::UIKey?();
+                            global::UIKey? downHint = new global::UIKey?();
+                            Vec xy = g.Push(key, rect, rectForReticle, rightHint: rightHint, leftHint: leftHint, upHint: upHint, downHint: downHint).rect.xy;
+                            int number = valueOrDefault;
+                            double x2 = xy.x;
+                            double y = xy.y;
+                            nullable3 = textColor;
+                            Color color = nullable3 ?? Colors.textMain;
+                            BigNumbers.Render(number, x2, y, color);
+                            g.Pop();
+                        }
+                        w += str.Length * numberWidth;
+                    }
+                }
+                if (x.HasValue)
+                {
+                    int? nullable4 = x;
+                    int num = 0;
+                    if (nullable4.GetValueOrDefault() < num & nullable4.HasValue)
+                    {
+                        w += iconNumberPadding;
+                        if (!dontDraw)
+                        {
+                            nullable1 = new Rect?(new Rect((double)(w - 2)));
+                            global::UIKey? key = new global::UIKey?();
+                            Rect? rect = nullable1;
+                            Rect? rectForReticle = new Rect?();
+                            global::UIKey? rightHint = new global::UIKey?();
+                            global::UIKey? leftHint = new global::UIKey?();
+                            global::UIKey? upHint = new global::UIKey?();
+                            global::UIKey? downHint = new global::UIKey?();
+                            Vec xy = g.Push(key, rect, rectForReticle, rightHint: rightHint, leftHint: leftHint, upHint: upHint, downHint: downHint).rect.xy;
+                            Spr? id = new Spr?(Spr.icons_minus);
+                            double x3 = xy.x;
+                            double y = xy.y - 1.0;
+                            nullable3 = action.disabled ? new Color?(spriteColor) : textColor;
+                            Vec? originPx = new Vec?();
+                            Vec? originRel = new Vec?();
+                            Vec? scale = new Vec?();
+                            nullable1 = new Rect?();
+                            Rect? pixelRect = nullable1;
+                            Color? color = nullable3;
+                            Draw.Sprite(id, x3, y, originPx: originPx, originRel: originRel, scale: scale, pixelRect: pixelRect, color: color);
+                            g.Pop();
+                        }
+                        w += 3;
+                    }
+                    if (Math.Abs(x.Value) > 1)
+                    {
+                        w += iconNumberPadding + 1;
+                        if (!dontDraw)
+                        {
+                            nullable1 = new Rect?(new Rect((double)w));
+                            global::UIKey? key = new global::UIKey?();
+                            Rect? rect = nullable1;
+                            Rect? rectForReticle = new Rect?();
+                            global::UIKey? rightHint = new global::UIKey?();
+                            global::UIKey? leftHint = new global::UIKey?();
+                            global::UIKey? upHint = new global::UIKey?();
+                            global::UIKey? downHint = new global::UIKey?();
+                            Vec xy = g.Push(key, rect, rectForReticle, rightHint: rightHint, leftHint: leftHint, upHint: upHint, downHint: downHint).rect.xy;
+                            int number = Math.Abs(x.Value);
+                            double x4 = xy.x;
+                            double y = xy.y;
+                            nullable3 = textColor;
+                            Color color = nullable3 ?? Colors.textMain;
+                            BigNumbers.Render(number, x4, y, color);
+                            g.Pop();
+                        }
+                        w += 4;
+                    }
+                    w += iconNumberPadding;
+                    if (!dontDraw)
+                    {
+
+                        nullable1 = new Rect?(new Rect((double)w));
+                        global::UIKey? key = new global::UIKey?();
+                        Rect? rect = nullable1;
+                        Rect? rectForReticle = new Rect?();
+                        global::UIKey? rightHint = new global::UIKey?();
+                        global::UIKey? leftHint = new global::UIKey?();
+                        global::UIKey? upHint = new global::UIKey?();
+                        global::UIKey? downHint = new global::UIKey?();
+                        Vec xy = g.Push(key, rect, rectForReticle, rightHint: rightHint, leftHint: leftHint, upHint: upHint, downHint: downHint).rect.xy;
+                        Spr? id = new Spr?(Spr.icons_x_white);
+                        double x5 = xy.x;
+                        double y = xy.y - 1.0;
+                        Icon? icon1 = action.GetIcon(state);
+                        ref Icon? local = ref icon1;
+                        nullable3 = local.HasValue ? new Color?(local.GetValueOrDefault().color) : new Color?();
+                        Vec? originPx = new Vec?();
+                        Vec? originRel = new Vec?();
+                        Vec? scale = new Vec?();
+                        nullable1 = new Rect?();
+                        Rect? pixelRect = nullable1;
+                        Color? color = nullable3;
+                        Draw.Sprite(id, x5, y, originPx: originPx, originRel: originRel, scale: scale, pixelRect: pixelRect, color: color);
+                        g.Pop();
+                    }
+                    w += 8;
+                }
+                isFirst = false;
+            }
+        }
 
     }
 }
