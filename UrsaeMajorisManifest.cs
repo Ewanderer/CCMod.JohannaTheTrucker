@@ -103,7 +103,7 @@ namespace JohannaTheTrucker
                 new ExternalCard[] { BasicDefensivesCard ?? throw new Exception(), BasicFileSearchCard ?? throw new Exception() },
                 new ExternalArtifact[] { ExtraCargoPodArtifact ?? throw new Exception() },
                 new Type[] { typeof(CannonColorless), typeof(CannonColorless) },
-                new Type[0]);
+                new Type[] { typeof(ShieldPrep) });
 
             Ship_UrsaeMajoris_Starter.AddLocalisation("Ursae Majoris", "An armored cargo ship, infamous among pirates who flee on sight.");
 
