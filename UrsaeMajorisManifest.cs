@@ -89,7 +89,8 @@ namespace JohannaTheTrucker
                 {
                     hull = 18,
                     hullMax = 18,
-                    shieldMaxBase = 5
+                    shieldMaxBase = 5,
+                    baseDraw = 6
                 },
                 new ExternalPart[] { Ship_CargoLeft_Part ?? throw new Exception(), Ship_Cannon_Part ?? throw new Exception(), Ship_Cockpit_Part ?? throw new Exception(), Ship_Hull_Part ?? throw new Exception(), Ship_Bay_Part ?? throw new Exception(), Ship_CargoRight_Part ?? throw new Exception() },
                 Ship_Chassis_Sprite);
