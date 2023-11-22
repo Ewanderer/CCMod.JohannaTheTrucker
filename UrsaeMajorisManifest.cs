@@ -87,9 +87,10 @@ namespace JohannaTheTrucker
             Ship_UrsaeMajoris_Main = new ExternalShip("JohannaTheTrucker.Ships.UrsaeMajoris",
                 new Ship()
                 {
-                    hull = 16,
-                    hullMax = 16,
-                    shieldMaxBase = 3
+                    hull = 18,
+                    hullMax = 18,
+                    shieldMaxBase = 5,
+                    baseDraw = 6
                 },
                 new ExternalPart[] { Ship_CargoLeft_Part ?? throw new Exception(), Ship_Cannon_Part ?? throw new Exception(), Ship_Cockpit_Part ?? throw new Exception(), Ship_Hull_Part ?? throw new Exception(), Ship_Bay_Part ?? throw new Exception(), Ship_CargoRight_Part ?? throw new Exception() },
                 Ship_Chassis_Sprite);
@@ -100,9 +101,8 @@ namespace JohannaTheTrucker
         {
             Ship_UrsaeMajoris_Starter = new ExternalStarterShip("JohannaTheTrucker.Starterships.UrsaeMajoris",
                 Ship_UrsaeMajoris_Main ?? throw new Exception(),
-                new ExternalCard[] { BasicDefensivesCard ?? throw new Exception(), BasicFileSearchCard ?? throw new Exception() },
+                new ExternalCard[] { BasicDefensivesCard ?? throw new Exception(), BasicFileSearchCard ?? throw new Exception(), BasicBlastCard ?? throw new Exception(), BasicBlastCard ?? throw new Exception()},
                 new ExternalArtifact[] { ExtraCargoPodArtifact ?? throw new Exception() },
-                new Type[] { typeof(CannonColorless), typeof(CannonColorless) },
                 new Type[] { typeof(ShieldPrep) });
 
             Ship_UrsaeMajoris_Starter.AddLocalisation("Ursae Majoris", "An armored cargo ship, infamous among pirates who flee on sight.");
