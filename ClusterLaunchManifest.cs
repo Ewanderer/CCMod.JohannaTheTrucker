@@ -1,10 +1,12 @@
-﻿using CobaltCoreModding.Definitions.ModContactPoints;
+﻿using CobaltCoreModding.Definitions;
+using CobaltCoreModding.Definitions.ModContactPoints;
 using CobaltCoreModding.Definitions.ModManifests;
 using FMOD;
 using FSPRO;
 using HarmonyLib;
 using JohannaTheTrucker.MidrowStuff;
 using JohannaTheTrucker.SpecialEffects;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,13 +21,16 @@ namespace JohannaTheTrucker
     /// </summary>
     public class ClusterLaunchManifest : IModManifest
     {
-        IEnumerable<string> IModManifest.Dependencies => new string[0];
 
         DirectoryInfo? IManifest.ModRootFolder { get; set; }
 
         string IManifest.Name => "Actionmartini.JohannaTheTrucker.ClusterLaunch";
 
         public DirectoryInfo? GameRootFolder { get; set; }
+
+        public IEnumerable<DependencyEntry> Dependencies => Array.Empty<DependencyEntry>();
+
+        public ILogger? Logger { get; set; }
 
         void IModManifest.BootMod(IModLoaderContact contact)
         {

@@ -1,15 +1,22 @@
-﻿using CobaltCoreModding.Definitions.ExternalItems;
+﻿using CobaltCoreModding.Definitions;
+using CobaltCoreModding.Definitions.ExternalItems;
 using CobaltCoreModding.Definitions.ModContactPoints;
 using CobaltCoreModding.Definitions.ModManifests;
 using HarmonyLib;
 using JohannaTheTrucker.Actions;
 using JohannaTheTrucker.Cards;
+using Microsoft.Extensions.Logging;
 using System.Reflection;
 
 namespace JohannaTheTrucker
 {
     public partial class Manifest : ISpriteManifest, IDeckManifest, IGlossaryManifest, ICardManifest, ICharacterManifest, IAnimationManifest, IStatusManifest, ICustomEventManifest, IArtifactManifest, IShipPartManifest, IShipManifest, IStartershipManifest, IModManifest
     {
+
+        public IEnumerable<DependencyEntry> Dependencies => Array.Empty<DependencyEntry>();
+
+        public ILogger? Logger { get; set; }
+
 
         public static ExternalSprite? Ship_Bay_Sprite { get; private set; }
         public static ExternalSprite? Ship_Cannon_Sprite { get; private set; }
@@ -115,9 +122,8 @@ namespace JohannaTheTrucker
         public string Name { get; init; } = "Actionmartini.JohannaTheTrucker";
         public DirectoryInfo? GameRootFolder { get; set; }
 
-        public IEnumerable<string> Dependencies => new string[0];
 
-        void ISpriteManifest.LoadManifest(IArtRegistry artRegistry)
+        void ISpriteManifest.LoadManifest(ISpriteRegistry artRegistry)
         {
             if (ModRootFolder == null)
                 throw new Exception("Root Folder not set");
