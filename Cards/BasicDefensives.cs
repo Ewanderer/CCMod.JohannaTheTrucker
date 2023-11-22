@@ -18,14 +18,14 @@ namespace JohannaTheTrucker.Cards
                
                 case Upgrade.None:
                     result.Add(new AStatus() { 
-						status=Status.evade,
-						statusAmount=1,
-						targetPlayer=true
+			status=Status.evade,
+			statusAmount=1,
+			targetPlayer=true
                     });
                     result.Add(new AStatus()
                     {
                         status=Status.shield, 
-                        statusAmount=1,
+                        statusAmount=2,
                         targetPlayer = true
                     });
                     break;
@@ -39,20 +39,20 @@ namespace JohannaTheTrucker.Cards
                     result.Add(new AStatus()
                     {
                         status = Status.shield,
-                        statusAmount = 2,
+                        statusAmount = 3,
                         targetPlayer = true
                     });
 	    	break;
                 case Upgrade.B:
-					result.Add(new AStatus()
-                    {
-                        status = Status.shield,
-                        statusAmount = 1,
-                        targetPlayer = true
-                    });
-                    result.Add(new AStatus()
+			result.Add(new AStatus()
                     {
                         status = Status.evade,
+                        statusAmount = 2,
+                        targetPlayer = true
+                    });
+			result.Add(new AStatus()
+                    {
+                        status = Status.shield,
                         statusAmount = 2,
                         targetPlayer = true
                     });
