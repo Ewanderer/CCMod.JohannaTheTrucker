@@ -23,6 +23,12 @@ namespace JohannaTheTrucker.Cards
                         };
 
                         result.Add(spawn_cluster);
+                        result.Add(new AStatus()
+                        {
+                            status = Status.droneShift,
+                            statusAmount = 1,
+                            targetPlayer = true
+                        });
                     }
                     break;
                 case Upgrade.A:
@@ -38,13 +44,19 @@ namespace JohannaTheTrucker.Cards
                         };
 
                         result.Add(spawn_cluster);
+                        result.Add(new AStatus()
+                        {
+                            status = Status.droneShift,
+                            statusAmount = 1,
+                            targetPlayer = true
+                        });
                     }
                     break;
                 case Upgrade.B:
                     {
                         var cluster_missile = new MidrowStuff.ClusterMissile()
                         {
-                            stackSize = 2
+                            stackSize = 3
                         };
 
                         var spawn_cluster = new ASpawn()
