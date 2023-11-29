@@ -69,6 +69,7 @@ namespace JohannaTheTrucker
         public static ExternalSprite? JohannaMini { get; private set; }
         public static ExternalAnimation? JohannaMiniAnimation { get; private set; }
         public static ExternalAnimation? TalkAngryAnimation { get; private set; }
+        public static ExternalAnimation? TalkSquintAnimation { get; private set; }
         public static ExternalAnimation? TalkLaughAnimation { get; private set; }
         public static ExternalAnimation? TalkNeutralAnimation { get; private set; }
         public static ExternalAnimation? TalkReminisceAnimation { get; private set; }
@@ -112,6 +113,7 @@ namespace JohannaTheTrucker
 
 
         public static List<ExternalSprite> TalkAngrySprites { get; private set; } = new List<ExternalSprite>();
+        public static List<ExternalSprite> TalkSquintSprites { get; private set; } = new List<ExternalSprite>();
         public static List<ExternalSprite> TalkLaughSprites { get; private set; } = new List<ExternalSprite>();
         public static List<ExternalSprite> TalkNeutralSprites { get; private set; } = new List<ExternalSprite>();
         public static List<ExternalSprite> TalkReminisceSprites { get; private set; } = new List<ExternalSprite>();
@@ -420,6 +422,20 @@ namespace JohannaTheTrucker
             }
 
             //talk animations
+
+            {
+                var dir_path = Path.Combine(ModRootFolder.FullName, "Sprites", "talk_squint");
+                var files = Directory.GetFiles(dir_path).Select(e => new FileInfo(e)).ToArray();
+                var list = new List<ExternalSprite>();
+                for (int i = 0; i < files.Length; i++)
+                {
+                    var spr = new ExternalSprite("JohannaTheTrucker.TalkSquint" + i, files[i]);
+                    list.Add(spr);
+                    artRegistry.RegisterArt(spr);
+                }
+                HookFxSprites = list;
+            }
+
             {
                 var dir_path = Path.Combine(ModRootFolder.FullName, "Sprites", "hook_fx");
                 var files = Directory.GetFiles(dir_path).Select(e => new FileInfo(e)).ToArray();
@@ -526,11 +542,11 @@ namespace JohannaTheTrucker
             registry.RegisterGlossary(ClusterMissileHE_Glossary);
 
             ClusterMissileSeeker_Glossary = new ExternalGlossary("JohannaTheTrucker.Glossary.ClusteMissileSeeker_Glossary", "JohannaTheTruckerSeekerClusterRocketMidRow", false, ExternalGlossary.GlossayType.midrow, SeekerClusterMissleIcon ?? throw new Exception("Missing ClusterMissleIcon"));
-            ClusterMissileSeeker_Glossary.AddLocalisation("en", "Seeker Cluster Missile", "A swarm of {0} seeeker rocklets. On their turn, one flies towards the enemy ship dealing 1 damage. The entire stack is destroyed in one hit.", null);
+            ClusterMissileSeeker_Glossary.AddLocalisation("en", "Seeker Cluster Missile", "A swarm of {0} seeker rocklets. On their turn, one flies towards the enemy ship dealing 1 damage. The entire stack is destroyed in one hit.", null);
             registry.RegisterGlossary(ClusterMissileSeeker_Glossary);
 
             ClusterMissileHESeeker_Glossary = new ExternalGlossary("JohannaTheTrucker.Glossary.ClusteMissileHESeeker_Glossary", "JohannaTheTruckerHESeekerClusterRocketMidRow", false, ExternalGlossary.GlossayType.midrow, HESeekerClusterMissleToken ?? throw new Exception("Missing ClusterMissleIcon"));
-            ClusterMissileHESeeker_Glossary.AddLocalisation("en", "HE-S Cluster Missile", "A swarm of {0} heavy seeeker rocklets. On their turn, one flies towards the enemy ship dealing 2 damage on hit. The entire stack is destroyed in one hit.", null);
+            ClusterMissileHESeeker_Glossary.AddLocalisation("en", "HE-S Cluster Missile", "A swarm of {0} heavy seeker rocklets. On their turn, one flies towards the enemy ship dealing 2 damage on hit. The entire stack is destroyed in one hit.", null);
             registry.RegisterGlossary(ClusterMissileHESeeker_Glossary);
         }
 
@@ -687,6 +703,9 @@ namespace JohannaTheTrucker
 
             TalkAngryAnimation = new ExternalAnimation("JohannaTheTrucker.Animation.TalkAngry", JohannaDeck, "talk_angry", false, TalkAngrySprites);
             registry.RegisterAnimation(TalkAngryAnimation);
+
+            TalkSquintAnimation = new ExternalAnimation("JohannaTheTrucker.Animation.TalkSquint", JohannaDeck, "talk_angry", false, TalkSquintSprites);
+            registry.RegisterAnimation(TalkSquintAnimation);
 
             TalkLaughAnimation = new ExternalAnimation("JohannaTheTrucker.Animation.TalkLaugh", JohannaDeck, "talk_laugh", false, TalkLaughSprites);
             registry.RegisterAnimation(TalkLaughAnimation);

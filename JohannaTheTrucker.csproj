@@ -247,6 +247,18 @@
     <None Update="Sprites\talk_scared\JoFace9.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Sprites\talk_squint\JoFaceSquint1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sprites\talk_squint\JoFaceSquint2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sprites\talk_squint\JoFaceSquint3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sprites\talk_squint\JoFaceSquint4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Sprites\UrsaeMajoris\UrsaeMajoris.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
@@ -281,6 +293,7 @@
 
   <ItemGroup>
     <Folder Include="Sprites\hook_fx\" />
+    <Folder Include="Sprites\talk_squint\" />
   </ItemGroup>
 
 </Project>

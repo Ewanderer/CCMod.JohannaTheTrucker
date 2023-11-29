@@ -18,8 +18,7 @@ namespace JohannaTheTrucker.Cards
             switch (upgrade)
             {
                 case Upgrade.None:
-                case Upgrade.A:
-                    {
+		{
                         var cluster_missile = new MidrowStuff.ClusterMissile()
                         {
                             stackSize = 3
@@ -28,24 +27,14 @@ namespace JohannaTheTrucker.Cards
                         var spawn_cluster = new ASpawn()
                         {
                             thing = cluster_missile,
-                            offset=1
+                            offset=3
                         };
 
                         list.Add(spawn_cluster);
                     }
-
-                                        break;
-                case Upgrade.B:
+		    break;
+                case Upgrade.A:
                     {
-						var hook_action = new AHook()
-						{
-							//hookToRight = flipped
-						};
-
-						hook_action.disabled = hook_action.CalculateMove(s, c, out _) == null;
-
-						list.Add(hook_action);
-						
                         var cluster_missile = new MidrowStuff.ClusterMissile()
                         {
                             stackSize = 4
@@ -54,7 +43,24 @@ namespace JohannaTheTrucker.Cards
                         var spawn_cluster = new ASpawn()
                         {
                             thing = cluster_missile,
-                            offset = 0
+                            offset=4
+                        };
+
+                        list.Add(spawn_cluster);
+                    }
+
+                                        break;
+                case Upgrade.B:
+                    {
+                        var cluster_missile = new MidrowStuff.ClusterMissile()
+                        {
+                            stackSize = 2
+                        };
+
+                        var spawn_cluster = new ASpawn()
+                        {
+                            thing = cluster_missile,
+                            offset=6
                         };
 
                         list.Add(spawn_cluster);
@@ -71,7 +77,7 @@ namespace JohannaTheTrucker.Cards
             return new CardData()
             {
 				cost = 1,
-				flippable = upgrade == Upgrade.A,
+				flippable = true,
             };
         }
 
