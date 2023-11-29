@@ -42,7 +42,7 @@ namespace JohannaTheTrucker
 
             harmony.Patch(begin_method, prefix: new HarmonyMethod(begin_prefix));
 
-            var get_icon_method= typeof(ASpawn).GetMethod("GetIcon") ?? throw new Exception("ASpawn.GetIcon method not found.");
+            var get_icon_method = typeof(ASpawn).GetMethod("GetIcon") ?? throw new Exception("ASpawn.GetIcon method not found.");
 
             var get_icon_prefix = typeof(ClusterLaunchManifest).GetMethod("ASpawn_GetIcon_Prefix", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic) ?? throw new Exception("ClusterLaunchManifest.ASpawn_GetIcon_Prefix method not found.");
 
@@ -81,9 +81,9 @@ namespace JohannaTheTrucker
                 return false;
             }
             else
-            {             
+            {
                 __instance.thing.fromPlayer = __instance.fromPlayer;
-             
+
                 foreach (Artifact enumerateAllArtifact in s.EnumerateAllArtifacts())
                     __instance.thing = enumerateAllArtifact.ReplaceSpawnedThing(s, c, __instance.thing, __instance.fromPlayer);
                 int worldX1 = __instance.GetWorldX(s, c);
@@ -111,7 +111,7 @@ namespace JohannaTheTrucker
                         if (__instance.fromPlayer)
                         {
                             foreach (Artifact enumerateAllArtifact in s.EnumerateAllArtifacts())
-                                enumerateAllArtifact.OnPlayerSpawnSomething(s, c);
+                                enumerateAllArtifact.OnPlayerSpawnSomething(s, c, __instance.thing);
                         }
 
                         ParticleBursts.DroneSpawn(num, __instance.fromPlayer);
