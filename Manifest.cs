@@ -496,7 +496,7 @@ namespace JohannaTheTrucker
                 Seeker_CardSprite = new ExternalSprite("JohannaTheTrucker.JoCardArtSeeker", new FileInfo(path));
                 artRegistry.RegisterArt(Seeker_CardSprite);
 
-                path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("JoCardArtSmartExplosive.png"));
+                path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("JoCardArtSmartExplosives.png"));
                 SmartExplosive_CardSprite = new ExternalSprite("JohannaTheTrucker.Sprite.JoCardArtSmartExplosive", new FileInfo(path));
                 artRegistry.RegisterArt(SmartExplosive_CardSprite);
 
