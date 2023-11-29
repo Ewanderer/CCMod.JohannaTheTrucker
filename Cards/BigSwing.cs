@@ -12,73 +12,45 @@ namespace JohannaTheTrucker.Cards
     {
         public override List<CardAction> GetActions(State s, Combat c)
         {
-            var list = new List<CardAction>();
-            var hook_action = new AHook()
+            var result = new List<CardAction>
             {
-                hookToRight = flipped
+                new AStatus()
+                {
+                    status = Status.hermes,
+                    statusAmount = upgrade != Upgrade.A ? 3 : 2,
+                    targetPlayer=true
+                },
+                new AHook()
+                {
+                    hookToRight = flipped
+                },
+
             };
-
-            hook_action.disabled = hook_action.CalculateMove(s, c, out _) == null;
-
-            var distance = hook_action.CalculateMove(s, c, out _)?.dir ?? 0;
-
-            list.Add(new AMove()
+            if (upgrade == Upgrade.B)
             {
-                dir = distance*2,
-                targetPlayer = true,
-                fromEvade = false,
-                disabled = distance == 0,
-            });
+                result.Add(new AMove()
+                {
+                    targetPlayer = true,
+                    dir = -2,
+                });
+            }
+            return result;
 
 
-            return list;
+
+
         }
 
         public override CardData GetData(State state)
         {
-
-            var hook_action = new AHook()
-            {
-                hookToRight = flipped
-            };
-
-            int distance = 0;
-            if (state.route is Combat c)
-            {
-
-                hook_action.disabled = hook_action.CalculateMove(state, c, out _) == null;
-
-                distance = Math.Abs(hook_action.CalculateMove(state, c, out _)?.dir ?? 0)*3;
-            }
-
-            int cost;
-            switch (upgrade)
-            {
-                case Upgrade.None:
-                    cost = 2;
-                    break;
-                case Upgrade.A:
-                    cost = 1;
-                    break;
-                case Upgrade.B:
-                    cost = 0;
-                    break;
-                default:
-                    throw new NotImplementedException($"Uknown upgrade value: {upgrade}");
-            }
-
-            var dir_str = flipped ? Loc.GetLocString("env.MSolarWind.desc.right") : Loc.GetLocString("env.MSolarWind.desc.left");
-
             return new CardData()
             {
-                cost = cost,
+                cost = 2,
                 retain = upgrade == Upgrade.B,
-                flippable = true,
                 exhaust = upgrade == Upgrade.B,
-                description = string.Format(Loc.GetLocString(Manifest.BigSwingCard?.DescLocKey ?? throw new Exception("Missing Big swing card")), dir_str, distance)
+                flippable = true,
             };
         }
-
 
         public override string Name() => "Big Swing";
     }
