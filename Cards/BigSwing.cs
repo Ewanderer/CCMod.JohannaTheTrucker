@@ -22,7 +22,7 @@ namespace JohannaTheTrucker.Cards
                 },
                 new AHook()
                 {
-                    hookToRight = flipped
+                    hookToRight = flipped,
                 },
 
             };
