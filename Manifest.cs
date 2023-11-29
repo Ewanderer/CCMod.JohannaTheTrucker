@@ -25,8 +25,8 @@ namespace JohannaTheTrucker
         public static ExternalSprite? Heavy_CardSprite { get; private set; }
         public static ExternalSprite? LeapFrog_CardSprite { get; private set; }
         public static ExternalSprite? MassUpdardeB_CardSprite { get; private set; }
-        public static ExternalSprite? MassUpdardeDown_CardSprite { get; private set; }
-        public static ExternalSprite? MassUpdardeUp_CardSprite { get; private set; }
+        public static ExternalSprite? MassUpdradeDown_CardSprite { get; private set; }
+        public static ExternalSprite? MassUpgradeUp_CardSprite { get; private set; }
         public static ExternalSprite? Readjust_CardSprite { get; private set; }
         public static ExternalSprite? Rebound_CardSprite { get; private set; }
         public static ExternalSprite? RocketSilo_CardSprite { get; private set; }
@@ -473,20 +473,16 @@ namespace JohannaTheTrucker
                 artRegistry.RegisterArt(MassUpdardeB_CardSprite);
 
                 path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("JoCardArtMassUpgradeDown.png"));
-                MassUpdardeDown_CardSprite = new ExternalSprite("JohannaTheTrucker.JoCardArtMassUpgradeDown", new FileInfo(path));
-                artRegistry.RegisterArt(MassUpdardeDown_CardSprite);
+                MassUpdradeDown_CardSprite = new ExternalSprite("JohannaTheTrucker.JoCardArtMassUpgradeDown", new FileInfo(path));
+                artRegistry.RegisterArt(MassUpdradeDown_CardSprite);
 
                 path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("JoCardArtMassUpgradeUp.png"));
-                MassUpdardeUp_CardSprite = new ExternalSprite("JohannaTheTrucker.JoCardArtMassUpgradeUp", new FileInfo(path));
-                artRegistry.RegisterArt(MassUpdardeUp_CardSprite);
+                MassUpgradeUp_CardSprite = new ExternalSprite("JohannaTheTrucker.JoCardArtMassUpgradeUp", new FileInfo(path));
+                artRegistry.RegisterArt(MassUpgradeUp_CardSprite);
 
                 path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("JoCardArtReadjust.png"));
                 Readjust_CardSprite = new ExternalSprite("JohannaTheTrucker.JoCardArtReadjust", new FileInfo(path));
                 artRegistry.RegisterArt(Readjust_CardSprite);
-
-                path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("JoCardArtRebound.png"));
-                Rebound_CardSprite = new ExternalSprite("JohannaTheTrucker.JoCardArtRebound", new FileInfo(path));
-                artRegistry.RegisterArt(Rebound_CardSprite);
 
                 path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("JoCardArtRebound.png"));
                 Rebound_CardSprite = new ExternalSprite("JohannaTheTrucker.JoCardArtRebound", new FileInfo(path));
@@ -501,20 +497,8 @@ namespace JohannaTheTrucker
                 artRegistry.RegisterArt(Seeker_CardSprite);
 
                 path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("JoCardArtSmartExplosive.png"));
-                SmartExplosive_CardSprite = new ExternalSprite("JohannaTheTrucker.JoCardArtSmartExplosive", new FileInfo(path));
+                SmartExplosive_CardSprite = new ExternalSprite("JohannaTheTrucker.Sprite.JoCardArtSmartExplosive", new FileInfo(path));
                 artRegistry.RegisterArt(SmartExplosive_CardSprite);
-
-                path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("JoCardArtBasicBlast.png"));
-                BasicBlast_CardSprite = new ExternalSprite("JohannaTheTrucker.JoCardArtBasicBlast", new FileInfo(path));
-                artRegistry.RegisterArt(BasicBlast_CardSprite);
-
-                path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("JoCardArtBasicDefensive.png"));
-                BasicDefensive_CardSprite = new ExternalSprite("JohannaTheTrucker.JoCardArtBasicDefensive", new FileInfo(path));
-                artRegistry.RegisterArt(BasicDefensive_CardSprite);
-
-                path = Path.Combine(ModRootFolder.FullName, "Sprites", Path.GetFileName("JoCardArtBasicFileSearch.png"));
-                BasicFileSearch_CardSprite = new ExternalSprite("JohannaTheTrucker.JoCardArtBasicFileSearch", new FileInfo(path));
-                artRegistry.RegisterArt(BasicFileSearch_CardSprite);
 
             }
 
@@ -661,8 +645,6 @@ namespace JohannaTheTrucker
 
         void ICardManifest.LoadManifest(ICardRegistry registry)
         {
-            var card_art = ExternalSprite.GetRaw((int)Spr.cards_colorless);
-
             var hook_art = HookCardSprite ?? throw new Exception();
             var cluster_art = MissileCardSprite ?? throw new Exception();
             var folding_art = FoldingCardSprite ?? throw new Exception();

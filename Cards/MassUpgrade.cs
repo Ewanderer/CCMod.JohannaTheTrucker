@@ -77,7 +77,7 @@ namespace JohannaTheTrucker.Cards
 
             var art = Manifest.MassUpdardeB_CardSprite!;
             if (upgrade != Upgrade.B)
-                art = flipped ? Manifest.MassUpdardeDown_CardSprite! : Manifest.MassUpdardeUp_CardSprite!;
+                art = flipped ? Manifest.MassUpdradeDown_CardSprite! : Manifest.MassUpgradeUp_CardSprite!;
 
             return new CardData
             {
