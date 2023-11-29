@@ -101,9 +101,9 @@ namespace JohannaTheTrucker
         {
             Ship_UrsaeMajoris_Starter = new ExternalStarterShip("JohannaTheTrucker.Starterships.UrsaeMajoris",
                 Ship_UrsaeMajoris_Main ?? throw new Exception(),
-                new ExternalCard[] { BasicDefensivesCard ?? throw new Exception(), BasicFileSearchCard ?? throw new Exception(), BasicBlastCard ?? throw new Exception(), BasicBlastCard ?? throw new Exception()},
+                new ExternalCard[] { BasicDefensivesCard ?? throw new Exception(), BasicFileSearchCard ?? throw new Exception(), BasicBlastCard ?? throw new Exception(), BasicBlastCard ?? throw new Exception() },
                 new ExternalArtifact[] { ExtraCargoPodArtifact ?? throw new Exception() },
-                new Type[] { typeof(ShieldPrep) });
+               nativeStartingArtifacts: new Type[] { typeof(ShieldPrep) });
 
             Ship_UrsaeMajoris_Starter.AddLocalisation("Ursae Majoris", "An armored cargo ship, infamous among pirates who flee on sight.");
 
