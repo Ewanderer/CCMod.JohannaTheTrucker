@@ -19,13 +19,18 @@ namespace JohannaTheTrucker.Cards
                     status = Status.hermes,
                     statusAmount = upgrade != Upgrade.A ? 3 : 2,
                     targetPlayer=true
-                },
-                new AHook()
-                {
-                    hookToRight = flipped,
-                },
+                }
+            };
+            var hook_action = new AHook()
+            {
+                hookToRight = flipped,
+                fromPlayer = true,
 
             };
+            hook_action.disabled = hook_action.CalculateMove(s, c, out _) == null;
+
+            result.Add(hook_action);
+
             if (upgrade == Upgrade.B)
             {
                 result.Add(new AMove()
