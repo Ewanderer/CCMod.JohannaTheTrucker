@@ -526,7 +526,7 @@ namespace JohannaTheTrucker
                     list.Add(spr);
                     artRegistry.RegisterArt(spr);
                 }
-                HookFxSprites = list;
+                TalkSquintSprites = list;
             }
 
             {
@@ -793,7 +793,7 @@ namespace JohannaTheTrucker
             TalkAngryAnimation = new ExternalAnimation("JohannaTheTrucker.Animation.TalkAngry", JohannaDeck, "talk_angry", false, TalkAngrySprites);
             registry.RegisterAnimation(TalkAngryAnimation);
 
-            TalkSquintAnimation = new ExternalAnimation("JohannaTheTrucker.Animation.TalkSquint", JohannaDeck, "talk_angry", false, TalkSquintSprites);
+            TalkSquintAnimation = new ExternalAnimation("JohannaTheTrucker.Animation.TalkSquint", JohannaDeck, "talk_squint", false, TalkSquintSprites);
             registry.RegisterAnimation(TalkSquintAnimation);
 
             TalkLaughAnimation = new ExternalAnimation("JohannaTheTrucker.Animation.TalkLaugh", JohannaDeck, "talk_laugh", false, TalkLaughSprites);
