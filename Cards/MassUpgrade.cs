@@ -85,7 +85,7 @@ namespace JohannaTheTrucker.Cards
                 exhaust = true,
                 floppable = upgrade != Upgrade.B,
                 art = (Spr)(art.Id!),
-                artTint = "ffffff",
+                artTint = upgrade == Upgrade.B ? null : "ffffff",
             };
         }
 
