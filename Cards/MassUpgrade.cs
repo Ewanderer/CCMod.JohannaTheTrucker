@@ -75,13 +75,17 @@ namespace JohannaTheTrucker.Cards
                     throw new NotImplementedException($"Upgrade {upgrade} unkown!");
             }
 
+            var art = Manifest.MassUpdardeB_CardSprite!;
+            if (upgrade != Upgrade.B)
+                art = flipped ? Manifest.MassUpdradeDown_CardSprite! : Manifest.MassUpgradeUp_CardSprite!;
+
             return new CardData
             {
                 cost = cost,
                 exhaust = true,
                 floppable = upgrade != Upgrade.B,
-                art= new Spr?(this.flipped ? Spr.cards_Adaptability_Bottom : Spr.cards_Adaptability_Top),
-                artTint= "ffffff",
+                art = (Spr)(art.Id!),
+                artTint = upgrade == Upgrade.B ? null : "ffffff",
             };
         }
 
