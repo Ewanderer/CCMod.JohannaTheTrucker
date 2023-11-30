@@ -17,7 +17,7 @@ namespace JohannaTheTrucker.Cards
                 new AStatus()
                 {
                     status = Status.hermes,
-                    statusAmount = upgrade != Upgrade.A ? 3 : 2,
+                    statusAmount = upgrade == Upgrade.A ? 3 : 2,
                     targetPlayer=true
                 }
             };
