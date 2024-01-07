@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JohannaTheTrucker.Cards
 {
-    [CardMeta(deck =Deck.colorless, rarity = Rarity.common, upgradesTo = new Upgrade[] { Upgrade.A, Upgrade.B },dontOffer =true)]
+    [CardMeta(deck = Deck.colorless, rarity = Rarity.common, upgradesTo = new Upgrade[] { Upgrade.A, Upgrade.B }, dontOffer = true)]
     public class BasicBlast : Card
     {
 
@@ -17,29 +17,30 @@ namespace JohannaTheTrucker.Cards
             {
 
                 case Upgrade.None:
-                    result.Add(new AAttack() { 
-                    damage=1,
-                    targetPlayer=false,
+                    result.Add(new AAttack()
+                    {
+                        damage = this.GetDmg(s, 1),
+                        targetPlayer = false,
                     });
                     break;
                 case Upgrade.A:
                     result.Add(new AAttack()
                     {
-                        damage = 1,
+                        damage = this.GetDmg(s, 1),
                         targetPlayer = false,
                     });
                     result.Add(new AAttack()
                     {
-                        damage = 1,
+                        damage = this.GetDmg(s, 1),
                         targetPlayer = false,
                     });
                     break;
                 case Upgrade.B:
                     result.Add(new AAttack()
                     {
-                        damage = 1,
+                        damage = this.GetDmg(s, 1),
                         targetPlayer = false,
-                        piercing=true,
+                        piercing = true,
                     });
                     break;
 

@@ -9,7 +9,8 @@ namespace JohannaTheTrucker.Artifacts
     [ArtifactMeta(unremovable = true, owner = Deck.colorless, pools = new ArtifactPool[] { ArtifactPool.EventOnly })]
     public class ExtraCargoPod : Artifact
     {
-        public override int ModifyCardRewardCount(State state, bool inCombat)
+
+        public override int ModifyCardRewardCount(State state, bool isEvent, bool inCombat)
         {
             if (state.route is not Combat c)
                 return 0;
@@ -23,5 +24,7 @@ namespace JohannaTheTrucker.Artifacts
                 return 1;
             return 0;
         }
+
+      
     }
 }
