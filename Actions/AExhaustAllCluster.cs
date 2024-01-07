@@ -201,7 +201,7 @@ namespace JohannaTheTrucker.Actions
 
                 Part? partAtWorldX = target.GetPartAtWorldX(hit.Item3);
 
-                if ((partAtWorldX != null ? (partAtWorldX.stunnable ? 1 : 0) : 0) != 0)
+                if ((partAtWorldX != null ? (partAtWorldX.stunModifier==PStunMod.stunnable ? 1 : 0) : 0) != 0)
                     c.QueueImmediate((CardAction)new AStunPart()
                     {
                         worldX = hit.Item3

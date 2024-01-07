@@ -54,7 +54,6 @@ namespace JohannaTheTrucker.Actions
             {
                 dir = target_x - pos_x,
                 fromEvade = false,
-                ignoreHermes = true,
                 ignoreFlipped = true,
                 targetPlayer = fromPlayer,
                 whoDidThis = this.whoDidThis

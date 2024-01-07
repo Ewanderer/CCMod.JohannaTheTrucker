@@ -182,7 +182,7 @@ namespace JohannaTheTrucker.Actions
 
             Part? partAtWorldX = target.GetPartAtWorldX(target_pos);
 
-            if ((partAtWorldX != null ? (partAtWorldX.stunnable ? 1 : 0) : 0) != 0)
+            if ((partAtWorldX != null ? (partAtWorldX.stunModifier == PStunMod.stunnable ? 1 : 0) : 0) != 0)
                 c.QueueImmediate((CardAction)new AStunPart()
                 {
                     worldX = target_pos
