@@ -696,7 +696,7 @@ namespace JohannaTheTrucker
 
             SpaceFoldingCard = new ExternalCard("JohannaTheTrucker.Cards.SpaceFolding", typeof(SpaceFolding), folding_art, JohannaDeck);
             registry.RegisterCard(SpaceFoldingCard);
-            SpaceFoldingCard.AddLocalisation("Space Folding", "Flip midrow using your missile bay as pivot.", "Flip midrow using your missile bay as pivot. Gain 2 midshift.", "Bubble and Flip midrow usinyour missile bay as pivot.");
+            SpaceFoldingCard.AddLocalisation("Space Folding", "Flip midrow using your missile bay as pivot.", "Flip midrow using your missile bay as pivot. Gain 2 Droneshift.", "Bubble and Flip midrow usinyour missile bay as pivot.");
 
             VarietyPackCard = new ExternalCard("JohannaTheTrucker.Cards.VarietyPack", typeof(VarietyPack), VarietyPack_CardSprite!, JohannaDeck);
             registry.RegisterCard(VarietyPackCard);
