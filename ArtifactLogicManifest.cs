@@ -88,7 +88,7 @@ namespace JohannaTheTrucker
             {
                 LuckyLureArtifact = new ExternalArtifact("JohannaTheTrucker.Artifacts.LuckyLure", typeof(LuckyLure), LuckyLureSprite ?? throw new Exception("missing LuckyLure sprite"), ownerDeck: Manifest.JohannaDeck ?? throw new Exception("missing johanna deck."));
 
-                LuckyLureArtifact.AddLocalisation( "LUCKY LURE", "For every 4 missiles that hit the enemy, gain 1 <c=status>Midshift</c>");
+                LuckyLureArtifact.AddLocalisation( "LUCKY LURE", "For every 4 missiles that hit the enemy, gain 1 <c=status>Droneshift</c>");
 
                 registry.RegisterArtifact(LuckyLureArtifact);
             }
@@ -128,7 +128,7 @@ namespace JohannaTheTrucker
             {
                 MidrowProtectorProtocolArtifact = new ExternalArtifact( "JohannaTheTrucker.Artifacts.MidrowProtectorProtocol", typeof(MidrowProtectorProtocol), MidrowProtectorProtocolSprite ?? throw new Exception("missing MidrowProtectorProtocol sprite"), ownerDeck: Manifest.JohannaDeck ?? throw new Exception("missing johanna deck."));
 
-                MidrowProtectorProtocolArtifact.AddLocalisation("MIDROW PROTECTOR PROTOCOL", "Gain 1 <c=status>bubbler</c> at the start of your turn if you don't have any. <c=downside>Start every battle with 99 Lose All Midshift</c>.");
+                MidrowProtectorProtocolArtifact.AddLocalisation("MIDROW PROTECTOR PROTOCOL", "Gain 1 <c=status>bubbler</c> at the start of your turn if you don't have any. <c=downside>Start every battle with 99 Lose All Droneshift</c>.");
 
                 registry.RegisterArtifact(MidrowProtectorProtocolArtifact);
             }
